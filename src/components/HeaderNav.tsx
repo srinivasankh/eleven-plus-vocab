@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const links = [
   { href: "/", label: "Home" },
@@ -19,17 +20,20 @@ export function HeaderNav() {
         <span className="brand-kicker">11+ UK</span>
         <span className="brand-name">WordSpark</span>
       </div>
-      <nav aria-label="Main navigation">
-        <ul className="nav-list">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link className={pathname === link.href ? "nav-link active" : "nav-link"} href={link.href}>
-                {link.label}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="header-controls">
+        <nav aria-label="Main navigation">
+          <ul className="nav-list">
+            {links.map((link) => (
+              <li key={link.href}>
+                <Link className={pathname === link.href ? "nav-link active" : "nav-link"} href={link.href}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <ThemeToggle />
+      </div>
     </header>
   );
 }
