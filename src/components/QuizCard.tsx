@@ -18,9 +18,21 @@ export function QuizCard({ question, index, total, selected, onAnswer, locked }:
       <div className="quiz-options">
         {question.options.map((option, optionIndex) => {
           const chosen = selected === optionIndex;
+          const isCorrectOption = optionIndex === question.correctOptionIndex;
+          const isWrongSelection = locked && chosen && !isCorrectOption;
+          const revealCorrect = locked && isCorrectOption;
+          const className = [
+            "option-btn",
+            !locked && chosen ? "selected" : "",
+            isWrongSelection ? "wrong" : "",
+            revealCorrect ? "correct" : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+
           return (
             <button
-              className={chosen ? "option-btn selected" : "option-btn"}
+              className={className}
               disabled={locked}
               key={option}
               onClick={() => onAnswer(optionIndex)}

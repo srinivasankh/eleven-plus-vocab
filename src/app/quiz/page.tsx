@@ -39,6 +39,28 @@ function QuizPageContent() {
     return scoreQuiz(questions, answers);
   }, [submitted, questions, answers]);
 
+  const reviewRows = useMemo(() => {
+    if (!submitted || questions.length === 0) return [];
+
+    return questions.map((question, questionIndex) => {
+      const selectedIndex = answers[questionIndex];
+      const selectedWord =
+        typeof selectedIndex === "number" && selectedIndex >= 0
+          ? question.options[selectedIndex]
+          : "No answer";
+      const correctWord = question.options[question.correctOptionIndex];
+      const isCorrect = selectedIndex === question.correctOptionIndex;
+
+      return {
+        id: question.id,
+        prompt: question.prompt,
+        selectedWord,
+        correctWord,
+        isCorrect,
+      };
+    });
+  }, [submitted, questions, answers]);
+
   function createNewQuiz(length: QuizLength) {
     const newQuestions = generateQuizQuestions(entries, length);
     setQuestions(newQuestions);
@@ -181,6 +203,36 @@ function QuizPageContent() {
           <div className="result-actions">
             <button className="cta" onClick={() => createNewQuiz(selectedLength)} type="button">Try Again</button>
             <Link className="cta ghost" href="/progress">See Progress</Link>
+          </div>
+
+          <div className="quiz-review-wrap">
+            <h3>Review Your Answers</h3>
+            <div className="quiz-review-scroll">
+              <table className="quiz-review-table">
+                <thead>
+                  <tr>
+                    <th>Question</th>
+                    <th>Your Answer</th>
+                    <th>Correct Answer</th>
+                    <th>Result</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {reviewRows.map((row) => (
+                    <tr key={row.id}>
+                      <td>{row.prompt}</td>
+                      <td>{row.selectedWord}</td>
+                      <td>{row.correctWord}</td>
+                      <td>
+                        <span className={row.isCorrect ? "result-badge correct" : "result-badge wrong"}>
+                          {row.isCorrect ? "Correct" : "Wrong"}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
       ) : null}
