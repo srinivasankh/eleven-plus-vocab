@@ -9,12 +9,19 @@ type Props = {
   locked: boolean;
 };
 
+const labels = ["A", "B", "C", "D"];
+
 export function QuizCard({ question, index, total, selected, onAnswer, locked }: Props) {
   return (
     <section className="quiz-card" aria-live="polite">
-      <p className="quiz-progress">Question {index + 1} of {total}</p>
-      <h2>Pick the word that matches this meaning:</h2>
+      <div className="quiz-top">
+        <p className="quiz-progress">Question {index + 1} of {total}</p>
+        <span className="quiz-stage-badge">Focus Round</span>
+      </div>
+
+      <h2>Choose the strongest match for this meaning</h2>
       <p className="quiz-prompt">{question.prompt}</p>
+
       <div className="quiz-options">
         {question.options.map((option, optionIndex) => {
           const chosen = selected === optionIndex;
@@ -38,7 +45,8 @@ export function QuizCard({ question, index, total, selected, onAnswer, locked }:
               onClick={() => onAnswer(optionIndex)}
               type="button"
             >
-              {option}
+              <span aria-hidden="true" className="option-bullet">{labels[optionIndex] ?? "?"}</span>
+              <span>{option}</span>
             </button>
           );
         })}

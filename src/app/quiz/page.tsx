@@ -150,18 +150,19 @@ function QuizPageContent() {
   const current = questions[index];
 
   return (
-    <section className="page quiz">
-      <header className="section-head">
-        <h1>Quiz Arena</h1>
-        <p>Choose the word that matches each meaning.</p>
+    <section className="page quiz quiz-shell">
+      <header className="section-head page-banner">
+        <h1>Quiz Missions</h1>
+        <p>Pick the word that best matches each meaning.</p>
       </header>
 
       {questions.length === 0 ? (
         <section className="panel setup-panel">
-          <h2>Start a New Quiz</h2>
+          <h2>Launch a New Mission</h2>
+          <p>Choose your round size and train speed plus accuracy.</p>
           <div className="length-pills" role="group" aria-label="Quiz length options">
             {questionLengths.map((length) => (
-              <button className="chip-btn" key={length} onClick={() => createNewQuiz(length)} type="button">
+              <button className="length-btn" key={length} onClick={() => createNewQuiz(length)} type="button">
                 {length} questions
               </button>
             ))}

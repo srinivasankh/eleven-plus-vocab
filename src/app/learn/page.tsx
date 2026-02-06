@@ -38,26 +38,38 @@ export default function LearnPage() {
   }
 
   const learnedIds = new Set(progress?.learnedWordIds ?? []);
+  const learnedCount = progress?.learnedWordIds.length ?? 0;
 
   return (
     <section className="page learn">
-      <header className="section-head">
-        <h1>Word Library</h1>
-        <p>Search and reveal details to lock vocabulary into memory.</p>
+      <header className="section-head page-banner">
+        <div className="banner-row">
+          <div>
+            <h1>Learning Deck</h1>
+            <p>Search, reveal, and lock each advanced word into long-term memory.</p>
+          </div>
+          <span className="kicker-pill">{learnedCount} learned</span>
+        </div>
       </header>
 
-      <label className="search-wrap" htmlFor="search-words">
-        <span>Search words, meanings or synonyms</span>
-        <input
-          id="search-words"
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Try: resilient"
-          type="search"
-          value={query}
-        />
-      </label>
+      <section className="panel">
+        <label className="search-wrap" htmlFor="search-words">
+          <span>Search words, meanings, or synonyms</span>
+          <input
+            id="search-words"
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Try: resilient"
+            type="search"
+            value={query}
+          />
+        </label>
 
-      <p className="section-meta">Showing {filtered.length} of {entries.length} valid entries.</p>
+        <div className="meta-row" aria-label="Search summary">
+          <span className="meta-pill">Showing {filtered.length} words</span>
+          <span className="meta-pill">Total library {entries.length}</span>
+          <span className="meta-pill">Mastered {learnedCount}</span>
+        </div>
+      </section>
 
       <div className="word-grid">
         {filtered.slice(0, 150).map((entry) => (
