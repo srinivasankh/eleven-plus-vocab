@@ -17,9 +17,14 @@ export function HeaderNav() {
   return (
     <header className="site-header">
       <div className="brand-wrap">
-        <span className="brand-kicker">11+ UK</span>
-        <span className="brand-name">WordSpark</span>
+        <span aria-hidden="true" className="brand-orb">WS</span>
+        <div className="brand-text">
+          <span className="brand-kicker">11+ UK Vocabulary</span>
+          <span className="brand-name">WordSpark Missions</span>
+        </div>
+        <span className="brand-xp">XP Mode</span>
       </div>
+
       <div className="header-controls">
         <nav aria-label="Main navigation">
           <ul className="nav-list">

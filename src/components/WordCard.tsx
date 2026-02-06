@@ -15,13 +15,15 @@ export function WordCard({ entry, learned, onToggleLearned }: Props) {
   return (
     <article className="word-card">
       <div className="word-card-head">
-        <div>
-          <p className="word-meta">#{entry.id} · {entry.type}</p>
+        <div className="word-title-wrap">
+          <p className="word-meta">#{entry.id} / {entry.type}</p>
           <h3>{entry.word}</h3>
+          <span className="word-spark">Spark score booster</span>
         </div>
+
         <div className="word-actions">
           <button className="chip-btn" onClick={() => setOpen((value) => !value)} type="button">
-            {open ? "Hide" : "Reveal"}
+            {open ? "Hide notes" : "Reveal notes"}
           </button>
           <button
             className={learned ? "chip-btn solid" : "chip-btn"}
@@ -32,6 +34,7 @@ export function WordCard({ entry, learned, onToggleLearned }: Props) {
           </button>
         </div>
       </div>
+
       {open ? (
         <div className="word-details">
           <p><strong>Meaning:</strong> {entry.meaning}</p>

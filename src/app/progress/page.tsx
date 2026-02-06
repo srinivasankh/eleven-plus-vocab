@@ -17,23 +17,35 @@ export default function ProgressPage() {
   const learned = progress.learnedWordIds.length;
   const percentage = totalWords ? Math.round((learned / totalWords) * 100) : 0;
   const latest = progress.quizHistory[progress.quizHistory.length - 1];
+  const attempts = progress.quizHistory.length;
+  const best = progress.quizHistory.reduce((max, item) => Math.max(max, item.score), 0);
 
   return (
     <section className="page progress">
-      <header className="section-head">
-        <h1>Your Progress</h1>
+      <header className="section-head page-banner">
+        <h1>Mastery Dashboard</h1>
         <p>Progress is saved locally on this device/browser.</p>
       </header>
 
       <div className="progress-grid">
-        <article className="panel">
-          <h2>Words Learned</h2>
-          <p className="big-number">{learned}</p>
-          <p>of {totalWords} valid entries ({percentage}%).</p>
+        <article className="panel dashboard-card">
+          <p className="dashboard-label">Vocabulary Mastery</p>
+          <p className="big-number">{learned}/{totalWords}</p>
+          <div className="mastery-meter" aria-label="Mastery progress bar">
+            <div className="mastery-fill" style={{ width: `${percentage}%` }} />
+          </div>
+          <p>{percentage}% of valid entries learned.</p>
         </article>
 
-        <article className="panel">
-          <h2>Latest Quiz</h2>
+        <article className="panel dashboard-card">
+          <p className="dashboard-label">Quiz Momentum</p>
+          <p className="big-number">{attempts}</p>
+          <p>Total attempts recorded.</p>
+          <p>Best score so far: <strong>{best}</strong></p>
+        </article>
+
+        <article className="panel dashboard-card">
+          <p className="dashboard-label">Latest Mission</p>
           {latest ? (
             <>
               <p className="big-number">{latest.score}/{latest.total}</p>
