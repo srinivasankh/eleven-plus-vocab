@@ -862,6 +862,7 @@ a {
 .result-panel {
   display: grid;
   gap: var(--space-3);
+  min-width: 0;
 }
 
 .score-line {
@@ -874,10 +875,14 @@ a {
   margin-top: var(--space-3);
   border-top: 1px dashed var(--line-strong);
   padding-top: var(--space-3);
+  min-width: 0;
 }
 
 .quiz-review-scroll {
   overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 .quiz-review-table {
