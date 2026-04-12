@@ -1,22 +1,29 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { VocabEntry } from "@/lib/types";
 
 type Props = {
   entry: VocabEntry;
   learned: boolean;
   onToggleLearned: (id: number) => void;
+  forceOpen?: { value: boolean; version: number } | null;
 };
 
-export function WordCard({ entry, learned, onToggleLearned }: Props) {
+export function WordCard({ entry, learned, onToggleLearned, forceOpen }: Props) {
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (forceOpen) {
+      setOpen(forceOpen.value);
+    }
+  }, [forceOpen]);
 
   return (
     <article className="word-card">
       <div className="word-card-head">
         <div className="word-title-wrap">
-          <p className="word-meta">#{entry.id} / {entry.type}</p>
+          <p className="word-meta">{entry.type}</p>
           <h3>{entry.word}</h3>
           <span className="word-spark">Spark score booster</span>
         </div>

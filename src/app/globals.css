@@ -510,6 +510,57 @@ a {
   padding: 0.25rem 0.65rem;
 }
 
+.group-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  text-align: left;
+  appearance: none;
+  font: inherit;
+  color: inherit;
+}
+
+.group-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.group-card:active {
+  transform: translateY(0);
+}
+
+.group-emoji {
+  font-size: 2rem;
+}
+
+.back-btn {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0;
+  margin-bottom: var(--space-2);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.back-btn:hover {
+  text-decoration: underline;
+}
+
+.bulk-actions {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-3);
+}
+
 .cta,
 .chip-btn,
 .option-btn,
