@@ -9534,3 +9534,2739 @@
 3. Certain chemicals are volatile and must be handled with great care.
 4. His volatile temper meant that people were careful around him.
 5. The stock market became volatile after the unexpected announcement.
+
+# Set 29 Vocabulary List
+
+## 561. Absurd
+
+**Type:** Adjective
+
+**Meaning:** Wildly unreasonable or illogical.
+
+**Synonyms:** preposterous, irrational, ridiculous, nonsensical
+
+**Antonyms:** reasonable, sensible, logical, rational
+
+**Example Sentences:**
+1. It seemed absurd to carry an umbrella on such a bright, sunny day.
+2. The idea that cats could fly is completely absurd.
+3. She laughed at the absurd plot twist in the comedy film.
+4. He made an absurd suggestion that they walk a hundred miles to save money.
+5. The teacher found it absurd that the pupil had forgotten to bring a pencil three days in a row.
+
+## 562. Bewildered
+
+**Type:** Adjective
+
+**Meaning:** Perplexed and confused; unable to understand something.
+
+**Synonyms:** baffled, puzzled, flummoxed, confused
+
+**Antonyms:** clear-headed, composed, enlightened, sure
+
+**Example Sentences:**
+1. The tourist looked bewildered as she tried to read the foreign map.
+2. He was bewildered by the complicated maths problem on the board.
+3. The young puppy appeared bewildered in its new home.
+4. She felt bewildered when all her friends suddenly fell silent.
+5. The bewildered boy had no idea why everyone was laughing.
+
+## 563. Conceal
+
+**Type:** Verb
+
+**Meaning:** To keep something from being seen or known; to hide.
+
+**Synonyms:** disguise, enshroud, hide, cover up
+
+**Antonyms:** reveal, expose, uncover, disclose
+
+**Example Sentences:**
+1. The magician used a cloth to conceal the rabbit before the trick.
+2. She tried to conceal her disappointment when she didn't win the prize.
+3. The spy concealed the documents inside a false-bottomed briefcase.
+4. Heavy clouds concealed the sun for most of the afternoon.
+5. He found it hard to conceal his excitement about the birthday surprise.
+
+## 564. Conspire
+
+**Type:** Verb
+
+**Meaning:** To make secret plans jointly to commit an unlawful or harmful act.
+
+**Synonyms:** plot, scheme, collude, connive
+
+**Antonyms:** support, assist, cooperate openly, agree
+
+**Example Sentences:**
+1. The two villains conspired to steal the jewels from the museum.
+2. It seemed as though everything conspired to make her day go wrong.
+3. The boys were caught conspiring to cheat during the exam.
+4. In the story, the advisors conspired against the king behind closed doors.
+5. She suspected her colleagues were conspiring to keep a secret from her.
+
+## 565. Contest
+
+**Type:** Verb / Noun
+
+**Meaning:** To oppose or challenge an action or theory as wrong; also a competition.
+
+**Synonyms:** oppose, challenge, dispute, debate
+
+**Antonyms:** accept, agree, concede, support
+
+**Example Sentences:**
+1. The losing team decided to contest the referee's final decision.
+2. She entered a poetry contest and won first place.
+3. The lawyer chose to contest the evidence presented in court.
+4. Three candidates decided to contest the position of head boy.
+5. He did not contest the result, even though he felt it was unfair.
+
+## 566. Convince
+
+**Type:** Verb
+
+**Meaning:** To cause someone to believe firmly in the truth of something.
+
+**Synonyms:** persuade, assure, satisfy, sway
+
+**Antonyms:** dissuade, discourage, deter, unsettle
+
+**Example Sentences:**
+1. She managed to convince her parents to let her stay up late.
+2. The salesman tried to convince us that his product was the best.
+3. No one could convince him that he had made a mistake.
+4. The scientist convinced the audience with her clear and detailed evidence.
+5. He convinced his friend to try the new restaurant by describing the food.
+
+## 567. Cunning
+
+**Type:** Adjective
+
+**Meaning:** Getting what one wants in a clever, deceptive way.
+
+**Synonyms:** crafty, artful, devious, sly
+
+**Antonyms:** honest, guileless, straightforward, naive
+
+**Example Sentences:**
+1. The cunning fox tricked the other animals into sharing their food.
+2. She devised a cunning plan to escape the locked room.
+3. The villain in the story was cunning enough to outwit the detective.
+4. He used a cunning disguise to sneak into the party uninvited.
+5. Despite being small, the cunning spider trapped much larger insects in its web.
+
+## 568. Devote
+
+**Type:** Verb
+
+**Meaning:** To give all or most of one's time or effort to a person or activity.
+
+**Synonyms:** allocate, assign, allot, dedicate
+
+**Antonyms:** neglect, ignore, abandon, withhold
+
+**Example Sentences:**
+1. She devoted her weekends to learning a new language.
+2. The nurse devoted her career to caring for elderly patients.
+3. He devotes at least an hour each evening to reading.
+4. The charity devotes all of its funds to helping homeless children.
+5. She devoted herself completely to practising for the piano recital.
+
+## 569. Foe
+
+**Type:** Noun
+
+**Meaning:** An enemy or opponent.
+
+**Synonyms:** rival, nemesis, adversary, enemy
+
+**Antonyms:** friend, ally, companion, supporter
+
+**Example Sentences:**
+1. In the legend, the brave knight faced his greatest foe alone.
+2. The two politicians were long-standing foes who rarely agreed on anything.
+3. The hero had to outsmart his foe to rescue the captured villagers.
+4. Even in sport, it is important to respect your foe.
+5. The two cats eyed each other as sworn foes until they slowly became friends.
+
+## 570. Inaudible
+
+**Type:** Adjective
+
+**Meaning:** Unable to be heard.
+
+**Synonyms:** unheard, muted, silent, indistinct
+
+**Antonyms:** audible, loud, clear, distinct
+
+**Example Sentences:**
+1. Her whisper was completely inaudible over the noise of the crowd.
+2. The teacher asked the pupil to speak up as his answer was inaudible.
+3. The bat uses inaudible sound waves to navigate in the dark.
+4. From the back of the hall, the speaker's voice was almost inaudible.
+5. She muttered something inaudible under her breath and walked away.
+
+## 571. Incision
+
+**Type:** Noun
+
+**Meaning:** A surgical cut made in skin or flesh.
+
+**Synonyms:** cut, slit, gash, wound
+
+**Antonyms:** closure, suture, seal, stitch
+
+**Example Sentences:**
+1. The surgeon made a small incision before removing the splinter.
+2. The incision healed well after the operation.
+3. A clean incision is important to reduce the risk of infection.
+4. She wore a bandage over the incision to protect it.
+5. The doctor explained that the incision would leave only a tiny scar.
+
+## 572. Intense
+
+**Type:** Adjective
+
+**Meaning:** Of extreme force, degree, or strength.
+
+**Synonyms:** great, severe, extreme, fierce
+
+**Antonyms:** mild, moderate, gentle, light
+
+**Example Sentences:**
+1. The intense heat of the desert sun made walking difficult.
+2. She gave the maths problem intense concentration for twenty minutes.
+3. The match was so intense that the crowd barely breathed.
+4. He felt an intense sense of pride when his team won the trophy.
+5. The intense colours of the sunset painted the sky in vivid shades.
+
+## 573. Malady
+
+**Type:** Noun
+
+**Meaning:** A disease or ailment.
+
+**Synonyms:** illness, sickness, infection, disorder
+
+**Antonyms:** health, wellness, fitness, wellbeing
+
+**Example Sentences:**
+1. The doctor diagnosed a rare malady that required specialist treatment.
+2. The whole village seemed to be suffering from the same malady.
+3. Rest and fluids are the best cures for a mild malady.
+4. She nursed her brother through a nasty malady that lasted two weeks.
+5. The ancient text described a mysterious malady that struck the town.
+
+## 574. Pronunciation
+
+**Type:** Noun
+
+**Meaning:** The way in which a word or language is pronounced.
+
+**Synonyms:** articulation, enunciation, diction, accent
+
+**Antonyms:** mispronunciation, mumbling, slurring
+
+**Example Sentences:**
+1. The teacher corrected the pupil's pronunciation of the word "February".
+2. She listened to audio recordings to improve her French pronunciation.
+3. Clear pronunciation helps the audience understand a speaker more easily.
+4. He was embarrassed by his pronunciation of the difficult surname.
+5. The pronunciation of many English words does not match their spelling.
+
+## 575. Quiver
+
+**Type:** Verb
+
+**Meaning:** To tremble or shake with a slight, rapid motion.
+
+**Synonyms:** tremble, shiver, quake, shudder
+
+**Antonyms:** steady, still, calm, stabilise
+
+**Example Sentences:**
+1. Her lips began to quiver just before she burst into tears.
+2. The leaves quivered gently in the soft afternoon breeze.
+3. His voice quivered with nerves as he stood up to speak.
+4. The frightened puppy quivered in the corner of the room.
+5. She felt her hands quiver as she opened the results envelope.
+
+## 576. Ramble
+
+**Type:** Verb
+
+**Meaning:** To talk or write at length in a confused or inconsequential way; also to walk for leisure.
+
+**Synonyms:** chatter, babble, blether, wander
+
+**Antonyms:** be concise, summarise, focus, be direct
+
+**Example Sentences:**
+1. The professor tended to ramble, making it hard to take clear notes.
+2. They went for a long ramble through the countryside on Sunday morning.
+3. She asked him to stop rambling and get to the point.
+4. The old man would ramble on about his childhood for hours.
+5. Try not to ramble in your essay — make each sentence count.
+
+## 577. Restore
+
+**Type:** Verb
+
+**Meaning:** To bring back or re-establish a previous right, situation, or condition.
+
+**Synonyms:** reinstate, revive, renew, return
+
+**Antonyms:** remove, abolish, destroy, worsen
+
+**Example Sentences:**
+1. The team worked hard to restore the old painting to its original condition.
+2. The peace treaty helped to restore calm to the troubled region.
+3. She restored the deleted file from the recycling bin on her computer.
+4. The gardener restored the overgrown garden to its former beauty.
+5. The new headteacher restored trust by listening to pupils and parents.
+
+## 578. Sane
+
+**Type:** Adjective
+
+**Meaning:** Of sound mind; not mad or mentally ill; sensible and rational.
+
+**Synonyms:** rational, sensible, lucid, sound
+
+**Antonyms:** insane, mad, irrational, unstable
+
+**Example Sentences:**
+1. After days without sleep, she struggled to make sane decisions.
+2. The doctor confirmed that the patient was perfectly sane.
+3. He was the only sane voice in the chaotic meeting.
+4. Keeping a daily routine helped her stay calm and sane during difficult times.
+5. It seemed like the sane thing to do was to ask for help.
+
+## 579. Subterranean
+
+**Type:** Adjective
+
+**Meaning:** Existing or occurring beneath the earth's surface.
+
+**Synonyms:** underground, subsurface, buried, below-ground
+
+**Antonyms:** above-ground, surface, overground, aerial
+
+**Example Sentences:**
+1. The explorers discovered a vast subterranean cave beneath the hillside.
+2. Many cities have subterranean train networks that run beneath the streets.
+3. The subterranean roots of the ancient tree stretched for metres in every direction.
+4. Scientists found a subterranean river flowing deep beneath the desert.
+5. The ant colony built an impressive subterranean network of tunnels.
+
+## 580. Turbulent
+
+**Type:** Adjective
+
+**Meaning:** Moving unsteadily or violently; characterised by conflict or disorder.
+
+**Synonyms:** rough, stormy, chaotic, tempestuous
+
+**Antonyms:** calm, peaceful, smooth, tranquil
+
+**Example Sentences:**
+1. The turbulent river swept away anything in its path.
+2. Passengers were asked to fasten their seatbelts during the turbulent flight.
+3. It was a turbulent period in the country's history, full of protests and change.
+4. The turbulent sea made it impossible for the fishing boats to leave harbour.
+5. After a turbulent start to the season, the team finally found their form.
+
+# Set 30 Vocabulary List
+
+## 581. Affable
+
+**Type:** Adjective
+
+**Meaning:** Friendly and easy to talk to; pleasant in manner.
+
+**Synonyms:** amiable, good-natured, genial, approachable
+
+**Antonyms:** unfriendly, aloof, cold, disagreeable
+
+**Example Sentences:**
+1. The new teacher was so affable that pupils felt comfortable asking questions.
+2. His affable manner made him popular with everyone in the office.
+3. She was greeted by an affable shopkeeper who offered to help straight away.
+4. Despite being famous, the author remained affable and chatted with all his fans.
+5. An affable smile and a kind word can make a huge difference to someone's day.
+
+## 582. Calamity
+
+**Type:** Noun
+
+**Meaning:** An event causing sudden and widespread damage or distress; a disaster.
+
+**Synonyms:** disaster, catastrophe, tragedy, misfortune
+
+**Antonyms:** blessing, fortune, godsend, windfall
+
+**Example Sentences:**
+1. The flooding of the village was a terrible calamity for the local community.
+2. Losing her passport the day before the trip felt like a complete calamity.
+3. The earthquake was the worst calamity the region had experienced in decades.
+4. Quick action by the firefighters prevented a calamity in the town centre.
+5. The calamity brought the community together as people helped one another recover.
+
+## 583. Covet
+
+**Type:** Verb
+
+**Meaning:** To yearn to possess something belonging to another; to desire wrongfully.
+
+**Synonyms:** desire, crave, envy, begrudge
+
+**Antonyms:** relinquish, renounce, be content with, disdain
+
+**Example Sentences:**
+1. He coveted his neighbour's brand-new bicycle and dreamed of having one himself.
+2. She tried not to covet the prizes her classmates had won.
+3. The antique dealer coveted the rare painting he had seen at the auction.
+4. It is wrong to covet what others have instead of being grateful for your own.
+5. He openly coveted the captain's armband and trained hard to earn it.
+
+## 584. Curt
+
+**Type:** Adjective
+
+**Meaning:** Rudely brief in manner or speech; abrupt.
+
+**Synonyms:** brusque, abrupt, terse, blunt
+
+**Antonyms:** polite, courteous, expansive, warm
+
+**Example Sentences:**
+1. His curt reply made it clear he did not want to discuss the matter further.
+2. She was surprised by the teacher's curt response to her question.
+3. A curt nod was all she received when she said good morning to him.
+4. He gave a curt answer of "no" without any explanation.
+5. The manager's curt tone suggested she was unhappy with the team's performance.
+
+## 585. Deceive
+
+**Type:** Verb
+
+**Meaning:** To deliberately cause someone to believe something that is not true.
+
+**Synonyms:** swindle, defraud, cheat, mislead
+
+**Antonyms:** be honest, tell the truth, enlighten, inform
+
+**Example Sentences:**
+1. The dishonest trader tried to deceive customers about the quality of his goods.
+2. She felt betrayed when she realised her friend had deceived her.
+3. The magician's job is to deceive the audience in a fun and entertaining way.
+4. He attempted to deceive his parents by pretending he had done his homework.
+5. Appearances can often deceive — the quiet pupil turned out to be the most talented.
+
+## 586. Destitute
+
+**Type:** Adjective
+
+**Meaning:** Lacking money, food, or shelter; extremely poor.
+
+**Synonyms:** bereft, deprived, impoverished, penniless
+
+**Antonyms:** wealthy, affluent, prosperous, comfortable
+
+**Example Sentences:**
+1. After the fire destroyed their home, the family was left completely destitute.
+2. The charity raised money to help destitute families during the harsh winter.
+3. He arrived in the city destitute, with nothing but the clothes on his back.
+4. The flood left hundreds of villagers destitute and in need of urgent aid.
+5. She volunteered at a shelter to help those who were destitute and homeless.
+
+## 587. Earnest
+
+**Type:** Adjective
+
+**Meaning:** Resulting from or showing sincere and intense conviction; serious in intention.
+
+**Synonyms:** serious, solemn, sincere, heartfelt
+
+**Antonyms:** insincere, flippant, frivolous, casual
+
+**Example Sentences:**
+1. She made an earnest promise to return the borrowed book by Friday.
+2. His earnest expression showed that he truly meant every word he said.
+3. The pupil made an earnest effort to improve after her teacher's feedback.
+4. He was in earnest when he said he wanted to become a doctor one day.
+5. The earnest young man stayed behind after class to ask for extra help.
+
+## 588. Expel
+
+**Type:** Verb
+
+**Meaning:** To force someone or something to leave a place; to officially remove someone.
+
+**Synonyms:** banish, exile, eject, exclude
+
+**Antonyms:** admit, welcome, invite, accept
+
+**Example Sentences:**
+1. The school threatened to expel any pupil caught cheating in exams.
+2. The diplomat was expelled from the country following the dispute.
+3. He was expelled from the team after breaking the rules three times.
+4. The volcano began to expel huge clouds of ash into the sky.
+5. She feared she would be expelled from the competition for arriving late.
+
+## 589. Immerse
+
+**Type:** Verb
+
+**Meaning:** To dip or submerge in a liquid; to involve oneself deeply in something.
+
+**Synonyms:** plunge, douse, submerge, engross
+
+**Antonyms:** remove, extract, withdraw, surface
+
+**Example Sentences:**
+1. She immersed the vegetables in cold water to keep them fresh.
+2. He immersed himself in his studies during the weeks before the exam.
+3. The diver immersed himself fully before beginning to explore the reef.
+4. She loved to immerse herself in a good book on rainy afternoons.
+5. The cloth must be fully immersed in the dye for the colour to take properly.
+
+## 590. Innocuous
+
+**Type:** Adjective
+
+**Meaning:** Not harmful or offensive; unlikely to cause any ill effects.
+
+**Synonyms:** harmless, safe, inoffensive, benign
+
+**Antonyms:** harmful, dangerous, offensive, toxic
+
+**Example Sentences:**
+1. What seemed like an innocuous comment upset her more than he had expected.
+2. The spider found in the garden turned out to be completely innocuous.
+3. He made an innocuous joke that everyone laughed at without taking offence.
+4. The chemical was innocuous in small amounts but dangerous in large doses.
+5. Her innocuous question accidentally revealed the surprise they had been planning.
+
+## 591. Lavish
+
+**Type:** Adjective / Verb
+
+**Meaning:** Sumptuously rich, elaborate, or luxurious; to give generously.
+
+**Synonyms:** lush, opulent, extravagant, luxurious
+
+**Antonyms:** modest, plain, frugal, sparse
+
+**Example Sentences:**
+1. The guests were treated to a lavish banquet with dozens of courses.
+2. She decorated her home in a lavish style with gold and velvet furnishings.
+3. He lavished praise on the pupils who had worked hardest during term.
+4. The lavish hotel suite had a private pool and views over the city.
+5. It was a lavish celebration, with fireworks, live music, and exotic food.
+
+## 592. Moderate
+
+**Type:** Adjective / Verb
+
+**Meaning:** Average in amount, intensity, or degree; neither very great nor very little.
+
+**Synonyms:** common, mild, modest, average
+
+**Antonyms:** extreme, excessive, intense, immoderate
+
+**Example Sentences:**
+1. The doctor recommended moderate exercise, such as a daily walk.
+2. Temperatures remained moderate throughout the spring half term.
+3. She achieved moderate success in her first year of business.
+4. A moderate amount of rain fell, which was enough to water the garden.
+5. He ate a moderate portion rather than piling his plate high.
+
+## 593. Oblige
+
+**Type:** Verb
+
+**Meaning:** To make someone legally or morally bound to do something; to do someone a favour.
+
+**Synonyms:** compel, bind, constrain, require
+
+**Antonyms:** free, release, permit, excuse
+
+**Example Sentences:**
+1. The new law obliges all drivers to wear a seatbelt at all times.
+2. She felt obliged to help her neighbour carry the heavy shopping bags.
+3. He was happy to oblige when his teacher asked him to read aloud.
+4. The school is obliged to provide support for pupils with additional needs.
+5. As the host, she felt obliged to make sure every guest was comfortable.
+
+## 594. Provoke
+
+**Type:** Verb
+
+**Meaning:** To deliberately make someone annoyed or angry; to stimulate a reaction.
+
+**Synonyms:** anger, enrage, incite, irritate
+
+**Antonyms:** calm, soothe, pacify, appease
+
+**Example Sentences:**
+1. He tried to provoke his sister by taking her favourite book without asking.
+2. The politician's speech provoked an angry response from the crowd.
+3. She knew better than to provoke the teacher with cheeky remarks.
+4. The dog began to bark as if something outside had provoked it.
+5. His deliberate attempts to provoke a reaction were ignored completely.
+
+## 595. Quell
+
+**Type:** Verb
+
+**Meaning:** To put an end to something, especially by using force; to suppress.
+
+**Synonyms:** curb, suppress, subdue, crush
+
+**Antonyms:** incite, start, provoke, encourage
+
+**Example Sentences:**
+1. The head teacher was called in to quell the argument in the playground.
+2. She took a deep breath to quell her nerves before walking on stage.
+3. The police were called to quell the disturbance outside the stadium.
+4. He tried to quell his excitement so he would not spoil the surprise.
+5. The captain's calm words were enough to quell the panic among the crew.
+
+## 596. Recite
+
+**Type:** Verb
+
+**Meaning:** To repeat something aloud from memory, especially before an audience.
+
+**Synonyms:** chant, intone, declaim, narrate
+
+**Antonyms:** mumble, stay silent, listen, forget
+
+**Example Sentences:**
+1. She stood up confidently to recite the poem she had learned that week.
+2. The class was asked to recite their times tables at the start of the lesson.
+3. He could recite the names of all the capital cities without hesitation.
+4. She had practised enough times to recite the speech without any notes.
+5. The children gathered around to recite the school's founding pledge together.
+
+## 597. Rogue
+
+**Type:** Noun / Adjective
+
+**Meaning:** A dishonest or unprincipled person; something that behaves in an erratic way.
+
+**Synonyms:** scoundrel, villain, reprobate, rascal
+
+**Antonyms:** hero, gentleman, saint, honest person
+
+**Example Sentences:**
+1. The rogue trader was arrested for selling counterfeit goods at the market.
+2. In the story, the rogue used clever tricks to steal from unsuspecting travellers.
+3. A rogue wave struck the boat without warning, sending water across the deck.
+4. Despite being a loveable rogue, everyone knew he could not be fully trusted.
+5. The rogue elephant had separated from its herd and was roaming the village.
+
+## 598. Sanitary
+
+**Type:** Adjective
+
+**Meaning:** Relating to the conditions that affect hygiene and health; clean and hygienic.
+
+**Synonyms:** hygienic, antiseptic, sterilised, clean
+
+**Antonyms:** unsanitary, contaminated, dirty, unhygienic
+
+**Example Sentences:**
+1. The kitchen must be kept sanitary to prevent the spread of germs.
+2. Inspectors visited the restaurant to check that sanitary standards were being met.
+3. She always carried hand sanitiser to keep her hands sanitary on the go.
+4. The hospital introduced strict sanitary procedures to protect patients.
+5. Clean water and sanitary conditions are essential for good public health.
+
+## 599. Tempestuous
+
+**Type:** Adjective
+
+**Meaning:** Very stormy; full of wild and conflicting emotions or forces.
+
+**Synonyms:** blustery, turbulent, gusty, stormy
+
+**Antonyms:** calm, peaceful, still, serene
+
+**Example Sentences:**
+1. The sailors struggled to control the boat in the tempestuous sea.
+2. Their tempestuous relationship was full of arguments followed by apologies.
+3. The tempestuous weather made it impossible to hold the outdoor event.
+4. Dark clouds rolled in, signalling the start of a tempestuous afternoon.
+5. The tempestuous debate in parliament lasted well into the evening.
+
+## 600. Wretched
+
+**Type:** Adjective
+
+**Meaning:** In a very unhappy or unfortunate state; of very poor quality.
+
+**Synonyms:** pitiful, tragic, miserable, forlorn
+
+**Antonyms:** happy, fortunate, content, joyful
+
+**Example Sentences:**
+1. She felt absolutely wretched when she realised she had hurt her friend's feelings.
+2. The wretched conditions in the old building meant it had to be demolished.
+3. He spent a wretched night tossing and turning, unable to sleep.
+4. The wretched dog had been left outside in the rain without shelter.
+5. Despite feeling wretched with a cold, she refused to miss the important match.
+
+# Set 31 Vocabulary List
+
+## 601. Accustom
+
+**Type:** Verb
+
+**Meaning:** To make someone accept something as normal or familiar through habit.
+
+**Synonyms:** adapt, acclimatize, familiarise, habituate
+
+**Antonyms:** unsettle, disrupt, alienate, disorient
+
+**Example Sentences:**
+1. It took a few weeks to accustom herself to waking up early for school.
+2. The trainer helped the new recruits accustom themselves to the long marches.
+3. Moving abroad meant the family had to accustom themselves to a new culture.
+4. She quickly accustomed herself to the noise of the busy city centre.
+5. It can take time to accustom your eyes to darkness after coming indoors.
+
+## 602. Assiduous
+
+**Type:** Adjective
+
+**Meaning:** Showing great care, dedication, and perseverance in one's work.
+
+**Synonyms:** diligent, meticulous, industrious, thorough
+
+**Antonyms:** lazy, lethargic, careless, negligent
+
+**Example Sentences:**
+1. Her assiduous revision paid off when she achieved top marks in every subject.
+2. The assiduous young scientist checked his results three times to be sure.
+3. An assiduous worker, she never left the office before completing every task.
+4. He was assiduous in practising the piano, never missing a single session.
+5. The teacher praised the pupils for their assiduous effort throughout the term.
+
+## 603. Beckon
+
+**Type:** Verb
+
+**Meaning:** To make a gesture with the hand to summon or signal someone.
+
+**Synonyms:** signal, gesture, wave, motion
+
+**Antonyms:** dismiss, repel, discourage, wave away
+
+**Example Sentences:**
+1. The librarian beckoned to the children to come and listen to the story.
+2. She beckoned her friend over with a wave from across the playground.
+3. The guide beckoned the group forward along the narrow mountain path.
+4. He stood at the door and beckoned the visitor inside out of the rain.
+5. The shopkeeper beckoned to the customer who was peering through the window.
+
+## 604. Besieged
+
+**Type:** Verb / Adjective
+
+**Meaning:** Surrounded or crowded in on all sides; overwhelmed with requests or demands.
+
+**Synonyms:** surrounded, encircled, swamped, overwhelmed
+
+**Antonyms:** freed, released, dispersed, unbothered
+
+**Example Sentences:**
+1. The castle was besieged by enemy soldiers for three long months.
+2. The celebrity was besieged by fans the moment she stepped outside.
+3. After the announcement, the helpline was besieged with calls from worried parents.
+4. The small town was besieged by reporters following the dramatic rescue.
+5. He felt besieged by homework from every subject at the same time.
+
+## 605. Caulking
+
+**Type:** Noun / Verb
+
+**Meaning:** The process of filling or sealing seams and gaps to make them watertight or airtight.
+
+**Synonyms:** sealing, plugging, filling, grouting
+
+**Antonyms:** opening, unsealing, exposing, cracking
+
+**Example Sentences:**
+1. The builder used caulking to seal the gap around the bathtub.
+2. She applied fresh caulking around the window frames to keep the cold air out.
+3. The boat needed caulking along its hull before it could safely go to sea.
+4. A tube of caulking is an essential item for any home repair kit.
+5. The caulking around the shower had worn away and needed to be replaced.
+
+## 606. Clemency
+
+**Type:** Noun
+
+**Meaning:** Mercy and leniency shown towards someone; the quality of being kind and forgiving.
+
+**Synonyms:** mercy, leniency, kindness, compassion
+
+**Antonyms:** cruelty, harshness, severity, mercilessness
+
+**Example Sentences:**
+1. The judge showed clemency and gave the young offender a lighter sentence.
+2. She begged for clemency on behalf of her brother, explaining his difficult circumstances.
+3. The king was known for his clemency towards defeated enemies who surrendered peacefully.
+4. Showing clemency does not mean ignoring wrongdoing — it means responding with compassion.
+5. The crowd pleaded for clemency as the verdict was read out in the courtroom.
+
+## 607. Compel
+
+**Type:** Verb
+
+**Meaning:** To force or oblige someone to do something; to drive someone to act.
+
+**Synonyms:** impel, constrain, enforce, coerce
+
+**Antonyms:** dissuade, prevent, discourage, free
+
+**Example Sentences:**
+1. The new law compels all passengers to wear a seatbelt in the back seat.
+2. She felt compelled to speak up when she saw something was wrong.
+3. The evidence was so strong that it compelled the jury to reach a verdict quickly.
+4. Nothing could compel him to change his mind once it was made up.
+5. A sense of duty compelled her to stay behind and help clear up after the event.
+
+## 608. Covert
+
+**Type:** Adjective
+
+**Meaning:** Not openly acknowledged or displayed; done in a hidden or secretive way.
+
+**Synonyms:** hidden, private, secret, clandestine
+
+**Antonyms:** overt, open, public, transparent
+
+**Example Sentences:**
+1. The spy carried out a covert operation to gather information without being detected.
+2. She sent a covert message to her friend during the dull assembly.
+3. The police launched a covert investigation into the suspicious activity.
+4. He gave her a covert glance from across the room, trying not to be noticed.
+5. The team used covert cameras to monitor the wildlife without disturbing the animals.
+
+## 609. Dilapidated
+
+**Type:** Adjective
+
+**Meaning:** In a state of disrepair through age, neglect, or wear; run-down.
+
+**Synonyms:** crumbling, damaged, run-down, decrepit
+
+**Antonyms:** pristine, well-maintained, restored, immaculate
+
+**Example Sentences:**
+1. The dilapidated farmhouse had broken windows and a crumbling roof.
+2. They bought a dilapidated cottage and spent years restoring it to its former glory.
+3. The children dared each other to explore the dilapidated building at the edge of town.
+4. The garden wall had become so dilapidated that it collapsed in the storm.
+5. A dilapidated old bicycle leaned against the fence, its tyres completely flat.
+
+## 610. Dwelling
+
+**Type:** Noun
+
+**Meaning:** A house, flat, or other place where a person lives; a place of residence.
+
+**Synonyms:** accommodation, lodgings, abode, residence
+
+**Antonyms:** workplace, open space, ruin, desolation
+
+**Example Sentences:**
+1. The archaeologists uncovered the remains of an ancient dwelling near the river.
+2. Every dwelling in the street had been decorated with lights for the festival.
+3. The family's dwelling was small but cosy and filled with warmth.
+4. A cave was the earliest form of human dwelling before houses were built.
+5. Planning permission is required before converting a barn into a dwelling.
+
+## 611. Hasty
+
+**Type:** Adjective
+
+**Meaning:** Done with excessive speed or urgency; acting too quickly without care.
+
+**Synonyms:** quick, hurried, rushed, impulsive
+
+**Antonyms:** slow, considered, careful, deliberate
+
+**Example Sentences:**
+1. She made a hasty decision that she later deeply regretted.
+2. In his hasty rush to leave, he forgot to take his packed lunch.
+3. A hasty reply can often cause more problems than a thoughtful one.
+4. The hasty repairs to the roof did not last through the winter storms.
+5. He was warned not to make any hasty judgements before hearing both sides.
+
+## 612. Intangible
+
+**Type:** Adjective
+
+**Meaning:** Unable to be touched or grasped physically; difficult to define or measure precisely.
+
+**Synonyms:** impalpable, untouchable, abstract, indefinable
+
+**Antonyms:** tangible, palpable, physical, concrete
+
+**Example Sentences:**
+1. Love and loyalty are intangible qualities that cannot be measured or weighed.
+2. The painting had an intangible quality that made it impossible to look away.
+3. The value of kindness is intangible but its effects are felt deeply.
+4. She sensed an intangible change in the atmosphere as soon as she walked in.
+5. Trust is an intangible bond that takes years to build but moments to break.
+
+## 613. Omen
+
+**Type:** Noun
+
+**Meaning:** An event or sign believed to foretell a future occurrence, either good or evil.
+
+**Synonyms:** portent, sign, warning, foretoken
+
+**Antonyms:** certainty, coincidence, aftermath, consequence
+
+**Example Sentences:**
+1. The black cloud gathering on the horizon felt like an omen of bad weather ahead.
+2. Many cultures consider a rainbow to be a good omen after a storm.
+3. She took finding a four-leaf clover as a lucky omen for her exam.
+4. The sudden silence of the birds was considered an omen of danger in the old story.
+5. He dismissed the broken mirror as a silly superstition rather than an evil omen.
+
+## 614. Plume
+
+**Type:** Noun
+
+**Meaning:** A feather, especially a long ornamental one; a long spreading cloud of smoke, dust, or water.
+
+**Synonyms:** feather, quill, frond, column
+
+**Antonyms:** base, root, stump
+
+**Example Sentences:**
+1. The knight wore a magnificent plume of white feathers on his helmet.
+2. A plume of dark smoke rose from the chimney of the old factory.
+3. The peacock fanned out its spectacular plume to attract a mate.
+4. A plume of steam shot upwards as the train pulled into the station.
+5. She decorated her hat with a single elegant plume for the formal occasion.
+
+## 615. Pompous
+
+**Type:** Adjective
+
+**Meaning:** Affectedly grand, solemn, or self-important in manner or speech.
+
+**Synonyms:** imperious, overbearing, arrogant, conceited
+
+**Antonyms:** humble, modest, unpretentious, unassuming
+
+**Example Sentences:**
+1. The pompous mayor insisted on giving a long speech at every public event.
+2. His pompous attitude made it difficult for others to approach him with questions.
+3. She found his pompous tone irritating, especially when he was often wrong.
+4. The pompous professor spoke as though he were the only expert in the room.
+5. He gave a pompous wave of his hand as if dismissing everything she had said.
+
+## 616. Quaint
+
+**Type:** Adjective
+
+**Meaning:** Attractively unusual or old-fashioned in a charming or endearing way.
+
+**Synonyms:** picturesque, charming, quaint, old-fashioned
+
+**Antonyms:** modern, ordinary, plain, unremarkable
+
+**Example Sentences:**
+1. They stayed in a quaint little cottage with a thatched roof and climbing roses.
+2. The village was full of quaint cobbled streets and ancient stone buildings.
+3. She found the old customs of the island quaint but rather fascinating.
+4. The shop had a quaint wooden sign hanging above the door.
+5. He sent a quaint handwritten letter instead of an email, which she found charming.
+
+## 617. Reside
+
+**Type:** Verb
+
+**Meaning:** To live in or at a particular place; to be situated or based somewhere.
+
+**Synonyms:** live, dwell, inhabit, occupy
+
+**Antonyms:** leave, depart, vacate, abandon
+
+**Example Sentences:**
+1. The family has resided in the same village for over three generations.
+2. The power to make decisions resides with the head of the organisation.
+3. She currently resides in Edinburgh but was born in Cardiff.
+4. Several rare species of bird reside in the nature reserve all year round.
+5. The ambassador resides in a grand official building near the parliament.
+
+## 618. Stern
+
+**Type:** Adjective
+
+**Meaning:** Strict, severe, and uncompromising in manner or attitude.
+
+**Synonyms:** strict, severe, firm, harsh
+
+**Antonyms:** lenient, gentle, mild, easygoing
+
+**Example Sentences:**
+1. The stern headteacher insisted on absolute silence during assembly.
+2. Her father gave her a stern look that told her the conversation was over.
+3. The coach was stern about punctuality — lateness was simply not tolerated.
+4. Despite his stern appearance, the teacher was caring and fair.
+5. A stern warning from the referee was enough to calm the players down.
+
+## 619. Subdued
+
+**Type:** Adjective
+
+**Meaning:** Quiet and rather reflective or low in spirits; less intense than usual.
+
+**Synonyms:** sombre, downcast, dejected, muted
+
+**Antonyms:** lively, cheerful, animated, exuberant
+
+**Example Sentences:**
+1. The team were subdued after losing the match in the final minute.
+2. She spoke in a subdued tone, clearly upset by the news she had received.
+3. The lighting in the restaurant was soft and subdued, creating a calm atmosphere.
+4. After the argument, the house felt strangely subdued and silent.
+5. He was uncharacteristically subdued at the party, barely saying a word all evening.
+
+## 620. Wither
+
+**Type:** Verb
+
+**Meaning:** To become dry and shrivelled; to lose or cause to lose vitality and freshness.
+
+**Synonyms:** wilt, droop, shrivel, fade
+
+**Antonyms:** flourish, bloom, thrive, grow
+
+**Example Sentences:**
+1. The flowers began to wither after three days without water.
+2. His confidence started to wither under the pressure of the exam.
+3. The drought caused the crops to wither in the fields before harvest.
+4. She watched sadly as the last rose in the vase began to wither.
+5. Without encouragement, even the greatest talent can wither and fade.
+
+# Set 32 Vocabulary List
+
+## 621. Ally
+
+**Type:** Verb / Noun
+
+**Meaning:** to combine resources for a mutual benefit; a partner or friend who supports you.
+
+**Synonyms:** (v) unite, join, combine; (n) partner, friend, supporter
+
+**Antonyms:** enemy, opponent, adversary
+
+**Example Sentences:**
+1. The two small countries decided to ally with each other against the larger nation.
+2. In times of difficulty, it helps to have a trusted ally by your side.
+3. The school decided to ally itself with a local charity to raise money for good causes.
+4. An ally is someone who supports and helps you, especially in a difficult situation.
+5. The hero and the wizard became allies to defeat the evil dragon.
+
+## 622. Belligerent
+
+**Type:** Adjective
+
+**Meaning:** hostile and aggressive; eager to argue or fight.
+
+**Synonyms:** threatening, hot-tempered, aggressive, combative
+
+**Antonyms:** peaceful, friendly, calm, docile
+
+**Example Sentences:**
+1. The belligerent man picked a fight with everyone he met at the market.
+2. His belligerent tone made the conversation very difficult.
+3. The two belligerent nations could not agree on a peace treaty.
+4. The belligerent dog barked and growled at anyone who came near the gate.
+5. Try not to be belligerent; a calm approach is usually more effective.
+
+## 623. Avowed
+
+**Type:** Adjective
+
+**Meaning:** openly declared or admitted; asserting something publicly.
+
+**Synonyms:** declared, admitted, acknowledged, professed
+
+**Antonyms:** undeclared, secret, denied, hidden
+
+**Example Sentences:**
+1. He is an avowed supporter of the local football team and makes no secret of it.
+2. She is an avowed vegetarian who has not eaten meat for ten years.
+3. The politician made an avowed commitment to reduce taxes if elected.
+4. His avowed intention was to become a doctor, and he worked hard towards that goal.
+5. The avowed aim of the charity is to provide clean water for all.
+
+## 624. Charred
+
+**Type:** Adjective
+
+**Meaning:** burnt and blackened by fire or heat.
+
+**Synonyms:** scorched, burnt, blackened, singed
+
+**Antonyms:** unburnt, clean, pristine
+
+**Example Sentences:**
+1. The charred remains of the bonfire were still visible in the garden.
+2. The firefighters found only charred wood where the old barn had once stood.
+3. She accidentally left the toast too long and it came out completely charred.
+4. The charred edges of the old map showed that it had survived a fire.
+5. All that remained after the blaze was a pile of charred timber and ash.
+
+## 625. Coax
+
+**Type:** Verb
+
+**Meaning:** to persistently and gently persuade someone to do something.
+
+**Synonyms:** persuade, wheedle, lure, entice
+
+**Antonyms:** force, compel, demand, coerce
+
+**Example Sentences:**
+1. She managed to coax the frightened kitten out from under the bed.
+2. He had to coax his little sister into trying the new food.
+3. The trainer coaxed the horse gently over the high jump.
+4. No amount of coaxing could persuade him to change his mind.
+5. She coaxed a smile out of the shy child with a funny face.
+
+## 626. Contemporary
+
+**Type:** Adjective
+
+**Meaning:** living or occurring at the same time; modern and present-day.
+
+**Synonyms:** modern, present-day, current, simultaneous
+
+**Antonyms:** ancient, historical, old-fashioned, past
+
+**Example Sentences:**
+1. Shakespeare and Marlowe were contemporary writers who both worked in Elizabethan England.
+2. The museum has a large collection of contemporary art by living artists.
+3. She prefers contemporary music to classical pieces.
+4. A contemporary of Einstein, Marie Curie was also a brilliant scientist.
+5. The building was designed in a contemporary style with glass and steel.
+
+## 627. Conceited
+
+**Type:** Adjective
+
+**Meaning:** excessively proud of oneself; having an inflated opinion of one's own abilities.
+
+**Synonyms:** vain, self-centred, arrogant, smug
+
+**Antonyms:** humble, modest, meek, unassuming
+
+**Example Sentences:**
+1. He was so conceited that he spent more time admiring himself than helping others.
+2. The conceited footballer boasted about his skills to anyone who would listen.
+3. She found his conceited attitude very off-putting.
+4. A conceited person believes they are better than everyone else.
+5. Despite her great talent, she was never conceited or boastful.
+
+## 628. Conventional
+
+**Type:** Adjective
+
+**Meaning:** based on or in accordance with what is generally accepted or done; traditional.
+
+**Synonyms:** normal, standard, ordinary, traditional
+
+**Antonyms:** unconventional, eccentric, unusual, original
+
+**Example Sentences:**
+1. The family lived in a conventional house with a garden and a car on the drive.
+2. He chose a conventional career in law rather than pursuing his dream of painting.
+3. Conventional wisdom says that you should always save a little money each month.
+4. She rejected the conventional way of doing things and invented her own method.
+5. The scientist challenged conventional thinking with his groundbreaking new theory.
+
+## 629. Din
+
+**Type:** Noun
+
+**Meaning:** a loud, unpleasant, and prolonged noise; a continuous uproar.
+
+**Synonyms:** uproar, racket, clamour, commotion
+
+**Antonyms:** silence, quiet, calm, hush
+
+**Example Sentences:**
+1. The din from the construction site made it impossible to concentrate.
+2. The children's playground was full of the din of shouting and laughter.
+3. She had to raise her voice to be heard above the din of the crowd.
+4. The factory produced an unpleasant din that could be heard from the street.
+5. After the concert, the din of the instruments slowly faded into silence.
+
+## 630. Elude
+
+**Type:** Verb
+
+**Meaning:** to escape from or avoid something in a clever or cunning way; to be difficult to find or remember.
+
+**Synonyms:** evade, avoid, escape, dodge
+
+**Antonyms:** confront, face, encounter, meet
+
+**Example Sentences:**
+1. The cunning fox managed to elude the hunters for several hours.
+2. The answer to the puzzle continued to elude him, no matter how hard he thought.
+3. The suspect eluded the police by disguising himself and slipping through the back door.
+4. Fame had always eluded him, despite his many years of hard work.
+5. The rare butterfly seemed to elude every attempt to photograph it.
+
+## 631. Dismal
+
+**Type:** Adjective
+
+**Meaning:** causing a mood of gloom or depression; bleak and dreary.
+
+**Synonyms:** gloomy, depressing, bleak, dreary
+
+**Antonyms:** cheerful, bright, pleasant, uplifting
+
+**Example Sentences:**
+1. The dismal weather made everyone feel miserable and gloomy.
+2. The team put in a dismal performance and lost by six goals.
+3. The abandoned house looked dismal and unwelcoming in the grey light.
+4. She felt dismal after receiving the disappointing exam results.
+5. The winter months can be dismal, with short days and little sunlight.
+
+## 632. Helix
+
+**Type:** Noun
+
+**Meaning:** a spiral shape; a three-dimensional curve that winds around like a spring or corkscrew.
+
+**Synonyms:** spiral, coil, twist, curl
+
+**Antonyms:** (no direct antonyms)
+
+**Example Sentences:**
+1. DNA is shaped like a double helix, which looks like a twisted ladder.
+2. The staircase wound upwards in a graceful helix.
+3. The spring inside the pen is made in the shape of a helix.
+4. In science class, we learned that a helix is a special type of spiral shape.
+5. The shell of the snail forms a perfect helix as it grows.
+
+## 633. Impudent
+
+**Type:** Adjective
+
+**Meaning:** not showing due respect; boldly rude and disrespectful.
+
+**Synonyms:** impertinent, insolent, rude, cheeky
+
+**Antonyms:** respectful, polite, courteous, well-mannered
+
+**Example Sentences:**
+1. The impudent boy answered back to the teacher and was sent out of the class.
+2. It was impudent of him to interrupt the headteacher in the middle of her speech.
+3. She gave an impudent grin and refused to apologise.
+4. His impudent remarks upset many of the older guests at the dinner.
+5. An impudent child often ends up in trouble for their lack of respect.
+
+## 634. Gregarious
+
+**Type:** Adjective
+
+**Meaning:** fond of company; sociable and enjoying the company of others.
+
+**Synonyms:** sociable, companionable, affable, outgoing
+
+**Antonyms:** solitary, unsociable, withdrawn, reclusive
+
+**Example Sentences:**
+1. She is a gregarious person who loves being around people and going to parties.
+2. Lions are gregarious animals that live and hunt in groups called prides.
+3. His gregarious nature made him popular with everyone he met.
+4. A gregarious person finds it easy to make new friends in any situation.
+5. He was so gregarious that he never liked spending time alone.
+
+## 635. Inaugural
+
+**Type:** Adjective
+
+**Meaning:** marking the beginning of an institution, activity, or period of office; first.
+
+**Synonyms:** first, initial, opening, maiden
+
+**Antonyms:** final, last, closing, farewell
+
+**Example Sentences:**
+1. The president gave a powerful speech at his inaugural ceremony.
+2. It was the inaugural meeting of the new science club at school.
+3. The singer performed at the inaugural concert of the new theatre.
+4. This year marks the inaugural edition of the international book festival.
+5. The team played their inaugural match in front of a packed home crowd.
+
+## 636. Lament
+
+**Type:** Verb / Noun
+
+**Meaning:** to express grief or sorrow; a passionate expression of sadness or mourning.
+
+**Synonyms:** (v) mourn, grieve, wail, weep; (n) cry of grief, dirge
+
+**Antonyms:** (v) celebrate, rejoice, cheer; (n) celebration
+
+**Example Sentences:**
+1. The villagers gathered to lament the loss of their beloved leader.
+2. She could hear the lament of the bagpipes drifting across the hills.
+3. He lamented the fact that so many old buildings had been knocked down.
+4. A lament is a song or poem that expresses deep grief or sadness.
+5. There was no time to lament their defeat; they had to prepare for the next match.
+
+## 637. Perish
+
+**Type:** Verb
+
+**Meaning:** to suffer complete ruin or destruction; to die, especially in a sudden way.
+
+**Synonyms:** die, disappear, wither, dissolve
+
+**Antonyms:** survive, flourish, thrive, endure
+
+**Example Sentences:**
+1. Many ancient civilisations perished due to drought, war, or disease.
+2. The plants will perish if they are not watered regularly.
+3. Sailors used to perish at sea when storms destroyed their ships.
+4. Perish the thought of failing your exams after all that hard work!
+5. Without sunlight, most living things would quickly perish.
+
+## 638. Succumb
+
+**Type:** Verb
+
+**Meaning:** to fail to resist pressure, temptation, or illness; to give way.
+
+**Synonyms:** give in, surrender, capitulate, yield
+
+**Antonyms:** resist, withstand, overcome, endure
+
+**Example Sentences:**
+1. She tried to resist the chocolate cake but eventually succumbed to temptation.
+2. The brave defender refused to succumb to the pressure of the opposing team.
+3. He succumbed to his illness after a long battle and passed away peacefully.
+4. Many people succumb to stress when they have too much work to do.
+5. It is important not to succumb to peer pressure and to make your own choices.
+
+## 639. Ostentatious
+
+**Type:** Adjective
+
+**Meaning:** characterized by pretentious or showy display designed to impress others.
+
+**Synonyms:** showy, obtrusive, gaudy, flamboyant
+
+**Antonyms:** modest, understated, simple, humble
+
+**Example Sentences:**
+1. The billionaire lived in an ostentatious mansion filled with gold furniture.
+2. She found his ostentatious jewellery and expensive clothes rather vulgar.
+3. The ostentatious parade was designed to show off the country's military power.
+4. He drove an ostentatious sports car just to get people's attention.
+5. An ostentatious person wants everyone to notice how rich or important they are.
+
+## 640. Subterfuge
+
+**Type:** Noun
+
+**Meaning:** deceit used in order to achieve one's goal; a trick or scheme used to hide the truth.
+
+**Synonyms:** trickery, intrigue, deceit, deception
+
+**Antonyms:** honesty, openness, transparency, sincerity
+
+**Example Sentences:**
+1. He used subterfuge to sneak into the building without anyone noticing.
+2. The spy relied on subterfuge and disguise to gather information.
+3. It was discovered that the company had been using subterfuge to hide its losses.
+4. Subterfuge is the use of clever tricks to deceive others.
+5. She resorted to subterfuge to avoid telling her parents where she had really been.
+
+# Set 33 Vocabulary List
+
+## 641. Meandering
+
+**Type:** Adjective / Verb
+
+**Meaning:** following a winding course; (of a river or road) curving and twisting rather than going in a straight line.
+
+**Synonyms:** curving, bending, winding, twisting
+
+**Antonyms:** straight, direct
+
+**Example Sentences:**
+1. The meandering river snaked lazily through the green valley.
+2. We took a meandering path through the woods to reach the cottage.
+3. Her meandering speech wandered from one topic to another without ever reaching a point.
+4. The meandering country lane was lined with wildflowers and old stone walls.
+5. After lunch, we went on a meandering walk along the riverbank.
+
+## 642. Capacious
+
+**Type:** Adjective
+
+**Meaning:** having a lot of space inside; roomy and able to hold a great deal.
+
+**Synonyms:** sizable, spacious, broad, roomy
+
+**Antonyms:** narrow, small, cramped, confined
+
+**Example Sentences:**
+1. She carried a capacious handbag that held everything from books to an umbrella.
+2. The capacious hall could easily seat over a thousand guests.
+3. Their new house had a capacious kitchen with plenty of room for cooking together.
+4. A capacious boot is essential for a family car going on long holidays.
+5. The library's capacious reading room was filled with sunlight and tall shelves.
+
+## 643. Decant
+
+**Type:** Verb
+
+**Meaning:** to pour a liquid gradually from one container into another, especially without disturbing the sediment.
+
+**Synonyms:** pour, transfer, tip, draw off
+
+**Antonyms:** fill, collect, retain
+
+**Example Sentences:**
+1. He carefully decanted the wine into a glass jug before the meal.
+2. She decanted the soup from the pot into a serving bowl.
+3. To decant a liquid means to pour it slowly so that any sediment is left behind.
+4. The chemist decanted the clear solution into a smaller flask.
+5. They decanted the olive oil into a pretty bottle for the dinner table.
+
+## 644. Covet
+
+**Type:** Verb
+
+**Meaning:** to long for something, especially something belonging to someone else.
+
+**Synonyms:** crave, envy, desire, yearn for
+
+**Antonyms:** dislike, abjure, renounce, reject
+
+**Example Sentences:**
+1. He had always coveted his neighbour's bright red sports car.
+2. The young pianist coveted the prize awarded to the best musician each year.
+3. To covet something means to want it badly, often when it isn't yours to have.
+4. She tried not to covet her friend's new bicycle, but it was hard not to admire it.
+5. Many athletes covet an Olympic gold medal above any other prize.
+
+## 645. Peril
+
+**Type:** Noun
+
+**Meaning:** serious and immediate danger; the risk of being harmed or destroyed.
+
+**Synonyms:** danger, hazard, risk, jeopardy
+
+**Antonyms:** safety, security, protection
+
+**Example Sentences:**
+1. The sailors were in great peril as the storm crashed against their ship.
+2. Climbing the cliff at night put the explorers in serious peril.
+3. She warned us of the perils of crossing the busy road without looking.
+4. Peril is a word used to describe a situation of extreme danger.
+5. The hero rescued the children from the peril of the burning building.
+
+## 646. Sacred
+
+**Type:** Adjective
+
+**Meaning:** considered holy and deserving great respect; very important and not to be changed or harmed.
+
+**Synonyms:** holy, spiritual, cherished, hallowed
+
+**Antonyms:** irreligious, unimportant, profane, secular
+
+**Example Sentences:**
+1. The temple was a sacred place where worshippers came to pray in silence.
+2. To many people, family traditions are sacred and must be carefully preserved.
+3. The ancient text was treated as a sacred object and kept in a glass case.
+4. A sacred site is one that is considered holy by a particular religion or culture.
+5. He believed that his promise to his grandfather was sacred and could never be broken.
+
+## 647. Dismiss
+
+**Type:** Verb
+
+**Meaning:** to send someone away, especially from a job; to refuse to consider an idea seriously.
+
+**Synonyms:** decline, release, discharge, reject
+
+**Antonyms:** accept, keep, allow, retain
+
+**Example Sentences:**
+1. The teacher dismissed the class as soon as the bell rang.
+2. The manager had to dismiss the employee for repeatedly arriving late.
+3. He dismissed her suggestion without even thinking about it properly.
+4. Don't dismiss the idea too quickly; it might turn out to be useful.
+5. The judge dismissed the case because there was not enough evidence.
+
+## 648. Flourish
+
+**Type:** Verb / Noun
+
+**Meaning:** to grow or develop in a healthy or vigorous way; (n) a bold or extravagant gesture or action.
+
+**Synonyms:** (v) grow, blossom, develop, thrive; (n) gesture, sweep
+
+**Antonyms:** decrease, shrivel, wither, decline
+
+**Example Sentences:**
+1. Roses flourish in soil that is rich and well-drained.
+2. The small business began to flourish after it opened a website.
+3. Her artistic talent flourished once she joined the painting club.
+4. He signed his name with a great flourish at the bottom of the letter.
+5. To flourish means to grow strongly or to be very successful.
+
+## 649. Shrine
+
+**Type:** Noun
+
+**Meaning:** a holy place where people worship or remember a sacred person or event.
+
+**Synonyms:** altar, temple, sanctuary, holy place
+
+**Antonyms:** secular building
+
+**Example Sentences:**
+1. Pilgrims travelled for many days to visit the shrine high in the mountains.
+2. A small shrine stood at the side of the road, decorated with flowers.
+3. The room had been turned into a shrine to her favourite singer, with posters everywhere.
+4. A shrine is a special place dedicated to a god, saint, or important memory.
+5. They lit candles at the shrine to remember loved ones who had passed away.
+
+## 650. Indifferent
+
+**Type:** Adjective
+
+**Meaning:** showing no interest or concern about something or someone.
+
+**Synonyms:** uninterested, uncaring, unconcerned, apathetic
+
+**Antonyms:** passionate, interested, enthusiastic, caring
+
+**Example Sentences:**
+1. He seemed completely indifferent to whether his team won or lost.
+2. The cat was indifferent to the new toy we had bought for it.
+3. She gave an indifferent shrug when asked which film she wanted to watch.
+4. To be indifferent means not to care one way or the other about something.
+5. The audience grew indifferent as the long, dull speech continued.
+
+## 651. Malady
+
+**Type:** Noun
+
+**Meaning:** a disease or illness; a serious problem or unhealthy condition.
+
+**Synonyms:** disease, virus, illness, ailment
+
+**Antonyms:** healthiness, wellness, vigour
+
+**Example Sentences:**
+1. The doctor was unable to identify the strange malady that had struck the village.
+2. Loneliness is a malady that affects many people in big cities.
+3. Coughing and sneezing are common symptoms of this winter malady.
+4. A malady is another word for an illness, especially one that lasts a long time.
+5. The old gardener suffered from a mysterious malady that left him very tired.
+
+## 652. Determine
+
+**Type:** Verb
+
+**Meaning:** to decide or settle something firmly; to discover the facts about something.
+
+**Synonyms:** decide, conclude, select, resolve
+
+**Antonyms:** commence, initiate, hesitate, waver
+
+**Example Sentences:**
+1. The judges will determine the winner of the competition tomorrow.
+2. Scientists tried to determine the cause of the unusual weather.
+3. She was determined to finish the marathon, no matter how tired she felt.
+4. To determine something means to make a firm decision or to find it out.
+5. The detective worked carefully to determine who had taken the missing necklace.
+
+## 653. Incisive
+
+**Type:** Adjective
+
+**Meaning:** intelligently analytical and clear-thinking; expressing an idea sharply and accurately.
+
+**Synonyms:** concise, succinct, sharp, penetrating
+
+**Antonyms:** long-winded, vague, rambling, unclear
+
+**Example Sentences:**
+1. The journalist was famous for her incisive questions during interviews.
+2. He gave an incisive analysis of the football match in just a few sentences.
+3. Her incisive comments quickly got to the heart of the problem.
+4. An incisive mind can cut straight through confusing information to find the truth.
+5. The teacher praised the pupil's incisive answer for being both short and exact.
+
+## 654. Exonerate
+
+**Type:** Verb
+
+**Meaning:** to officially declare that someone is not guilty of wrongdoing.
+
+**Synonyms:** absolve, justify, exempt, clear
+
+**Antonyms:** convict, condemn, blame, accuse
+
+**Example Sentences:**
+1. New evidence was found that completely exonerated the accused man.
+2. The investigation exonerated the teacher of any blame for the accident.
+3. To exonerate someone is to prove that they did not do something wrong.
+4. The court exonerated her after the real culprit confessed.
+5. The report exonerated the company of any responsibility for the leak.
+
+## 655. Prevalent
+
+**Type:** Adjective
+
+**Meaning:** widespread; existing or happening often or in many places.
+
+**Synonyms:** commonplace, frequent, normal, widespread
+
+**Antonyms:** rare, unique, one-of-a-kind, uncommon
+
+**Example Sentences:**
+1. Coughs and colds are particularly prevalent during the winter months.
+2. The use of mobile phones is now prevalent among children of all ages.
+3. Old-fashioned customs are still prevalent in some parts of the countryside.
+4. If something is prevalent, it is found very commonly in a place or group.
+5. Smartwatches have become increasingly prevalent over the past few years.
+
+## 656. Scrupulous
+
+**Type:** Adjective
+
+**Meaning:** very careful and thorough about details; behaving in a strictly honest way.
+
+**Synonyms:** strict, meticulous, critical, painstaking
+
+**Antonyms:** careless, easy-going, lenient, sloppy
+
+**Example Sentences:**
+1. The scientist kept scrupulous notes of every experiment she carried out.
+2. He was scrupulous about returning every coin he had borrowed.
+3. The hotel was scrupulous in its cleanliness, with not a speck of dust anywhere.
+4. A scrupulous person pays great attention to detail and behaves very honestly.
+5. She was scrupulous in following the recipe exactly as it was written.
+
+## 657. Elated
+
+**Type:** Adjective
+
+**Meaning:** extremely happy and excited, especially because something good has happened.
+
+**Synonyms:** ecstatic, jubilant, overjoyed, thrilled
+
+**Antonyms:** morose, mirthless, gloomy, dejected
+
+**Example Sentences:**
+1. She was elated when she heard she had been chosen for the team.
+2. The whole family felt elated after their long-awaited holiday was finally booked.
+3. He looked elated as he held up his shiny gold trophy.
+4. To be elated means to feel a wonderful, soaring sense of happiness.
+5. The elated crowd cheered loudly as the winning goal was scored.
+
+## 658. Augment
+
+**Type:** Verb
+
+**Meaning:** to make something larger, greater, or stronger by adding to it.
+
+**Synonyms:** upgrade, enhance, amplify, boost
+
+**Antonyms:** decrease, halt, undermine, reduce
+
+**Example Sentences:**
+1. He took a weekend job to augment his pocket money.
+2. The orchestra augmented its sound by adding extra strings for the concert.
+3. She read widely to augment her knowledge before the exam.
+4. To augment something is to add to it so that it becomes bigger or better.
+5. The company hired more staff to augment its small design team.
+
+## 659. Fabricate
+
+**Type:** Verb
+
+**Meaning:** to invent or make up something false in order to deceive; to construct or manufacture an object.
+
+**Synonyms:** falsify, feign, devise, pretend
+
+**Antonyms:** verify, authenticate, prove, validate
+
+**Example Sentences:**
+1. He tried to fabricate an excuse for missing his homework, but no one believed him.
+2. The witness was caught having fabricated her story about the accident.
+3. The factory fabricates parts for cars and aeroplanes.
+4. To fabricate means either to make something or to invent a false story.
+5. She fabricated a clever model of a castle out of cardboard and tape.
+
+## 660. Domestic
+
+**Type:** Adjective
+
+**Meaning:** relating to one's home, family, or country, rather than to other countries; (of animals) kept by humans.
+
+**Synonyms:** familial, native, household, internal
+
+**Antonyms:** foreign, alien, international, wild
+
+**Example Sentences:**
+1. She enjoyed quiet domestic life with her family on the weekends.
+2. The shop sells a range of domestic appliances, from kettles to washing machines.
+3. Domestic flights take off and land within the same country.
+4. Cats and dogs are popular domestic animals in many homes.
+5. The country tries to support its own domestic industries before relying on imports.
+
+# Set 34 Vocabulary List
+
+## 661. Flagrant
+
+**Type:** Adjective
+
+**Meaning:** (of a bad action) very obvious and shocking; openly done without any attempt to hide it.
+
+**Synonyms:** undisguised, brazen, glaring, blatant
+
+**Antonyms:** meek, timid, obscure, subtle
+
+**Example Sentences:**
+1. He was sent off for a flagrant foul during the football match.
+2. The flagrant lie was so obvious that no one was fooled by it.
+3. Cheating in plain sight of the teacher was a flagrant act of dishonesty.
+4. A flagrant breach of the rules will result in immediate disqualification.
+5. She showed a flagrant disregard for the school uniform policy.
+
+## 662. Prolific
+
+**Type:** Adjective
+
+**Meaning:** producing a great number or amount of something; very fruitful or productive.
+
+**Synonyms:** creative, bountiful, productive, fertile
+
+**Antonyms:** barren, fruitless, unproductive, sparse
+
+**Example Sentences:**
+1. The author was prolific, writing more than fifty novels in her lifetime.
+2. Rabbits are well known for being prolific breeders.
+3. The apple tree was so prolific that we had baskets of fruit to give away.
+4. He was a prolific goal-scorer, finding the net almost every game.
+5. A prolific writer is one who produces a great deal of work.
+
+## 663. Uniformity
+
+**Type:** Noun
+
+**Meaning:** the quality of being the same as or very similar to others; lack of variety.
+
+**Synonyms:** consistency, similarity, sameness, regularity
+
+**Antonyms:** incongruity, discord, variety, difference
+
+**Example Sentences:**
+1. The school insisted on uniformity in its pupils' appearance and behaviour.
+2. There was a pleasing uniformity in the rows of newly painted houses.
+3. Some uniformity in the shop signs gave the high street a tidy look.
+4. Uniformity means that things are all the same or follow a strict pattern.
+5. He complained that the uniformity of the food at school made every lunch feel the same.
+
+## 664. Disclose
+
+**Type:** Verb
+
+**Meaning:** to make secret or new information known; to reveal something hidden.
+
+**Synonyms:** reveal, admit, announce, divulge
+
+**Antonyms:** conceal, deny, cover, hide
+
+**Example Sentences:**
+1. The company refused to disclose how much money it had lost.
+2. She finally disclosed the secret she had kept for many years.
+3. The doctor cannot disclose details about a patient without permission.
+4. To disclose something is to share information that was previously hidden.
+5. He disclosed that he had been working on a surprise gift for his mother.
+
+## 665. Exploit
+
+**Type:** Verb / Noun
+
+**Meaning:** (v) to make use of someone or something unfairly for one's own advantage; (n) a brave or notable deed.
+
+**Synonyms:** (v) abuse, capitalise, manipulate, take advantage of; (n) feat, adventure
+
+**Antonyms:** protect, defend, respect, treat fairly
+
+**Example Sentences:**
+1. The factory was accused of exploiting its workers by paying very low wages.
+2. He tried to exploit his friend's kindness by always borrowing money.
+3. Companies often exploit new technology to make their products better.
+4. The book described the daring exploits of the famous explorer.
+5. To exploit someone is to use them unfairly for your own benefit.
+
+## 666. Formulaic
+
+**Type:** Adjective
+
+**Meaning:** following a fixed pattern or set of rules; predictable and lacking originality.
+
+**Synonyms:** conventional, standard, predictable, routine
+
+**Antonyms:** unexpected, abnormal, original, unique
+
+**Example Sentences:**
+1. The film was criticised for being too formulaic and lacking surprises.
+2. Pop songs sometimes have a formulaic structure of verse, chorus, verse.
+3. Her formulaic answers showed she had memorised them from a textbook.
+4. Something formulaic follows a tried-and-tested pattern that rarely changes.
+5. The teacher encouraged the class to avoid formulaic openings in their stories.
+
+## 667. Despair
+
+**Type:** Noun / Verb
+
+**Meaning:** the complete loss or absence of hope; (v) to lose all hope.
+
+**Synonyms:** despondency, gloom, melancholy, hopelessness
+
+**Antonyms:** comfort, peace, joy, hope
+
+**Example Sentences:**
+1. After the third defeat in a row, the team sank into despair.
+2. He stared at the broken vase in despair, knowing it had been his grandmother's favourite.
+3. Don't despair; you can always try the test again next term.
+4. Despair is a feeling of having no hope left at all.
+5. She refused to despair, even when things looked very difficult.
+
+## 668. Elicit
+
+**Type:** Verb
+
+**Meaning:** to draw out or bring forth a response, fact, or reaction from someone.
+
+**Synonyms:** obtain, acquire, evoke, draw out
+
+**Antonyms:** ignore, neglect, lose, suppress
+
+**Example Sentences:**
+1. The teacher's funny joke elicited a burst of laughter from the class.
+2. The lawyer asked careful questions to elicit the truth from the witness.
+3. Her sad story elicited sympathy from everyone in the room.
+4. To elicit something means to bring it out, often a reaction or piece of information.
+5. The advert was designed to elicit a strong emotional response from viewers.
+
+## 669. Malicious
+
+**Type:** Adjective
+
+**Meaning:** intending to do harm or cause hurt to others; spiteful.
+
+**Synonyms:** malevolent, malignant, wicked, spiteful
+
+**Antonyms:** aiding, assisting, kind, benevolent
+
+**Example Sentences:**
+1. The malicious gossip spread quickly and hurt many feelings.
+2. He sent a malicious email designed to upset his classmate.
+3. There was a malicious smile on the villain's face as he watched the trap close.
+4. Computers can be infected by malicious software that damages files.
+5. Something malicious is meant to cause harm or pain to someone else.
+
+## 670. Neat
+
+**Type:** Adjective
+
+**Meaning:** arranged in a tidy and orderly way; (of a drink) not diluted with water or other liquid.
+
+**Synonyms:** tidy, clean, orderly, smart
+
+**Antonyms:** messy, diluted, untidy, cluttered
+
+**Example Sentences:**
+1. Her bedroom was always neat, with every book in its proper place.
+2. He prefers his apple juice neat, without any extra water.
+3. The neat rows of vegetables in the garden looked beautiful.
+4. His handwriting was so neat that it almost looked printed.
+5. Try to keep your desk neat so you can find what you need.
+
+## 671. Transparent
+
+**Type:** Adjective
+
+**Meaning:** allowing light to pass through so that objects behind can be clearly seen; open, honest, and easy to understand.
+
+**Synonyms:** candid, easy, clear, see-through
+
+**Antonyms:** opaque, difficult, convoluted, secretive
+
+**Example Sentences:**
+1. The transparent glass walls let sunlight stream into every room.
+2. The teacher's instructions were transparent and easy to follow.
+3. The school promised to be transparent about how the money was spent.
+4. Something transparent can either be see-through or completely honest.
+5. The water was so transparent you could see the pebbles at the bottom of the stream.
+
+## 672. Intimate
+
+**Type:** Adjective
+
+**Meaning:** closely connected by friendship or affection; small and warmly cosy.
+
+**Synonyms:** cozy, loving, affectionate, close
+
+**Antonyms:** cold, distant, aloof, unfriendly
+
+**Example Sentences:**
+1. They had an intimate chat by the fire late into the evening.
+2. The little café had an intimate atmosphere with soft music and candles.
+3. Only her most intimate friends knew about her plan to surprise everyone.
+4. An intimate gathering is a small, friendly meeting between people who know each other well.
+5. The two sisters shared an intimate bond that no one else could match.
+
+## 673. Dormant
+
+**Type:** Adjective
+
+**Meaning:** not active or growing for a period of time, but able to become active again.
+
+**Synonyms:** asleep, passive, latent, inactive
+
+**Antonyms:** alert, active, lively, awake
+
+**Example Sentences:**
+1. The volcano had been dormant for hundreds of years before erupting again.
+2. Bears remain dormant for much of the winter while they hibernate.
+3. Many seeds lie dormant under the soil until the spring rains arrive.
+4. Her interest in painting had been dormant since she was young.
+5. Something dormant is resting but ready to become active again.
+
+## 674. Moderate
+
+**Type:** Adjective / Verb
+
+**Meaning:** average in amount, intensity, or degree, not extreme; (v) to make less extreme.
+
+**Synonyms:** balanced, temperate, gentle, reasonable
+
+**Antonyms:** biased, imbalanced, harsh, extreme
+
+**Example Sentences:**
+1. There was a moderate amount of traffic on the road this morning.
+2. He runs at a moderate pace so he doesn't get too tired.
+3. The teacher tried to moderate the heated debate between the two pupils.
+4. A moderate climate is neither very hot nor very cold.
+5. Try to be moderate when eating sweets; too many can make you ill.
+
+## 675. Sufficient
+
+**Type:** Adjective
+
+**Meaning:** enough for a particular purpose or need.
+
+**Synonyms:** adequate, ample, suitable, plentiful
+
+**Antonyms:** meagre, lacking, inadequate, insufficient
+
+**Example Sentences:**
+1. There was sufficient food at the party for everyone to have seconds.
+2. We had just sufficient time to catch the train before it left.
+3. The blanket was not sufficient to keep him warm during the cold night.
+4. Sufficient means enough — not too much and not too little.
+5. Make sure you have sufficient water with you on a long walk.
+
+## 676. Conjecture
+
+**Type:** Noun / Verb
+
+**Meaning:** an opinion or guess based on incomplete information; (v) to form such an opinion.
+
+**Synonyms:** guesswork, hunch, hypothesis, speculation
+
+**Antonyms:** proof, estimation, calculation, fact
+
+**Example Sentences:**
+1. Without evidence, his theory was nothing more than conjecture.
+2. The detective refused to make any conjecture before she had the facts.
+3. There has been much conjecture about the cause of the strange noise.
+4. Conjecture means making a guess without having proper proof.
+5. We can only conjecture about what really happened that stormy night.
+
+## 677. Employ
+
+**Type:** Verb
+
+**Meaning:** to give someone a job; to make use of something.
+
+**Synonyms:** hire, utilise, enlist, engage
+
+**Antonyms:** fire, discharge, dismiss, sack
+
+**Example Sentences:**
+1. The factory employs over two hundred people from the local town.
+2. She decided to employ a clever trick to solve the puzzle.
+3. The company employed new staff to help with the busy holiday season.
+4. To employ someone is to hire them to do a job for you.
+5. He employed a calm voice to settle the noisy children.
+
+## 678. Adrift
+
+**Type:** Adjective / Adverb
+
+**Meaning:** floating without being moored or steered; without purpose or direction.
+
+**Synonyms:** afloat, aimless, amiss, drifting
+
+**Antonyms:** on track, anchored, determined, focused
+
+**Example Sentences:**
+1. The little boat was set adrift on the calm blue sea.
+2. After leaving school, he felt adrift and unsure what to do next.
+3. The rope snapped, and the raft drifted adrift down the river.
+4. To be adrift is to float along, or to feel lost without direction.
+5. The young puppy seemed adrift in the huge new garden.
+
+## 679. Condemn
+
+**Type:** Verb
+
+**Meaning:** to express strong disapproval of someone or something; to sentence to a punishment.
+
+**Synonyms:** reprimand, denounce, censure, criticise
+
+**Antonyms:** approve, compliment, praise, commend
+
+**Example Sentences:**
+1. World leaders condemned the cruel attack on the helpless village.
+2. The judge condemned the criminal to a long stay in prison.
+3. She condemned bullying in any form during her assembly speech.
+4. To condemn someone is to strongly disapprove of what they have done.
+5. The old building was condemned because it was no longer safe.
+
+## 680. Peripheral
+
+**Type:** Adjective
+
+**Meaning:** relating to or situated on the edge or outer boundary; of secondary importance.
+
+**Synonyms:** marginal, incidental, outer, secondary
+
+**Antonyms:** central, interior, major, important
+
+**Example Sentences:**
+1. He could see something move at the peripheral edge of his vision.
+2. The discussion focused on the main problem, leaving peripheral issues for later.
+3. A keyboard and mouse are common peripheral devices used with a computer.
+4. Something peripheral is on the edge or is of less importance.
+5. The peripheral roads around the city are usually less busy than the centre.
+
+# Set 35 Vocabulary List
+
+## 681. Magnitude
+
+**Type:** Noun
+
+**Meaning:** the great size, extent, or importance of something.
+
+**Synonyms:** degree, significance, scale, extent
+
+**Antonyms:** insignificance, tininess, smallness, triviality
+
+**Example Sentences:**
+1. The magnitude of the earthquake shocked scientists around the world.
+2. We did not at first realise the magnitude of the problem.
+3. Stars are classified by their magnitude, or how bright they appear in the sky.
+4. The magnitude of his kindness was clear to everyone he helped.
+5. Magnitude is a word that describes the size or importance of something.
+
+## 682. Convince
+
+**Type:** Verb
+
+**Meaning:** to make someone firmly believe that something is true or right.
+
+**Synonyms:** persuade, assure, prompt, sway
+
+**Antonyms:** dissuade, repel, prevent, discourage
+
+**Example Sentences:**
+1. She tried to convince her parents to let her have a pet rabbit.
+2. The lawyer convinced the jury that her client was innocent.
+3. He convinced himself that everything would turn out fine in the end.
+4. To convince someone is to make them believe what you are saying.
+5. The salesperson failed to convince me that I needed a new phone.
+
+## 683. Elude
+
+**Type:** Verb
+
+**Meaning:** to escape from or avoid being caught, often by being clever.
+
+**Synonyms:** evade, outwit, baffle, dodge
+
+**Antonyms:** aid, assist, meet, confront
+
+**Example Sentences:**
+1. The clever fox managed to elude the hunters once again.
+2. The answer to the riddle continued to elude her all afternoon.
+3. The thief eluded the police by hiding inside an empty barn.
+4. Sleep eluded him as he lay awake worrying about the test.
+5. To elude someone is to escape from them in a clever way.
+
+## 684. Divine
+
+**Type:** Adjective
+
+**Meaning:** of, from, or like God or a god; extremely good or delightful.
+
+**Synonyms:** angelic, heavenly, sacred, godly
+
+**Antonyms:** earthly, unholy, hellish, mortal
+
+**Example Sentences:**
+1. In many stories, kings were said to rule by divine right.
+2. The chocolate cake tasted absolutely divine.
+3. Ancient peoples believed that thunder was a sign of divine anger.
+4. The painting showed a divine figure surrounded by golden light.
+5. Something divine is connected to a god or is wonderfully good.
+
+## 685. Insert
+
+**Type:** Verb / Noun
+
+**Meaning:** to place, fit, or push something into something else.
+
+**Synonyms:** embed, implant, inject, place in
+
+**Antonyms:** dislodge, displace, remove, extract
+
+**Example Sentences:**
+1. Please insert the key into the lock and turn it gently.
+2. She inserted a new battery into the remote control.
+3. The teacher asked him to insert a comma in the correct place.
+4. To insert something is to put it inside or between other things.
+5. He inserted a bookmark to keep his place in the long novel.
+
+## 686. Indict
+
+**Type:** Verb
+
+**Meaning:** to formally accuse or charge someone with a serious crime.
+
+**Synonyms:** accuse, charge, blame, prosecute
+
+**Antonyms:** exonerate, free, acquit, clear
+
+**Example Sentences:**
+1. The court decided to indict the man on charges of theft.
+2. To indict someone means to officially say they have committed a crime.
+3. The grand jury chose to indict the company for breaking safety rules.
+4. He was indicted for fraud after a long police investigation.
+5. The newspaper article seemed to indict the entire system as unfair.
+
+## 687. Inconspicuous
+
+**Type:** Adjective
+
+**Meaning:** not attracting attention; hard to see or notice.
+
+**Synonyms:** unobtrusive, discreet, hidden, unnoticeable
+
+**Antonyms:** exposed, noticeable, open, obvious
+
+**Example Sentences:**
+1. He chose an inconspicuous seat at the back of the room.
+2. The little bird's brown feathers made it inconspicuous against the bark.
+3. She wore inconspicuous clothes so that no one would recognise her.
+4. Something inconspicuous blends in and is not easily seen.
+5. The tiny door was inconspicuous, hidden behind a tall bookshelf.
+
+## 688. Coy
+
+**Type:** Adjective
+
+**Meaning:** pretending to be shy or modest, especially as a way of attracting attention.
+
+**Synonyms:** bashful, evasive, timid, skittish
+
+**Antonyms:** aggressive, immodest, forward, bold
+
+**Example Sentences:**
+1. She gave a coy smile when asked who her secret friend was.
+2. He was coy about his birthday plans, refusing to share any details.
+3. The actress was coy in interviews about her new film role.
+4. Someone who is coy pretends to be shyer than they really are.
+5. Don't be coy — tell us what you really think of the new design.
+
+## 689. Garment
+
+**Type:** Noun
+
+**Meaning:** an item of clothing.
+
+**Synonyms:** apparel, costume, robe, attire
+
+**Antonyms:** nakedness, bareness
+
+**Example Sentences:**
+1. The shop sold beautiful garments made from soft Indian silk.
+2. She carefully folded each garment and placed it in the suitcase.
+3. The royal garment was decorated with gold thread and tiny jewels.
+4. A garment is simply a piece of clothing that someone wears.
+5. The tailor mended the torn garment so that it looked brand new.
+
+## 690. Futile
+
+**Type:** Adjective
+
+**Meaning:** producing no useful result; pointless and likely to fail.
+
+**Synonyms:** ineffective, vain, trivial, useless
+
+**Antonyms:** fruitful, productive, valuable, worthwhile
+
+**Example Sentences:**
+1. It was futile to argue with him once he had made up his mind.
+2. Their attempts to reach the summit before nightfall proved futile.
+3. Trying to empty the flooded basement with a small bucket felt futile.
+4. Something futile is a waste of time because it cannot succeed.
+5. She made one last, futile effort to find her lost ring in the sand.
+
+## 691. Sincere
+
+**Type:** Adjective
+
+**Meaning:** free from pretence or deceit; genuine in feelings, thoughts, or actions.
+
+**Synonyms:** genuine, heartfelt, real, earnest
+
+**Antonyms:** devious, deceitful, flippant, insincere
+
+**Example Sentences:**
+1. She gave a sincere apology for the hurtful thing she had said.
+2. His thanks were sincere, and you could see he really meant them.
+3. A sincere friend will always tell you the truth, even when it is hard.
+4. To be sincere means to truly mean what you say or do.
+5. He wrote a sincere letter to his grandmother to thank her for the gift.
+
+## 692. Thesis
+
+**Type:** Noun
+
+**Meaning:** a statement or theory put forward as a premise to be proved; a long piece of academic writing on a particular subject.
+
+**Synonyms:** essay, argument, dissertation, proposition
+
+**Antonyms:** counterargument, rebuttal, refutation
+
+**Example Sentences:**
+1. Her thesis was that early reading helps children to do better at school.
+2. He spent two years writing his thesis on the history of the local railway.
+3. The teacher asked us to state our thesis clearly at the start of the essay.
+4. A thesis is a long piece of writing that argues for a particular idea.
+5. Every paragraph of the report supported her main thesis.
+
+## 693. Pledge
+
+**Type:** Verb / Noun
+
+**Meaning:** to make a serious, formal promise; (n) such a promise.
+
+**Synonyms:** promise, swear, vow, guarantee
+
+**Antonyms:** disagree, reject, break, release
+
+**Example Sentences:**
+1. The mayor pledged to build a new park for the children of the town.
+2. They took a pledge of friendship that would last all their lives.
+3. She pledged to give half her pocket money to charity each week.
+4. To pledge something is to promise it solemnly and seriously.
+5. The class made a pledge to keep their classroom tidy every day.
+
+## 694. Nuance
+
+**Type:** Noun
+
+**Meaning:** a very slight difference in meaning, feeling, sound, or colour.
+
+**Synonyms:** distinction, hint, subtlety, shade
+
+**Antonyms:** bluntness, obviousness, generalisation
+
+**Example Sentences:**
+1. There is a fine nuance between feeling sad and feeling disappointed.
+2. The painter captured every nuance of light on the calm lake.
+3. He missed the nuance in her voice that hinted she was annoyed.
+4. A nuance is a small difference that is easy to overlook.
+5. Good actors understand the nuances of every character they play.
+
+## 695. Impeccable
+
+**Type:** Adjective
+
+**Meaning:** in accordance with the highest standards; without flaw or fault.
+
+**Synonyms:** immaculate, exquisite, precise, flawless
+
+**Antonyms:** flawed, blemished, defective, imperfect
+
+**Example Sentences:**
+1. The waiter offered impeccable service throughout the long meal.
+2. Her manners were impeccable; she always remembered to say thank you.
+3. He wore an impeccable white suit to the wedding.
+4. Something impeccable is so well done that nothing about it can be criticised.
+5. The pianist's impeccable performance was rewarded with a standing ovation.
+
+## 696. Traitor
+
+**Type:** Noun
+
+**Meaning:** a person who betrays a friend, country, cause, or trust.
+
+**Synonyms:** conspirator, deserter, impostor, renegade
+
+**Antonyms:** loyalist, supporter, ally, patriot
+
+**Example Sentences:**
+1. The soldier was branded a traitor for selling secrets to the enemy.
+2. To call someone a traitor is to say they have betrayed those who trusted them.
+3. The story tells of a traitor who let invaders into the castle at night.
+4. Friends never expected him to turn out to be a traitor.
+5. History remembers many traitors whose treachery changed the course of nations.
+
+## 697. Bewildered
+
+**Type:** Adjective
+
+**Meaning:** completely confused and unable to understand what is happening.
+
+**Synonyms:** puzzled, perplexed, befuddled, dazed
+
+**Antonyms:** aware, oriented, understanding, clear-headed
+
+**Example Sentences:**
+1. The bewildered tourist stood in the busy square trying to read his map.
+2. She gave a bewildered look when asked the difficult maths question.
+3. The puppy was bewildered by all the noise in the busy market.
+4. A bewildered person feels lost and unable to make sense of things.
+5. He was completely bewildered by the strange machine on the table.
+
+## 698. Proximity
+
+**Type:** Noun
+
+**Meaning:** nearness in space, time, or relationship.
+
+**Synonyms:** closeness, concurrence, immediacy, nearness
+
+**Antonyms:** distance, remoteness, separation, isolation
+
+**Example Sentences:**
+1. The hotel's proximity to the beach made it very popular with families.
+2. Because of the proximity of the holidays, the shops were extremely busy.
+3. She felt safer when she was in close proximity to her parents.
+4. Proximity is a fancy way of saying how near something is.
+5. The library's proximity to my house means I can pop in every week.
+
+## 699. Pioneer
+
+**Type:** Noun / Verb
+
+**Meaning:** a person who is among the first to explore or develop a new area, idea, or method.
+
+**Synonyms:** original, prime, discoverer, trailblazer
+
+**Antonyms:** secondary, following, last, latecomer
+
+**Example Sentences:**
+1. She was a pioneer of women's rights in the early twentieth century.
+2. The pioneers travelled west in covered wagons to start new lives.
+3. The scientist pioneered a new way of treating the disease.
+4. A pioneer is someone who is first to do something important.
+5. The company pioneered the use of electric cars in our country.
+
+## 700. Hypocritical
+
+**Type:** Adjective
+
+**Meaning:** behaving in a way that contradicts what one claims to believe or feel.
+
+**Synonyms:** insincere, self-righteous, unfair, two-faced
+
+**Antonyms:** fair, sincere, genuine, honest
+
+**Example Sentences:**
+1. It was hypocritical of him to scold others for being late when he was always late himself.
+2. She found his speech about kindness rather hypocritical given his cruel actions.
+3. People dislike hypocritical leaders who don't follow their own rules.
+4. To be hypocritical is to say one thing while doing the opposite.
+5. The class agreed it would be hypocritical to demand respect without giving it.
+
+# Set 36 Vocabulary List
+
+## 701. Methodical
+
+**Type:** Adjective
+
+**Meaning:** done according to a careful, systematic, and orderly plan.
+
+**Synonyms:** systematic, efficient, scrupulous, organised
+
+**Antonyms:** careless, disorganised, thoughtless, haphazard
+
+**Example Sentences:**
+1. The detective took a methodical approach, examining every clue carefully.
+2. She was methodical in her revision, making notes for each topic in turn.
+3. The scientist's methodical work led to an important discovery.
+4. Being methodical means working in a careful, ordered way.
+5. He cleaned his room in a methodical fashion, starting in one corner and working around.
+
+## 702. Intense
+
+**Type:** Adjective
+
+**Meaning:** of extreme force, strength, or feeling.
+
+**Synonyms:** acute, vivid, fierce, powerful
+
+**Antonyms:** calm, dull, gentle, mild
+
+**Example Sentences:**
+1. The intense heat of the desert made walking very difficult.
+2. She felt an intense sadness when her old dog finally passed away.
+3. There was an intense look on his face as he tried to solve the puzzle.
+4. The colours of the sunset were intense and breathtakingly beautiful.
+5. Something intense is felt or experienced very strongly.
+
+## 703. Fragment
+
+**Type:** Noun / Verb
+
+**Meaning:** a small part broken off or separated from something; (v) to break into small pieces.
+
+**Synonyms:** shard, shred, chunk, piece
+
+**Antonyms:** whole, entirety, total, all
+
+**Example Sentences:**
+1. She picked up a fragment of the broken vase from the kitchen floor.
+2. Only a fragment of the ancient scroll has survived to this day.
+3. He could remember just a fragment of the dream after he woke up.
+4. The glass fragmented into hundreds of tiny pieces when it hit the ground.
+5. A fragment is a small part of something larger that has been broken or separated.
+
+## 704. Procure
+
+**Type:** Verb
+
+**Meaning:** to obtain something, especially with care or effort.
+
+**Synonyms:** obtain, acquire, secure, get
+
+**Antonyms:** lose, surrender, relinquish, forfeit
+
+**Example Sentences:**
+1. After much searching, she managed to procure tickets for the sold-out concert.
+2. The chef was determined to procure only the freshest ingredients.
+3. He procured a rare old book from a tiny shop in the back streets.
+4. To procure something is to obtain it, often after some effort.
+5. The school procured new computers for the library after a long fundraising drive.
+
+## 705. Sacrifice
+
+**Type:** Verb / Noun
+
+**Meaning:** to give up something valuable for the sake of something else; (n) the act of giving something up.
+
+**Synonyms:** offering, penance, surrender, forfeit
+
+**Antonyms:** preserve, retain, withhold, keep
+
+**Example Sentences:**
+1. She sacrificed her weekend in order to finish the school project on time.
+2. Their parents made many sacrifices to send them to a good school.
+3. The footballer sacrificed an easy goal so that his teammate could score.
+4. To sacrifice something is to give it up for the sake of something more important.
+5. The brave knight made the ultimate sacrifice to save the kingdom.
+
+## 706. Invert
+
+**Type:** Verb
+
+**Meaning:** to put something upside down or in the opposite position, order, or arrangement.
+
+**Synonyms:** reverse, revert, flip, overturn
+
+**Antonyms:** continue, persist, remain, uphold
+
+**Example Sentences:**
+1. He inverted the bottle so that the last drop of sauce would come out.
+2. To make the cake easier to remove, invert the tin onto a wire rack.
+3. The photographer inverted the colours of the picture for an unusual effect.
+4. To invert means to turn something upside down or back to front.
+5. She inverted the order of her notes and the story made much more sense.
+
+## 707. Quaint
+
+**Type:** Adjective
+
+**Meaning:** attractively unusual or old-fashioned.
+
+**Synonyms:** whimsical, peculiar, charming, picturesque
+
+**Antonyms:** modern, ugly, common, ordinary
+
+**Example Sentences:**
+1. We stayed in a quaint little cottage with a thatched roof.
+2. The quaint old village seemed unchanged for hundreds of years.
+3. She wore a quaint hat decorated with silk flowers and ribbons.
+4. Something quaint is charming because it is old-fashioned or unusual.
+5. The bookshop had a quaint sign hanging above its narrow wooden door.
+
+## 708. Prudent
+
+**Type:** Adjective
+
+**Meaning:** acting with or showing care and thought for the future; sensible.
+
+**Synonyms:** judicious, cautious, careful, reasonable
+
+**Antonyms:** impulsive, reckless, foolish, hasty
+
+**Example Sentences:**
+1. It is prudent to save some of your pocket money for emergencies.
+2. The prudent driver slowed down as the road became icy.
+3. She made a prudent decision to take an umbrella, even though the sky was clear.
+4. A prudent person thinks carefully before acting.
+5. It would be prudent to revise a little every day rather than panic the night before.
+
+## 709. Embrace
+
+**Type:** Verb / Noun
+
+**Meaning:** (v) to hold someone closely in one's arms; to accept an idea willingly; (n) a hug.
+
+**Synonyms:** adopt, embody, welcome, hug
+
+**Antonyms:** exclude, reject, shun, refuse
+
+**Example Sentences:**
+1. She ran to embrace her brother after his long journey home.
+2. The school decided to embrace new technology in the classroom.
+3. Many people embrace healthy habits as they grow older.
+4. To embrace something can mean to hug it or to accept it warmly.
+5. He gave his grandmother a gentle embrace before leaving.
+
+## 710. Implement
+
+**Type:** Verb / Noun
+
+**Meaning:** (v) to put a decision or plan into effect; (n) a tool or instrument used for a job.
+
+**Synonyms:** achieve, carry out, enforce, resolve
+
+**Antonyms:** forget, ignore, fail, neglect
+
+**Example Sentences:**
+1. The school plans to implement a new homework policy next term.
+2. The gardener used a sharp implement to dig up the weeds.
+3. They worked hard to implement the changes the teacher had suggested.
+4. To implement a plan means to actually carry it out.
+5. A spade is a useful implement for gardening.
+
+## 711. Impede
+
+**Type:** Verb
+
+**Meaning:** to delay or prevent something by getting in the way.
+
+**Synonyms:** block, obstruct, curb, hinder
+
+**Antonyms:** aid, allow, encourage, assist
+
+**Example Sentences:**
+1. The fallen tree impeded traffic along the country lane.
+2. Loud noise can impede a child's ability to concentrate on schoolwork.
+3. Heavy boots impeded his progress through the deep snow.
+4. To impede something is to slow it down or get in its way.
+5. Nothing could impede her determination to win the gold medal.
+
+## 712. Incongruous
+
+**Type:** Adjective
+
+**Meaning:** out of place; not in harmony or keeping with the surroundings or other things.
+
+**Synonyms:** bizarre, contradictory, incompatible, out of place
+
+**Antonyms:** corresponding, fitting, consistent, suitable
+
+**Example Sentences:**
+1. A modern glass tower looked incongruous among the old stone cottages.
+2. His cheerful song seemed incongruous in the quiet, sad room.
+3. The bright pink chair was incongruous with the rest of the simple grey furniture.
+4. Something incongruous looks strange or wrong in its setting.
+5. It felt incongruous to wear shorts in the middle of a snowstorm.
+
+## 713. Summit
+
+**Type:** Noun
+
+**Meaning:** the highest point of a mountain or hill; a meeting between heads of government.
+
+**Synonyms:** zenith, pinnacle, meridian, peak
+
+**Antonyms:** base, bottom, foot, nadir
+
+**Example Sentences:**
+1. After many hours of climbing, they finally reached the summit of the mountain.
+2. World leaders met at the climate summit to discuss the environment.
+3. From the summit, we could see for miles across the green valleys.
+4. A summit is the very top of something, or a very important meeting.
+5. The flag was planted proudly at the summit by the brave team of climbers.
+
+## 714. Elucidate
+
+**Type:** Verb
+
+**Meaning:** to make something clear by explaining it; to throw light on a subject.
+
+**Synonyms:** enlighten, illuminate, decode, clarify
+
+**Antonyms:** baffle, confound, obscure, confuse
+
+**Example Sentences:**
+1. The teacher elucidated the difficult problem with a simple drawing.
+2. Could you elucidate exactly what you mean by that statement?
+3. The author elucidated her ideas in the introduction to the book.
+4. To elucidate something is to make it clear and easier to understand.
+5. The guide elucidated the meaning of the ancient symbols on the wall.
+
+## 715. Grotesque
+
+**Type:** Adjective
+
+**Meaning:** comically or repulsively ugly or distorted; strange and unpleasant.
+
+**Synonyms:** monstrous, preposterous, outlandish, hideous
+
+**Antonyms:** familiar, reasonable, nice, beautiful
+
+**Example Sentences:**
+1. Stone gargoyles with grotesque faces lined the roof of the old church.
+2. The story described a grotesque creature lurking in the dark forest.
+3. He pulled a grotesque face that made the younger children giggle.
+4. Something grotesque is very strange and ugly in an unsettling way.
+5. The mask was so grotesque that no one wanted to wear it for the play.
+
+## 716. Refuse
+
+**Type:** Verb / Noun
+
+**Meaning:** (v) to indicate one is not willing to do something; (n, refuse) waste material or rubbish.
+
+**Synonyms:** decline, protest, reject, ignore
+
+**Antonyms:** accept, allow, approve, endorse
+
+**Example Sentences:**
+1. He refused to leave the playground until his friend had arrived.
+2. She politely refused a second helping of pudding.
+3. The dog refused to come inside, no matter how loudly we called.
+4. The lorry collected the household refuse from each driveway.
+5. To refuse something is to say no to it firmly.
+
+## 717. Eloquent
+
+**Type:** Adjective
+
+**Meaning:** fluent, persuasive, and clear in speaking or writing.
+
+**Synonyms:** articulate, expressive, persuasive, vocal
+
+**Antonyms:** apathetic, dull, shy, ineffective
+
+**Example Sentences:**
+1. The head teacher gave an eloquent speech about kindness at the assembly.
+2. Her eloquent letter convinced the council to save the local park.
+3. He was eloquent in defending his point of view during the debate.
+4. An eloquent speaker is one who can express ideas clearly and powerfully.
+5. The poem was a short but eloquent tribute to the brave firefighters.
+
+## 718. Bargain
+
+**Type:** Noun / Verb
+
+**Meaning:** (n) something bought for less than its usual price; (v) to negotiate the price.
+
+**Synonyms:** discount, deal, reduction, value
+
+**Antonyms:** rip-off, inflation, overcharge
+
+**Example Sentences:**
+1. The shoes were a real bargain in the end-of-summer sale.
+2. She bargained with the market trader and got a lower price for the basket.
+3. At only one pound, the second-hand book was an absolute bargain.
+4. To strike a bargain means to come to an agreement that suits both sides.
+5. A bargain is something you buy at a much lower price than usual.
+
+## 719. Quell
+
+**Type:** Verb
+
+**Meaning:** to put an end to something, especially by force; to calm strong feelings.
+
+**Synonyms:** overcome, stifle, subdue, vanquish
+
+**Antonyms:** incite, encourage, provoke, agitate
+
+**Example Sentences:**
+1. The teacher quickly quelled the noisy argument at the back of the class.
+2. A few kind words from her mother helped to quell her fears about the test.
+3. The soldiers were sent to quell the riot in the city centre.
+4. To quell something means to stop it, especially when it is loud or strong.
+5. He took a deep breath to quell the wave of nerves before going on stage.
+
+## 720. Influence
+
+**Type:** Noun / Verb
+
+**Meaning:** the power to have an effect on someone or something; (v) to have such an effect.
+
+**Synonyms:** control, domination, force, impact
+
+**Antonyms:** triviality, insignificance, powerlessness, weakness
+
+**Example Sentences:**
+1. Her older sister had a big influence on the kind of music she listened to.
+2. The weather can have a strong influence on people's moods.
+3. He used his influence to help the small charity get a meeting with the mayor.
+4. To influence someone is to have an effect on what they think or do.
+5. Books can have a powerful influence on the way young readers see the world.
