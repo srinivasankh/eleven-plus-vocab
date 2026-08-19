@@ -13,7 +13,7 @@ Kid-friendly web app for UK 11+ exam vocabulary practice, built with Next.js + T
 
 ## Data Source
 
-- Source markdown: `Y5_set01_to_24.md`
+- Source markdown: `Y5_set01_to_48.md` (48 sets x 20 words = 960 entries)
 - Generated artifact: `src/data/vocab.generated.json`
 
 ## Scripts

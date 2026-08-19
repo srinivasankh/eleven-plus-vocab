@@ -2,7 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 
 const root = process.cwd();
-const sourcePath = path.join(root, "Y5_set01_to_36.md");
+const sourcePath = path.join(root, "Y5_set01_to_48.md");
 const outputPath = path.join(root, "src", "data", "vocab.generated.json");
 
 function splitList(value) {
