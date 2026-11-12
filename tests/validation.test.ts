@@ -53,14 +53,16 @@ describe("signUpSchema", () => {
 });
 
 describe("progress inputs", async () => {
-  const { quizResultSchema, setLearnedSchema } = await import("@/lib/validation");
+  const { answerSchema, quizLengthSchema, setLearnedSchema } = await import("@/lib/validation");
+  const attemptId = "6f1c2b9e-1d7a-4c39-9a51-3c8f0b1e2d44";
 
-  it("accepts plausible quiz results only", () => {
-    expect(quizResultSchema.safeParse({ score: 4, total: 5 }).success).toBe(true);
-    expect(quizResultSchema.safeParse({ score: 6, total: 5 }).success).toBe(false);
-    expect(quizResultSchema.safeParse({ score: -1, total: 5 }).success).toBe(false);
-    expect(quizResultSchema.safeParse({ score: 3, total: 7 }).success).toBe(false);
-    expect(quizResultSchema.safeParse({ score: 2.5, total: 5 }).success).toBe(false);
+  it("accepts only real quiz lengths and answer positions", () => {
+    expect(quizLengthSchema.safeParse(10).success).toBe(true);
+    expect(quizLengthSchema.safeParse(7).success).toBe(false);
+    expect(answerSchema.safeParse({ attemptId, position: 0, chosenIndex: 3 }).success).toBe(true);
+    expect(answerSchema.safeParse({ attemptId, position: 0, chosenIndex: 4 }).success).toBe(false);
+    expect(answerSchema.safeParse({ attemptId, position: 20, chosenIndex: 0 }).success).toBe(false);
+    expect(answerSchema.safeParse({ attemptId: "not-a-uuid", position: 0, chosenIndex: 0 }).success).toBe(false);
   });
 
   it("validates learned toggles", () => {

@@ -1,16 +1,11 @@
 "use client";
 
-import { Suspense, useMemo, useState } from "react";
+import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { answerQuestionAction, finishQuizAction, startQuizAction } from "@/app/actions/quiz";
 import { QuizCard } from "@/components/QuizCard";
-import { recordQuizResultAction, setQuizLengthAction } from "@/app/actions/progress";
-import { useActiveQuiz } from "@/hooks/useActiveQuiz";
-import { generateQuizQuestions, questionForEntry, scoreQuiz } from "@/lib/quiz";
-import { QuizLength, QuizQuestion } from "@/lib/types";
-import { getVocabEntries } from "@/lib/vocabData";
+import { QuizLength, QuizView } from "@/lib/types";
 
-const entries = getVocabEntries();
 const questionLengths: QuizLength[] = [5, 10, 20];
 
 function band(score: number, total: number): string {
@@ -21,124 +16,116 @@ function band(score: number, total: number): string {
   return "Keep practising";
 }
 
+/** Where to pick up a saved round: the first unanswered question (or the last one). */
+function resumeIndex(quiz: QuizView): number {
+  const firstOpen = quiz.questions.findIndex((question) => question.chosenIndex === null);
+  return firstOpen === -1 ? quiz.questions.length - 1 : firstOpen;
+}
+
 type Props = {
-  childId: string;
   initialQuizLength: QuizLength;
+  /** The child's unfinished round from the server, if any. */
+  activeQuiz: QuizView | null;
 };
 
-function QuizPageContent({ childId, initialQuizLength }: Props) {
-  const params = useSearchParams();
-  const { activeQuiz, setActiveQuiz } = useActiveQuiz(childId);
-  const [selectedLength, setSelectedLength] = useState<QuizLength>(initialQuizLength);
-  const [saveError, setSaveError] = useState<string | null>(null);
-
-  const [questions, setQuestions] = useState<QuizQuestion[]>([]);
-  const [answers, setAnswers] = useState<number[]>([]);
+/**
+ * The quiz runs on the server: it builds the questions, keeps each answer hidden until the
+ * child has answered, and scores the round. This component only shows what the server says.
+ */
+export function QuizMission({ initialQuizLength, activeQuiz }: Props) {
+  const [quiz, setQuiz] = useState<QuizView | null>(null);
+  const [savedQuiz, setSavedQuiz] = useState<QuizView | null>(activeQuiz);
   const [index, setIndex] = useState(0);
-  const [submitted, setSubmitted] = useState(false);
+  const [pendingChoice, setPendingChoice] = useState<number | null>(null);
+  const [selectedLength, setSelectedLength] = useState<QuizLength>(initialQuizLength);
+  const [error, setError] = useState<string | null>(null);
+  const [busy, startTransition] = useTransition();
 
-  const canResume = Boolean(activeQuiz);
-  const mode = params.get("mode");
+  const questions = useMemo(() => quiz?.questions ?? [], [quiz]);
+  const submitted = quiz?.status === "finished";
 
   const result = useMemo(() => {
-    if (!submitted || questions.length === 0) return null;
-    return scoreQuiz(questions, answers);
-  }, [submitted, questions, answers]);
+    if (!quiz || quiz.status !== "finished" || quiz.score === null) return null;
+    return { score: quiz.score, total: quiz.total };
+  }, [quiz]);
 
   const reviewRows = useMemo(() => {
-    if (!submitted || questions.length === 0) return [];
+    if (!submitted) return [];
 
-    return questions.map((question, questionIndex) => {
-      const selectedIndex = answers[questionIndex];
-      const selectedWord =
-        typeof selectedIndex === "number" && selectedIndex >= 0
-          ? question.options[selectedIndex]
-          : "No answer";
-      const correctWord = question.options[question.correctOptionIndex];
-      const isCorrect = selectedIndex === question.correctOptionIndex;
+    return questions.map((question) => {
+      const selectedWord = question.chosenIndex === null ? "No answer" : question.options[question.chosenIndex];
+      const correctWord = question.correctIndex === null ? "" : question.options[question.correctIndex];
 
       return {
-        id: question.id,
+        id: `q-${question.position}`,
         prompt: question.prompt,
         selectedWord,
         correctWord,
-        isCorrect,
+        isCorrect: question.chosenIndex !== null && question.chosenIndex === question.correctIndex,
       };
     });
-  }, [submitted, questions, answers]);
+  }, [submitted, questions]);
 
   function createNewQuiz(length: QuizLength) {
-    const newQuestions = generateQuizQuestions(entries, length);
-    setQuestions(newQuestions);
-    setAnswers(new Array(newQuestions.length).fill(-1));
-    setIndex(0);
-    setSubmitted(false);
-    setSaveError(null);
-
-    setActiveQuiz({
-      questionIndex: 0,
-      answers: new Array(newQuestions.length).fill(-1),
-      questionIds: newQuestions.map((question) => question.id),
-    });
-
-    if (length !== selectedLength) {
+    setError(null);
+    startTransition(async () => {
+      const started = await startQuizAction(length);
+      if (!started.ok) {
+        setError(started.error);
+        return;
+      }
+      setQuiz(started.data);
+      setSavedQuiz(null); // starting a new round replaces any saved one
+      setIndex(0);
       setSelectedLength(length);
-      void setQuizLengthAction(length);
-    }
+    });
   }
 
   function resumeQuiz() {
-    if (!activeQuiz) return;
-
-    const byId = new Map(entries.map((entry) => [entry.id, entry]));
-    const rebuilt = activeQuiz.questionIds
-      .map((id) => Number(id.replace("q-", "")))
-      .map((id) => byId.get(id))
-      .filter((entry): entry is (typeof entries)[number] => Boolean(entry))
-      .map((entry) => questionForEntry(entry, entries));
-
-    if (rebuilt.length === 0) {
-      createNewQuiz(selectedLength);
-      return;
-    }
-
-    setQuestions(rebuilt);
-    setAnswers(activeQuiz.answers);
-    setIndex(activeQuiz.questionIndex);
-    setSubmitted(false);
+    if (!savedQuiz) return;
+    setError(null);
+    setQuiz(savedQuiz);
+    setIndex(resumeIndex(savedQuiz));
   }
 
-  function answerQuestion(choice: number) {
-    const nextAnswers = [...answers];
-    nextAnswers[index] = choice;
-    setAnswers(nextAnswers);
+  async function answerQuestion(choice: number) {
+    const question = quiz?.questions[index];
+    if (!quiz || !question || question.chosenIndex !== null || pendingChoice !== null) return;
 
-    setActiveQuiz({
-      questionIndex: index,
-      answers: nextAnswers,
-      questionIds: questions.map((question) => question.id),
+    setError(null);
+    setPendingChoice(choice);
+    const answered = await answerQuestionAction({
+      attemptId: quiz.attemptId,
+      position: question.position,
+      chosenIndex: choice,
+    });
+    setPendingChoice(null);
+
+    if (!answered.ok) {
+      setError(answered.error);
+      return;
+    }
+    setQuiz({
+      ...quiz,
+      questions: quiz.questions.map((item) => (item.position === question.position ? { ...item, ...answered.data } : item)),
     });
   }
 
   function nextQuestion() {
+    if (!quiz) return;
     if (index + 1 < questions.length) {
-      const nextIndex = index + 1;
-      setIndex(nextIndex);
-
-      setActiveQuiz({
-        questionIndex: nextIndex,
-        answers,
-        questionIds: questions.map((question) => question.id),
-      });
+      setIndex(index + 1);
       return;
     }
 
-    setSubmitted(true);
-    setActiveQuiz(undefined);
-
-    const score = scoreQuiz(questions, answers);
-    void recordQuizResultAction(score).then((saved) => {
-      if (!saved.ok) setSaveError("We couldn't save this score to your progress. Your answers are below.");
+    setError(null);
+    startTransition(async () => {
+      const finished = await finishQuizAction(quiz.attemptId);
+      if (!finished.ok) {
+        setError(finished.error);
+        return;
+      }
+      setQuiz(finished.data);
     });
   }
 
@@ -151,19 +138,25 @@ function QuizPageContent({ childId, initialQuizLength }: Props) {
         <p>Pick the word that best matches each meaning.</p>
       </header>
 
+      {error ? (
+        <p className="form-error" role="alert">
+          {error}
+        </p>
+      ) : null}
+
       {questions.length === 0 ? (
         <section className="panel setup-panel">
           <h2>Launch a New Mission</h2>
           <p>Choose your round size and train speed plus accuracy.</p>
           <div className="length-pills" role="group" aria-label="Quiz length options">
             {questionLengths.map((length) => (
-              <button className="length-btn" key={length} onClick={() => createNewQuiz(length)} type="button">
+              <button className="length-btn" disabled={busy} key={length} onClick={() => createNewQuiz(length)} type="button">
                 {length} questions
               </button>
             ))}
           </div>
-          {canResume || mode === "resume" ? (
-            <button className="cta ghost" onClick={resumeQuiz} type="button">Resume Saved Quiz</button>
+          {savedQuiz ? (
+            <button className="cta ghost" disabled={busy} onClick={resumeQuiz} type="button">Resume Saved Quiz</button>
           ) : null}
         </section>
       ) : null}
@@ -172,17 +165,21 @@ function QuizPageContent({ childId, initialQuizLength }: Props) {
         <>
           <QuizCard
             index={index}
-            locked={answers[index] !== -1}
+            locked={current.chosenIndex !== null}
             onAnswer={answerQuestion}
-            question={current}
-            selected={answers[index] === -1 ? undefined : answers[index]}
+            question={{
+              prompt: current.prompt,
+              options: current.options,
+              correctOptionIndex: current.correctIndex ?? -1,
+            }}
+            selected={current.chosenIndex ?? pendingChoice ?? undefined}
             total={questions.length}
           />
 
           <div className="quiz-controls">
             <button
               className="cta"
-              disabled={answers[index] === -1}
+              disabled={current.chosenIndex === null || busy}
               onClick={nextQuestion}
               type="button"
             >
@@ -196,13 +193,8 @@ function QuizPageContent({ childId, initialQuizLength }: Props) {
         <section className="panel result-panel">
           <h2>{band(result.score, result.total)}</h2>
           <p className="score-line">You scored {result.score} out of {result.total}.</p>
-          {saveError ? (
-            <p className="form-error" role="alert">
-              {saveError}
-            </p>
-          ) : null}
           <div className="result-actions">
-            <button className="cta" onClick={() => createNewQuiz(selectedLength)} type="button">Try Again</button>
+            <button className="cta" disabled={busy} onClick={() => createNewQuiz(selectedLength)} type="button">Try Again</button>
             <Link className="cta ghost" href="/progress">See Progress</Link>
           </div>
 
@@ -238,13 +230,5 @@ function QuizPageContent({ childId, initialQuizLength }: Props) {
         </section>
       ) : null}
     </section>
-  );
-}
-
-export function QuizMission(props: Props) {
-  return (
-    <Suspense fallback={<section className="page quiz"><p>Loading quiz...</p></section>}>
-      <QuizPageContent {...props} />
-    </Suspense>
   );
 }

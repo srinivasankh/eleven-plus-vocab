@@ -9,7 +9,6 @@ import { child, learnedWord, quizAttempt, user } from "@/server/db/schema";
 import { seedVocab } from "@/server/db/seedVocab";
 import {
   getProgressSnapshot,
-  recordQuizResult,
   resetProgress,
   setPreferredQuizLength,
   setWordLearned,
@@ -18,6 +17,12 @@ import {
 import { resetTestDatabase } from "./helpers";
 
 let ctx: Awaited<ReturnType<typeof resetTestDatabase>>;
+
+/** Inserts a finished round directly (quiz play itself is covered in quiz.test.ts). */
+async function recordQuizResult(childId: string, score: number, total: number) {
+  await ctx.db.insert(quizAttempt).values({ childId, total, score, status: "finished", finishedAt: new Date() });
+  await new Promise((resolve) => setTimeout(resolve, 5)); // distinct timestamps for ordering
+}
 let asha: string;
 let ben: string;
 
@@ -75,8 +80,13 @@ describe("quiz results", () => {
   });
 
   it("is protected by database constraints as well as validation", async () => {
-    await expect(ctx.db.insert(quizAttempt).values({ childId: ben, score: 6, total: 5 })).rejects.toThrow();
-    await expect(ctx.db.insert(quizAttempt).values({ childId: ben, score: 1, total: 7 })).rejects.toThrow();
+    const finishedAt = new Date();
+    await expect(
+      ctx.db.insert(quizAttempt).values({ childId: ben, score: 6, total: 5, status: "finished", finishedAt }),
+    ).rejects.toThrow();
+    await expect(
+      ctx.db.insert(quizAttempt).values({ childId: ben, score: 1, total: 7, status: "finished", finishedAt }),
+    ).rejects.toThrow();
   });
 
   it("remembers each child's preferred quiz length", async () => {

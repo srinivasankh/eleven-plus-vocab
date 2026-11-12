@@ -9,6 +9,7 @@ import {
   primaryKey,
   text,
   timestamp,
+  uniqueIndex,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -156,7 +157,12 @@ export const learnedWord = pgTable(
   (table) => [primaryKey({ columns: [table.childId, table.headword] })],
 );
 
-/** One quiz round. Stage 3 stores finished rounds only; stage 4 adds questions and in-progress rounds. */
+export const quizStatusEnum = pgEnum("quiz_status", ["in_progress", "finished"]);
+
+/**
+ * One quiz round. The server builds the questions, stores them, and scores the round —
+ * the browser never decides what is correct. A child has at most one round in progress.
+ */
 export const quizAttempt = pgTable(
   "quiz_attempt",
   {
@@ -164,14 +170,53 @@ export const quizAttempt = pgTable(
     childId: uuid("child_id")
       .notNull()
       .references(() => child.id, { onDelete: "cascade" }),
+    status: quizStatusEnum("status").notNull().default("in_progress"),
     total: integer("total").notNull(),
-    score: integer("score").notNull(),
-    finishedAt: timestamp("finished_at", { withTimezone: true }).notNull().defaultNow(),
+    /** Null until the round is finished. */
+    score: integer("score"),
+    startedAt: timestamp("started_at", { withTimezone: true }).notNull().defaultNow(),
+    finishedAt: timestamp("finished_at", { withTimezone: true }),
   },
   (table) => [
     index("quiz_attempt_child_finished_idx").on(table.childId, table.finishedAt),
+    uniqueIndex("quiz_attempt_one_in_progress_idx")
+      .on(table.childId)
+      .where(sql`${table.status} = 'in_progress'`),
     check("quiz_attempt_total_check", sql`${table.total} in (5, 10, 20)`),
-    check("quiz_attempt_score_check", sql`${table.score} between 0 and ${table.total}`),
+    check("quiz_attempt_score_check", sql`${table.score} is null or ${table.score} between 0 and ${table.total}`),
+    check(
+      "quiz_attempt_finished_check",
+      sql`(${table.status} = 'finished') = (${table.score} is not null and ${table.finishedAt} is not null)`,
+    ),
+  ],
+);
+
+/**
+ * A question within a round, frozen as it was shown: prompt and options are copied so the
+ * review stays correct even if the word list is edited later.
+ */
+export const quizQuestion = pgTable(
+  "quiz_question",
+  {
+    attemptId: uuid("attempt_id")
+      .notNull()
+      .references(() => quizAttempt.id, { onDelete: "cascade" }),
+    position: integer("position").notNull(),
+    wordId: integer("word_id").references(() => words.id, { onDelete: "set null" }),
+    prompt: text("prompt").notNull(),
+    options: text("options").array().notNull(),
+    correctIndex: integer("correct_index").notNull(),
+    /** Null until answered. */
+    chosenIndex: integer("chosen_index"),
+    answeredAt: timestamp("answered_at", { withTimezone: true }),
+  },
+  (table) => [
+    primaryKey({ columns: [table.attemptId, table.position] }),
+    check("quiz_question_correct_index_check", sql`${table.correctIndex} between 0 and cardinality(${table.options}) - 1`),
+    check(
+      "quiz_question_chosen_index_check",
+      sql`${table.chosenIndex} is null or ${table.chosenIndex} between 0 and cardinality(${table.options}) - 1`,
+    ),
   ],
 );
 

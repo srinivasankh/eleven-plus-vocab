@@ -5,7 +5,7 @@ Kid-friendly web app for UK 11+ exam vocabulary practice, built with Next.js + T
 ## Features
 
 - Learn mode with searchable vocabulary cards
-- Quiz mode (multiple-choice meanings -> words)
+- Quiz mode (multiple-choice meanings -> words), run and scored on the server; unfinished quizzes can be resumed on any device
 - Family accounts: a parent signs in (email + password) and adds up to 6 child profiles
 - Progress saved per child on the server (learned words, quiz results), so it follows the family across devices
 - Resume unfinished quiz

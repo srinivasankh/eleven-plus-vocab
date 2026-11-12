@@ -34,10 +34,11 @@ export const setLearnedSchema = z.object({
   learned: z.boolean(),
 });
 
-export const quizResultSchema = z
-  .object({ score: z.number().int().min(0), total: quizLengthSchema })
-  .refine((value) => value.score <= value.total, { message: "Score can't be more than the total." });
-
+export const answerSchema = z.object({
+  attemptId: z.string().uuid(),
+  position: z.number().int().min(0).max(19),
+  chosenIndex: z.number().int().min(0).max(3),
+});
 /**
  * Only allow redirects to a path on this site ("/quiz"), never to another origin
  * ("//evil.example", "https://…") — otherwise sign-in links could be used for phishing.

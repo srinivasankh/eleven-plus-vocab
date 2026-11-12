@@ -16,6 +16,7 @@ export default async function HomePage() {
               learnedCount: snapshot.learnedHeadwords.length,
               attempts: snapshot.attempts,
               latest: snapshot.recentResults[0] ?? null,
+              hasActiveQuiz: snapshot.hasActiveQuiz,
             }
           : null
       }

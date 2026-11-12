@@ -34,13 +34,12 @@ export type ParseResult = {
   };
 };
 
+/** What QuizCard needs to draw a question. */
 export type QuizQuestion = {
-  id: string;
   prompt: string;
-  questionType: "meaning_to_word";
   options: string[];
+  /** -1 while the answer is still hidden. */
   correctOptionIndex: number;
-  vocabId: number;
 };
 
 export type QuizLength = 5 | 10 | 20;
@@ -66,5 +65,24 @@ export type ProgressSnapshot = {
   /** Highest percentage so far (ties → most recent). */
   best: QuizResult | null;
   preferredQuizLength: QuizLength;
+  /** True when the child has an unfinished quiz to resume. */
+  hasActiveQuiz: boolean;
+};
+
+/** A quiz question as sent to the browser. `correctIndex` is null until the question is answered. */
+export type QuizQuestionView = {
+  position: number;
+  prompt: string;
+  options: string[];
+  chosenIndex: number | null;
+  correctIndex: number | null;
+};
+
+export type QuizView = {
+  attemptId: string;
+  status: "in_progress" | "finished";
+  total: QuizLength;
+  score: number | null;
+  questions: QuizQuestionView[];
 };
 

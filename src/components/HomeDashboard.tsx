@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useActiveQuiz } from "@/hooks/useActiveQuiz";
 import { QuizResult } from "@/lib/types";
 
 type Props = {
@@ -12,13 +11,12 @@ type Props = {
     learnedCount: number;
     attempts: number;
     latest: QuizResult | null;
+    hasActiveQuiz: boolean;
   } | null;
 };
 
 export function HomeDashboard({ learner }: Props) {
-  const { activeQuiz } = useActiveQuiz(learner?.id ?? null);
-
-  const hasActiveQuiz = Boolean(activeQuiz);
+  const hasActiveQuiz = learner?.hasActiveQuiz ?? false;
   const learnedCount = learner?.learnedCount ?? 0;
   const attempts = learner?.attempts ?? 0;
   const latestScore = learner?.latest;

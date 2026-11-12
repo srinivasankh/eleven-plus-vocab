@@ -9,30 +9,39 @@ import { child, learnedWord, quizAttempt, words } from "@/server/db/schema";
 
 const RECENT = 8;
 
-function toResult(row: { finishedAt: Date; score: number; total: number }): QuizResult {
-  return { ts: row.finishedAt.toISOString(), score: row.score, total: row.total };
+type FinishedRow = { finishedAt: Date | null; score: number | null; total: number };
+
+/** Only called for finished rounds, where the CHECK constraint guarantees score and finishedAt. */
+function toResult(row: FinishedRow): QuizResult {
+  return { ts: (row.finishedAt as Date).toISOString(), score: row.score as number, total: row.total };
 }
 
 export async function getProgressSnapshot(childId: string): Promise<ProgressSnapshot> {
   const db = getDb();
+  const finished = and(eq(quizAttempt.childId, childId), eq(quizAttempt.status, "finished"));
 
-  const [learnedRows, [{ totalWords }], recentRows, [{ attempts }], [bestRow], [childRow]] = await Promise.all([
+  const [learnedRows, [{ totalWords }], recentRows, [{ attempts }], [bestRow], [childRow], [active]] = await Promise.all([
     db.select({ headword: learnedWord.headword }).from(learnedWord).where(eq(learnedWord.childId, childId)),
     db.select({ totalWords: countDistinct(words.headword) }).from(words),
     db
       .select({ finishedAt: quizAttempt.finishedAt, score: quizAttempt.score, total: quizAttempt.total })
       .from(quizAttempt)
-      .where(eq(quizAttempt.childId, childId))
+      .where(finished)
       .orderBy(desc(quizAttempt.finishedAt))
       .limit(RECENT),
-    db.select({ attempts: sql<number>`count(*)::int` }).from(quizAttempt).where(eq(quizAttempt.childId, childId)),
+    db.select({ attempts: sql<number>`count(*)::int` }).from(quizAttempt).where(finished),
     db
       .select({ finishedAt: quizAttempt.finishedAt, score: quizAttempt.score, total: quizAttempt.total })
       .from(quizAttempt)
-      .where(eq(quizAttempt.childId, childId))
+      .where(finished)
       .orderBy(sql`${quizAttempt.score}::float / ${quizAttempt.total} desc`, desc(quizAttempt.finishedAt))
       .limit(1),
     db.select({ preferredQuizLength: child.preferredQuizLength }).from(child).where(eq(child.id, childId)),
+    db
+      .select({ id: quizAttempt.id })
+      .from(quizAttempt)
+      .where(and(eq(quizAttempt.childId, childId), eq(quizAttempt.status, "in_progress")))
+      .limit(1),
   ]);
 
   return {
@@ -42,6 +51,7 @@ export async function getProgressSnapshot(childId: string): Promise<ProgressSnap
     recentResults: recentRows.map(toResult),
     best: bestRow ? toResult(bestRow) : null,
     preferredQuizLength: (childRow?.preferredQuizLength ?? 10) as QuizLength,
+    hasActiveQuiz: Boolean(active),
   };
 }
 
@@ -67,20 +77,11 @@ export async function setWordLearned(childId: string, wordId: number, learned: b
   return word.headword;
 }
 
-/** `score`/`total` must already be validated (total ∈ {5,10,20}, 0 ≤ score ≤ total). */
-export async function recordQuizResult(childId: string, score: number, total: QuizLength): Promise<QuizResult> {
-  const [row] = await getDb()
-    .insert(quizAttempt)
-    .values({ childId, score, total })
-    .returning({ finishedAt: quizAttempt.finishedAt, score: quizAttempt.score, total: quizAttempt.total });
-  return toResult(row);
-}
-
 export async function setPreferredQuizLength(childId: string, length: QuizLength): Promise<void> {
   await getDb().update(child).set({ preferredQuizLength: length }).where(eq(child.id, childId));
 }
 
-/** Clears one child's learned words and quiz history (not their profile). */
+/** Clears one child's learned words and quiz history, including any unfinished round (not their profile). */
 export async function resetProgress(childId: string): Promise<void> {
   await getDb().transaction(async (tx) => {
     await tx.delete(learnedWord).where(eq(learnedWord.childId, childId));

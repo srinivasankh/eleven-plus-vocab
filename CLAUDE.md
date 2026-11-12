@@ -47,19 +47,31 @@ The database is disposable (it disappears with the container); migrations + seed
 Done: Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side,
 parent accounts (Better Auth, email + password) with child profiles; every page except `/`,
 `/sign-in`, `/sign-up` requires sign-in **and** an active child; **progress per child in
-Postgres** (learned words by headword, quiz results, preferred quiz length).
-Not yet (stage 4): the quiz itself. Until then:
-- `/quiz` still builds questions in the browser from the bundled `src/data/vocab.generated.json`
-  and computes the score client-side; `recordQuizResultAction` only checks it is plausible.
-- A half-finished quiz lives in `localStorage` under `eleven_plus_active_quiz_v1:<childId>`
-  (`src/lib/storage.ts`, `useActiveQuiz`), wrapped so blocked storage can't crash the app.
-  The pre-accounts blob `eleven_plus_quiz_progress_v1` is no longer read or written (stage 5 may import it).
+Postgres** (learned words by headword, quiz results, preferred quiz length); **the quiz runs on
+the server** (questions built, stored, revealed and scored server-side; resume from the database).
+Nothing about progress or quizzes is kept in the browser any more (only the theme preference).
+Not yet (stage 5): error pages/logging/health check, optional import of pre-accounts
+`localStorage` progress (`eleven_plus_quiz_progress_v1`), removing the legacy JSON pipeline.
+
+### Quiz
+- Tables: `quiz_attempt` (status `in_progress` | `finished`; **at most one in progress per child**
+  via a partial unique index; CHECK that finished ⇔ score + finished_at set) and `quiz_question`
+  (PK attempt_id + position; prompt/options frozen as shown; `correct_index`, `chosen_index`).
+- `src/lib/quiz.ts` (pure, unit-tested): `buildQuiz` picks distinct headwords; `buildQuestion`
+  picks 3 distractors with **distinct headwords** (never the answer's — fixes duplicate "Serene"),
+  same part of speech preferred; RNG injected (`crypto.randomInt` on the server).
+- `src/server/quiz.ts`: `startQuiz` (replaces any unfinished round, saves preferred length),
+  `getActiveQuiz`, `answerQuestion` (first answer is final; reveals `correctIndex`),
+  `finishQuiz` (requires all answered; scores in a transaction; idempotent). Views never include
+  `correctIndex` for unanswered questions. All scoped by the verified child id.
+- Actions: `src/app/actions/quiz.ts`. `QuizMission` only renders what the server returns;
+  resume lands on the first unanswered question.
 
 ### Progress
-- Tables: `learned_word` (PK child_id + headword), `quiz_attempt` (finished rounds; CHECK
-  total ∈ {5,10,20}, 0 ≤ score ≤ total), `child.preferred_quiz_length`. All cascade-delete with the child.
-- `src/server/progress.ts`: `getProgressSnapshot`, `setWordLearned` (by word id → headword),
-  `recordQuizResult`, `setPreferredQuizLength`, `resetProgress`. They take an **already-verified**
+- Tables: `learned_word` (PK child_id + headword), `quiz_attempt` (see Quiz), `child.preferred_quiz_length`.
+  All cascade-delete with the child.
+- `src/server/progress.ts`: `getProgressSnapshot` (counts **finished** rounds only; `hasActiveQuiz`),
+  `setWordLearned` (by word id → headword), `setPreferredQuizLength`, `resetProgress` (also clears an unfinished round). They take an **already-verified**
   child id; server actions in `src/app/actions/progress.ts` get it from `requireChild()`, never from the client.
 - Pages load a `ProgressSnapshot` on the server and pass it as props. Client updates are
   optimistic (update UI, call action, roll back + show `.form-error` on failure).
@@ -118,23 +130,22 @@ Database rules:
 ```
 src/app/            App Router pages (server components that call requireChild(), rendering client components)
   sign-in/, sign-up/, profiles/   account screens (built from existing CSS classes)
-  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child), progress.ts
+  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child), progress.ts, quiz.ts
   api/auth/[...all] Better Auth handler
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
   learn/page.tsx    server: words + snapshot → <LearnDeck> (client: group picker, search, WordCards)
-  quiz/page.tsx     server: requireChild() → <QuizMission childId initialQuizLength>
+  quiz/page.tsx     server: active round + preferred length → <QuizMission activeQuiz initialQuizLength>
   progress/page.tsx server: snapshot → <ProgressDashboard>
 src/components/     HomeDashboard, LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
                     WordCard, QuizCard, ThemeProvider, ThemeToggle, DataWarningFooter
-src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, vocab.ts
+src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, quiz.ts, vocab.ts
 src/middleware.ts   redirects signed-out visitors away from /learn, /quiz, /progress, /profiles
 drizzle/            generated SQL migrations (committed)
-src/hooks/          useActiveQuiz (per-child unfinished quiz in localStorage), useMounted, useTheme
+src/hooks/          useMounted, useTheme
 src/lib/
-  types.ts          VocabEntry, WordEntry, QuizQuestion, QuizLength (5|10|20), ProgressSnapshot, ...
-  quiz.ts           generateQuizQuestions, questionForEntry, scoreQuiz
-  storage.ts        per-child active quiz in localStorage (safe against blocked storage)
+  types.ts          VocabEntry, WordEntry, QuizLength (5|10|20), QuizView, ProgressSnapshot, ...
+  quiz.ts           pure quiz builder: buildQuiz, buildQuestion, scoreAnswers, shuffle (injectable RNG)
   difficulty.ts     hand-curated easy/hard ID sets (seed source for word.difficulty); else medium
   vocabSeed.ts      pure markdown→rows transform (headword, difficulty)
   validation.ts     Zod schemas (sign-in/up, child name), safeNextPath / learnerNextPath
@@ -146,19 +157,18 @@ plans/              past implementation plans (historical; may reference old cou
 
 ### Key behaviours
 
-- **Quiz:** question type is `meaning_to_word` only. Prompt = meaning; 4 options = correct word + 3 distractors (same part of speech when ≥3 available, chosen deterministically from the entry id), then shuffled randomly. Question id format: `q-<vocabId>`.
-- **Progress** lives in Postgres per child (see "Progress" above). Only the unfinished quiz is in `localStorage`; always load it through `sanitizeActiveQuiz` / `loadActiveQuiz`.
+- **Quiz:** "meaning → word" only. Prompt = meaning; 4 options = answer + 3 distractors with distinct headwords (same part of speech preferred), shuffled once on the server and stored. See "Quiz" above.
+- **Progress** lives in Postgres per child (see "Progress" above).
 - **Theme** stored under `eleven_plus_theme_v1`; the inline script in `layout.tsx` duplicates the resolution logic in `theme.ts` (to avoid a flash) — keep both in sync.
 - **Difficulty:** stored in `word.difficulty`, seeded from the `easyIds` / `hardIds` sets in `src/lib/difficulty.ts` (244 easy / 381 medium / 335 hard). When adding new sets, classify the new IDs there and re-seed.
 - **Duplicates:** 960 entries but 878 distinct words (`headword`); 78 words appear in two sets.
 
 ## Known issues / tech debt
 
-- **Quiz resume bug:** `activeQuiz.answers` stores option *indices*, but resume rebuilds questions via `questionForEntry`, which reshuffles options — saved answers can map to different words.
-- Quiz scores are still computed in the browser (plausibility-checked on save) — moves server-side in stage 4.
-- Quiz question for #839 "Serene" offers "Serene" twice (distractors excluded by id, not headword) — fixed by design in stage 4.
 - Duplicated parser (script vs `src/lib`), duplicated theme-init logic (layout vs `theme.ts`).
 - `plans/steady-dreaming-hedgehog.md` references 560 words; the dataset is now 960.
+- Legacy JSON (`src/data/vocab.generated.json`, `vocabData.ts`) is now only used by `DataWarningFooter`; remove in stage 5.
+- Fixed in stage 4: resuming a quiz could change saved answers; "Serene" offered twice; scores computed (and fakeable) in the browser; "Resume" button shown with nothing to resume.
 - Fixed in stage 3: blocked browser storage crashed every page; "best score" compared raw counts across quiz lengths; mastery counted duplicate words twice.
 - Fixed: the parsers used to assign 929 of 960 words to set 48 (line number computed from a character offset). Regression-tested in `tests/parser.test.ts`.
 
