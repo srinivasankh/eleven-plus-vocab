@@ -10,6 +10,8 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     include: ["tests/**/*.test.ts", "tests/**/*.test.tsx"],
+    // Database tests need Postgres; they run separately via `npm run test:db`.
+    exclude: ["tests/db/**", "node_modules/**"],
     setupFiles: ["tests/setup.ts"],
   },
 });

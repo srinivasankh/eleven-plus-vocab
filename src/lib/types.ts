@@ -9,6 +9,15 @@ export type VocabEntry = {
   examples: string[];
 };
 
+export type Difficulty = "easy" | "medium" | "hard";
+
+/** A vocabulary entry as stored in the database: a parsed entry plus derived fields. */
+export type WordEntry = VocabEntry & {
+  /** Lower-cased word; words that appear in more than one set share a headword. */
+  headword: string;
+  difficulty: Difficulty;
+};
+
 export type ParseWarning = {
   line?: number;
   reason: string;

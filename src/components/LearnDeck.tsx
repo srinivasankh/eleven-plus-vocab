@@ -3,16 +3,7 @@
 import { useMemo, useState } from "react";
 import { WordCard } from "@/components/WordCard";
 import { useProgressState } from "@/hooks/useProgressState";
-import { getVocabEntries } from "@/lib/vocabData";
-import {
-  Difficulty,
-  countByDifficulty,
-  filterByDifficulty,
-  getDifficulty,
-} from "@/lib/difficulty";
-
-const entries = getVocabEntries();
-const difficultyCounts = countByDifficulty(entries);
+import { Difficulty, WordEntry } from "@/lib/types";
 
 const groupMeta: Record<
   Difficulty,
@@ -37,19 +28,34 @@ const groupMeta: Record<
 
 const groups: Difficulty[] = ["easy", "medium", "hard"];
 
-export default function LearnPage() {
+type Props = {
+  entries: WordEntry[];
+};
+
+export function LearnDeck({ entries }: Props) {
   const { progress, setProgress } = useProgressState();
   const [query, setQuery] = useState("");
   const [selectedGroup, setSelectedGroup] = useState<Difficulty | null>(null);
   const [bulkOpen, setBulkOpen] = useState<{ value: boolean; version: number } | null>(null);
   const [showUnlearnedOnly, setShowUnlearnedOnly] = useState(false);
 
+  const difficultyCounts = useMemo(() => {
+    const counts: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
+    for (const entry of entries) counts[entry.difficulty] += 1;
+    return counts;
+  }, [entries]);
+
+  const difficultyById = useMemo(
+    () => new Map(entries.map((entry) => [entry.id, entry.difficulty])),
+    [entries],
+  );
+
   const groupEntries = useMemo(() => {
     if (!selectedGroup) return [];
-    return filterByDifficulty(entries, selectedGroup);
-  }, [selectedGroup]);
+    return entries.filter((entry) => entry.difficulty === selectedGroup);
+  }, [entries, selectedGroup]);
 
-  const learnedIds = new Set(progress?.learnedWordIds ?? []);
+  const learnedIds = useMemo(() => new Set(progress?.learnedWordIds ?? []), [progress]);
 
   const filtered = useMemo(() => {
     let result = groupEntries;
@@ -91,7 +97,7 @@ export default function LearnPage() {
   function masteredInGroup(difficulty: Difficulty): number {
     if (!progress) return 0;
     return progress.learnedWordIds.filter(
-      (id) => getDifficulty(id) === difficulty,
+      (id) => difficultyById.get(id) === difficulty,
     ).length;
   }
 
