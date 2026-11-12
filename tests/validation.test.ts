@@ -51,3 +51,21 @@ describe("signUpSchema", () => {
     }
   });
 });
+
+describe("progress inputs", async () => {
+  const { quizResultSchema, setLearnedSchema } = await import("@/lib/validation");
+
+  it("accepts plausible quiz results only", () => {
+    expect(quizResultSchema.safeParse({ score: 4, total: 5 }).success).toBe(true);
+    expect(quizResultSchema.safeParse({ score: 6, total: 5 }).success).toBe(false);
+    expect(quizResultSchema.safeParse({ score: -1, total: 5 }).success).toBe(false);
+    expect(quizResultSchema.safeParse({ score: 3, total: 7 }).success).toBe(false);
+    expect(quizResultSchema.safeParse({ score: 2.5, total: 5 }).success).toBe(false);
+  });
+
+  it("validates learned toggles", () => {
+    expect(setLearnedSchema.safeParse({ wordId: 12, learned: true }).success).toBe(true);
+    expect(setLearnedSchema.safeParse({ wordId: "12", learned: true }).success).toBe(false);
+    expect(setLearnedSchema.safeParse({ wordId: 0, learned: true }).success).toBe(false);
+  });
+});

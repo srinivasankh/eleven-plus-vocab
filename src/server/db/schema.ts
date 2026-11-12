@@ -1,5 +1,16 @@
 import { sql } from "drizzle-orm";
-import { boolean, index, integer, pgEnum, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  check,
+  index,
+  integer,
+  pgEnum,
+  pgTable,
+  primaryKey,
+  text,
+  timestamp,
+  uuid,
+} from "drizzle-orm/pg-core";
 
 export const difficultyEnum = pgEnum("difficulty", ["easy", "medium", "hard"]);
 
@@ -115,9 +126,53 @@ export const child = pgTable(
       .notNull()
       .references(() => user.id, { onDelete: "cascade" }),
     displayName: text("display_name").notNull(),
+    /** Last quiz length the child picked (5, 10 or 20). */
+    preferredQuizLength: integer("preferred_quiz_length").notNull().default(10),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
-  (table) => [index("child_parent_id_idx").on(table.parentId)],
+  (table) => [
+    index("child_parent_id_idx").on(table.parentId),
+    check("child_preferred_quiz_length_check", sql`${table.preferredQuizLength} in (5, 10, 20)`),
+  ],
+);
+
+// ---------------------------------------------------------------------------
+// Progress, per child.
+// ---------------------------------------------------------------------------
+
+/**
+ * Words a child has marked as learned. Keyed by headword, not word id, so a word that appears
+ * in two sets (e.g. "Serene" #42 and #839) is learned once and counts once.
+ */
+export const learnedWord = pgTable(
+  "learned_word",
+  {
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => child.id, { onDelete: "cascade" }),
+    headword: text("headword").notNull(),
+    learnedAt: timestamp("learned_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.childId, table.headword] })],
+);
+
+/** One quiz round. Stage 3 stores finished rounds only; stage 4 adds questions and in-progress rounds. */
+export const quizAttempt = pgTable(
+  "quiz_attempt",
+  {
+    id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+    childId: uuid("child_id")
+      .notNull()
+      .references(() => child.id, { onDelete: "cascade" }),
+    total: integer("total").notNull(),
+    score: integer("score").notNull(),
+    finishedAt: timestamp("finished_at", { withTimezone: true }).notNull().defaultNow(),
+  },
+  (table) => [
+    index("quiz_attempt_child_finished_idx").on(table.childId, table.finishedAt),
+    check("quiz_attempt_total_check", sql`${table.total} in (5, 10, 20)`),
+    check("quiz_attempt_score_check", sql`${table.score} between 0 and ${table.total}`),
+  ],
 );
 
 export type ChildRow = typeof child.$inferSelect;

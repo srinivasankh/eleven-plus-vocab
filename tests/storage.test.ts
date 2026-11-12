@@ -1,29 +1,44 @@
-import { describe, expect, it } from "vitest";
-import { sanitizeProgressState } from "@/lib/storage";
+import { afterEach, describe, expect, it, vi } from "vitest";
+import { activeQuizKey, loadActiveQuiz, sanitizeActiveQuiz, saveActiveQuiz } from "@/lib/storage";
 
-describe("storage sanitizer", () => {
-  it("returns defaults for invalid payload", () => {
-    const sanitized = sanitizeProgressState("bad");
-    expect(sanitized.learnedWordIds).toEqual([]);
-    expect(sanitized.preferences.questionsPerQuiz).toBe(10);
+const quiz = { questionIndex: 2, answers: [0, 1, -1], questionIds: ["q-10", "q-11", "q-12"] };
+
+afterEach(() => {
+  vi.restoreAllMocks();
+  window.localStorage.clear();
+});
+
+describe("sanitizeActiveQuiz", () => {
+  it("rejects malformed values", () => {
+    expect(sanitizeActiveQuiz("bad")).toBeUndefined();
+    expect(sanitizeActiveQuiz({ questionIndex: "2", answers: [], questionIds: [] })).toBeUndefined();
   });
 
-  it("preserves valid active quiz", () => {
-    const sanitized = sanitizeProgressState({
-      lastUpdated: "2026-01-01T00:00:00.000Z",
-      learnedWordIds: [1, 2],
-      quizHistory: [{ ts: "2026-01-01T00:00:00.000Z", score: 4, total: 5 }],
-      activeQuiz: {
-        questionIndex: 2,
-        answers: [0, 1, -1],
-        questionIds: ["q-10", "q-11", "q-12"],
-      },
-      preferences: {
-        questionsPerQuiz: 20,
-      },
-    });
+  it("keeps a valid quiz and drops bad array items", () => {
+    expect(sanitizeActiveQuiz({ ...quiz, answers: [0, "x", 1] })).toEqual({ ...quiz, answers: [0, 1] });
+  });
+});
 
-    expect(sanitized.activeQuiz?.questionIndex).toBe(2);
-    expect(sanitized.preferences.questionsPerQuiz).toBe(20);
+describe("active quiz storage", () => {
+  it("is stored separately for each child", () => {
+    saveActiveQuiz("child-a", quiz);
+    expect(loadActiveQuiz("child-a")).toEqual(quiz);
+    expect(loadActiveQuiz("child-b")).toBeUndefined();
+
+    saveActiveQuiz("child-a", undefined);
+    expect(window.localStorage.getItem(activeQuizKey("child-a"))).toBeNull();
+  });
+
+  it("never throws when the browser blocks storage", () => {
+    const blocked = () => {
+      throw new DOMException("The operation is insecure.", "SecurityError");
+    };
+    vi.spyOn(Storage.prototype, "setItem").mockImplementation(blocked);
+    vi.spyOn(Storage.prototype, "getItem").mockImplementation(blocked);
+    vi.spyOn(Storage.prototype, "removeItem").mockImplementation(blocked);
+
+    expect(() => saveActiveQuiz("child-a", quiz)).not.toThrow();
+    expect(() => saveActiveQuiz("child-a", undefined)).not.toThrow();
+    expect(loadActiveQuiz("child-a")).toBeUndefined();
   });
 });

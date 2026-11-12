@@ -1,6 +1,6 @@
 # Plan: Backend re-architecture (keep the current look and UX)
 
-Status: in progress (stages 0–2 done) · Branch: `claude/backend-exploration`
+Status: in progress (stages 0–3 done) · Branch: `claude/backend-exploration`
 
 ## Goal
 
@@ -96,7 +96,7 @@ in every server function (the real check).
    current lists). Learn page reads words server-side. UI unchanged.
 2. ✅ **Accounts & child profiles** — Better Auth, sign-in/up, `/profiles`, active-child cookie,
    route protection.
-3. **Progress on the server** — learned words per child (by headword), Progress page from DB.
+3. ✅ **Progress on the server** — learned words per child (by headword), Progress page from DB.
 4. **Quiz on the server** — attempts/questions tables, start/answer/finish/resume actions.
 5. **Hardening** — error pages, logging, health check, optional one-time import of a browser's
    old localStorage progress into a child profile, tests for ownership checks, update

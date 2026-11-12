@@ -15,6 +15,13 @@
       "when": 1794501460198,
       "tag": "0001_goofy_betty_ross",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794508681208,
+      "tag": "0002_tan_santa_claus",
+      "breakpoints": true
     }
   ]
 }

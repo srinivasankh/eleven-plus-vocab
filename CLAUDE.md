@@ -46,11 +46,25 @@ The database is disposable (it disappears with the container); migrations + seed
 **Mid-migration to a full-stack app** — see `plans/backend-architecture.md` (stages 0–5).
 Done: Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side,
 parent accounts (Better Auth, email + password) with child profiles; every page except `/`,
-`/sign-in`, `/sign-up` requires sign-in **and** an active child.
-Not yet: server-side progress and quiz. Until then:
-- `/quiz` and `/progress` still read the bundled `src/data/vocab.generated.json`.
-- User progress still lives only in browser `localStorage` (`useProgressState`) — so it is
-  **per device, shared by all children on that device** until stage 3.
+`/sign-in`, `/sign-up` requires sign-in **and** an active child; **progress per child in
+Postgres** (learned words by headword, quiz results, preferred quiz length).
+Not yet (stage 4): the quiz itself. Until then:
+- `/quiz` still builds questions in the browser from the bundled `src/data/vocab.generated.json`
+  and computes the score client-side; `recordQuizResultAction` only checks it is plausible.
+- A half-finished quiz lives in `localStorage` under `eleven_plus_active_quiz_v1:<childId>`
+  (`src/lib/storage.ts`, `useActiveQuiz`), wrapped so blocked storage can't crash the app.
+  The pre-accounts blob `eleven_plus_quiz_progress_v1` is no longer read or written (stage 5 may import it).
+
+### Progress
+- Tables: `learned_word` (PK child_id + headword), `quiz_attempt` (finished rounds; CHECK
+  total ∈ {5,10,20}, 0 ≤ score ≤ total), `child.preferred_quiz_length`. All cascade-delete with the child.
+- `src/server/progress.ts`: `getProgressSnapshot`, `setWordLearned` (by word id → headword),
+  `recordQuizResult`, `setPreferredQuizLength`, `resetProgress`. They take an **already-verified**
+  child id; server actions in `src/app/actions/progress.ts` get it from `requireChild()`, never from the client.
+- Pages load a `ProgressSnapshot` on the server and pass it as props. Client updates are
+  optimistic (update UI, call action, roll back + show `.form-error` on failure).
+- Mastery totals count distinct words (878), "best score" = best percentage.
+- Dates from the server are formatted after mount (`useMounted`) so they use the viewer's time zone.
 
 ### Accounts & access control
 - `user`/`session`/`account`/`verification` = Better Auth tables (a `user` is a **parent**);
@@ -104,23 +118,23 @@ Database rules:
 ```
 src/app/            App Router pages (server components that call requireChild(), rendering client components)
   sign-in/, sign-up/, profiles/   account screens (built from existing CSS classes)
-  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child)
+  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child), progress.ts
   api/auth/[...all] Better Auth handler
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
-  page.tsx          home: stats + mission links
-  learn/page.tsx    server: getAllWords() → <LearnDeck> (client: group picker, search, WordCards)
-  quiz/page.tsx     server: requireChild() → <QuizMission> (setup, play, resume, results)
-  progress/page.tsx server: requireChild() → <ProgressDashboard>
-src/components/     LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
+  page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
+  learn/page.tsx    server: words + snapshot → <LearnDeck> (client: group picker, search, WordCards)
+  quiz/page.tsx     server: requireChild() → <QuizMission childId initialQuizLength>
+  progress/page.tsx server: snapshot → <ProgressDashboard>
+src/components/     HomeDashboard, LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
                     WordCard, QuizCard, ThemeProvider, ThemeToggle, DataWarningFooter
-src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, vocab.ts
+src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, vocab.ts
 src/middleware.ts   redirects signed-out visitors away from /learn, /quiz, /progress, /profiles
 drizzle/            generated SQL migrations (committed)
-src/hooks/          useProgressState (load on mount, save on every change), useTheme
+src/hooks/          useActiveQuiz (per-child unfinished quiz in localStorage), useMounted, useTheme
 src/lib/
-  types.ts          VocabEntry, QuizQuestion, ProgressState, QuizLength (5|10|20), ...
+  types.ts          VocabEntry, WordEntry, QuizQuestion, QuizLength (5|10|20), ProgressSnapshot, ...
   quiz.ts           generateQuizQuestions, questionForEntry, scoreQuiz
-  storage.ts        localStorage persistence + sanitizeProgressState
+  storage.ts        per-child active quiz in localStorage (safe against blocked storage)
   difficulty.ts     hand-curated easy/hard ID sets (seed source for word.difficulty); else medium
   vocabSeed.ts      pure markdown→rows transform (headword, difficulty)
   validation.ts     Zod schemas (sign-in/up, child name), safeNextPath / learnerNextPath
@@ -133,7 +147,7 @@ plans/              past implementation plans (historical; may reference old cou
 ### Key behaviours
 
 - **Quiz:** question type is `meaning_to_word` only. Prompt = meaning; 4 options = correct word + 3 distractors (same part of speech when ≥3 available, chosen deterministically from the entry id), then shuffled randomly. Question id format: `q-<vocabId>`.
-- **Progress (`ProgressState`)** stored under key `eleven_plus_quiz_progress_v1`: `learnedWordIds`, `quizHistory[{ts,score,total}]`, optional `activeQuiz {questionIndex, answers, questionIds}`, `preferences.questionsPerQuiz`. Always pass loaded data through `sanitizeProgressState`. Changing the shape → bump the key version or migrate.
+- **Progress** lives in Postgres per child (see "Progress" above). Only the unfinished quiz is in `localStorage`; always load it through `sanitizeActiveQuiz` / `loadActiveQuiz`.
 - **Theme** stored under `eleven_plus_theme_v1`; the inline script in `layout.tsx` duplicates the resolution logic in `theme.ts` (to avoid a flash) — keep both in sync.
 - **Difficulty:** stored in `word.difficulty`, seeded from the `easyIds` / `hardIds` sets in `src/lib/difficulty.ts` (244 easy / 381 medium / 335 hard). When adding new sets, classify the new IDs there and re-seed.
 - **Duplicates:** 960 entries but 878 distinct words (`headword`); 78 words appear in two sets.
@@ -141,10 +155,11 @@ plans/              past implementation plans (historical; may reference old cou
 ## Known issues / tech debt
 
 - **Quiz resume bug:** `activeQuiz.answers` stores option *indices*, but resume rebuilds questions via `questionForEntry`, which reshuffles options — saved answers can map to different words.
-- `saveProgressState` doesn't catch storage errors → the whole app crashes when the browser blocks storage (goes away when progress moves server-side in stage 3).
+- Quiz scores are still computed in the browser (plausibility-checked on save) — moves server-side in stage 4.
 - Quiz question for #839 "Serene" offers "Serene" twice (distractors excluded by id, not headword) — fixed by design in stage 4.
 - Duplicated parser (script vs `src/lib`), duplicated theme-init logic (layout vs `theme.ts`).
 - `plans/steady-dreaming-hedgehog.md` references 560 words; the dataset is now 960.
+- Fixed in stage 3: blocked browser storage crashed every page; "best score" compared raw counts across quiz lengths; mastery counted duplicate words twice.
 - Fixed: the parsers used to assign 929 of 960 words to set 48 (line number computed from a character offset). Regression-tested in `tests/parser.test.ts`.
 
 ## Conventions

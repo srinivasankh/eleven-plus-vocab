@@ -4,7 +4,8 @@ import { Suspense, useMemo, useState } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { QuizCard } from "@/components/QuizCard";
-import { useProgressState } from "@/hooks/useProgressState";
+import { recordQuizResultAction, setQuizLengthAction } from "@/app/actions/progress";
+import { useActiveQuiz } from "@/hooks/useActiveQuiz";
 import { generateQuizQuestions, questionForEntry, scoreQuiz } from "@/lib/quiz";
 import { QuizLength, QuizQuestion } from "@/lib/types";
 import { getVocabEntries } from "@/lib/vocabData";
@@ -20,18 +21,23 @@ function band(score: number, total: number): string {
   return "Keep practising";
 }
 
-function QuizPageContent() {
+type Props = {
+  childId: string;
+  initialQuizLength: QuizLength;
+};
+
+function QuizPageContent({ childId, initialQuizLength }: Props) {
   const params = useSearchParams();
-  const { progress, setProgress } = useProgressState();
+  const { activeQuiz, setActiveQuiz } = useActiveQuiz(childId);
+  const [selectedLength, setSelectedLength] = useState<QuizLength>(initialQuizLength);
+  const [saveError, setSaveError] = useState<string | null>(null);
 
   const [questions, setQuestions] = useState<QuizQuestion[]>([]);
   const [answers, setAnswers] = useState<number[]>([]);
   const [index, setIndex] = useState(0);
   const [submitted, setSubmitted] = useState(false);
 
-  const selectedLength = progress?.preferences.questionsPerQuiz ?? 10;
-
-  const canResume = Boolean(progress?.activeQuiz);
+  const canResume = Boolean(activeQuiz);
   const mode = params.get("mode");
 
   const result = useMemo(() => {
@@ -67,26 +73,25 @@ function QuizPageContent() {
     setAnswers(new Array(newQuestions.length).fill(-1));
     setIndex(0);
     setSubmitted(false);
+    setSaveError(null);
 
-    if (!progress) return;
-    setProgress({
-      ...progress,
-      preferences: {
-        questionsPerQuiz: length,
-      },
-      activeQuiz: {
-        questionIndex: 0,
-        answers: new Array(newQuestions.length).fill(-1),
-        questionIds: newQuestions.map((question) => question.id),
-      },
+    setActiveQuiz({
+      questionIndex: 0,
+      answers: new Array(newQuestions.length).fill(-1),
+      questionIds: newQuestions.map((question) => question.id),
     });
+
+    if (length !== selectedLength) {
+      setSelectedLength(length);
+      void setQuizLengthAction(length);
+    }
   }
 
   function resumeQuiz() {
-    if (!progress?.activeQuiz) return;
+    if (!activeQuiz) return;
 
     const byId = new Map(entries.map((entry) => [entry.id, entry]));
-    const rebuilt = progress.activeQuiz.questionIds
+    const rebuilt = activeQuiz.questionIds
       .map((id) => Number(id.replace("q-", "")))
       .map((id) => byId.get(id))
       .filter((entry): entry is (typeof entries)[number] => Boolean(entry))
@@ -98,8 +103,8 @@ function QuizPageContent() {
     }
 
     setQuestions(rebuilt);
-    setAnswers(progress.activeQuiz.answers);
-    setIndex(progress.activeQuiz.questionIndex);
+    setAnswers(activeQuiz.answers);
+    setIndex(activeQuiz.questionIndex);
     setSubmitted(false);
   }
 
@@ -108,14 +113,10 @@ function QuizPageContent() {
     nextAnswers[index] = choice;
     setAnswers(nextAnswers);
 
-    if (!progress) return;
-    setProgress({
-      ...progress,
-      activeQuiz: {
-        questionIndex: index,
-        answers: nextAnswers,
-        questionIds: questions.map((question) => question.id),
-      },
+    setActiveQuiz({
+      questionIndex: index,
+      answers: nextAnswers,
+      questionIds: questions.map((question) => question.id),
     });
   }
 
@@ -124,26 +125,20 @@ function QuizPageContent() {
       const nextIndex = index + 1;
       setIndex(nextIndex);
 
-      if (!progress) return;
-      setProgress({
-        ...progress,
-        activeQuiz: {
-          questionIndex: nextIndex,
-          answers,
-          questionIds: questions.map((question) => question.id),
-        },
+      setActiveQuiz({
+        questionIndex: nextIndex,
+        answers,
+        questionIds: questions.map((question) => question.id),
       });
       return;
     }
 
     setSubmitted(true);
+    setActiveQuiz(undefined);
 
-    if (!progress) return;
     const score = scoreQuiz(questions, answers);
-    setProgress({
-      ...progress,
-      quizHistory: [...progress.quizHistory, { ts: new Date().toISOString(), ...score }],
-      activeQuiz: undefined,
+    void recordQuizResultAction(score).then((saved) => {
+      if (!saved.ok) setSaveError("We couldn't save this score to your progress. Your answers are below.");
     });
   }
 
@@ -201,6 +196,11 @@ function QuizPageContent() {
         <section className="panel result-panel">
           <h2>{band(result.score, result.total)}</h2>
           <p className="score-line">You scored {result.score} out of {result.total}.</p>
+          {saveError ? (
+            <p className="form-error" role="alert">
+              {saveError}
+            </p>
+          ) : null}
           <div className="result-actions">
             <button className="cta" onClick={() => createNewQuiz(selectedLength)} type="button">Try Again</button>
             <Link className="cta ghost" href="/progress">See Progress</Link>
@@ -241,10 +241,10 @@ function QuizPageContent() {
   );
 }
 
-export function QuizMission() {
+export function QuizMission(props: Props) {
   return (
     <Suspense fallback={<section className="page quiz"><p>Loading quiz...</p></section>}>
-      <QuizPageContent />
+      <QuizPageContent {...props} />
     </Suspense>
   );
 }

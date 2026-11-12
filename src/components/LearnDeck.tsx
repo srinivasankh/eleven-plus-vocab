@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { setLearnedAction } from "@/app/actions/progress";
 import { WordCard } from "@/components/WordCard";
-import { useProgressState } from "@/hooks/useProgressState";
 import { Difficulty, WordEntry } from "@/lib/types";
 
 const groupMeta: Record<
@@ -30,10 +30,13 @@ const groups: Difficulty[] = ["easy", "medium", "hard"];
 
 type Props = {
   entries: WordEntry[];
+  /** Headwords this child has already learned (from the server). */
+  initialLearned: string[];
 };
 
-export function LearnDeck({ entries }: Props) {
-  const { progress, setProgress } = useProgressState();
+export function LearnDeck({ entries, initialLearned }: Props) {
+  const [learned, setLearned] = useState<Set<string>>(() => new Set(initialLearned));
+  const [saveError, setSaveError] = useState<string | null>(null);
   const [query, setQuery] = useState("");
   const [selectedGroup, setSelectedGroup] = useState<Difficulty | null>(null);
   const [bulkOpen, setBulkOpen] = useState<{ value: boolean; version: number } | null>(null);
@@ -45,22 +48,16 @@ export function LearnDeck({ entries }: Props) {
     return counts;
   }, [entries]);
 
-  const difficultyById = useMemo(
-    () => new Map(entries.map((entry) => [entry.id, entry.difficulty])),
-    [entries],
-  );
-
   const groupEntries = useMemo(() => {
     if (!selectedGroup) return [];
     return entries.filter((entry) => entry.difficulty === selectedGroup);
   }, [entries, selectedGroup]);
 
-  const learnedIds = useMemo(() => new Set(progress?.learnedWordIds ?? []), [progress]);
 
   const filtered = useMemo(() => {
     let result = groupEntries;
     if (showUnlearnedOnly) {
-      result = result.filter((entry) => !learnedIds.has(entry.id));
+      result = result.filter((entry) => !learned.has(entry.headword));
     }
     if (query.trim()) {
       const lowered = query.toLowerCase();
@@ -72,17 +69,31 @@ export function LearnDeck({ entries }: Props) {
       );
     }
     return result;
-  }, [query, groupEntries, showUnlearnedOnly, learnedIds]);
+  }, [query, groupEntries, showUnlearnedOnly, learned]);
 
-  function toggleLearned(id: number) {
-    if (!progress) return;
-    const exists = progress.learnedWordIds.includes(id);
-    setProgress({
-      ...progress,
-      learnedWordIds: exists
-        ? progress.learnedWordIds.filter((item) => item !== id)
-        : [...progress.learnedWordIds, id],
+  function updateLearned(headword: string, isLearned: boolean) {
+    setLearned((previous) => {
+      const next = new Set(previous);
+      if (isLearned) next.add(headword);
+      else next.delete(headword);
+      return next;
     });
+  }
+
+  /** Updates the screen straight away, then saves; undoes the change if saving fails. */
+  async function toggleLearned(id: number) {
+    const entry = entries.find((item) => item.id === id);
+    if (!entry) return;
+    const nowLearned = !learned.has(entry.headword);
+
+    setSaveError(null);
+    updateLearned(entry.headword, nowLearned);
+
+    const result = await setLearnedAction({ wordId: id, learned: nowLearned });
+    if (!result.ok) {
+      updateLearned(entry.headword, !nowLearned);
+      setSaveError(result.error);
+    }
   }
 
   function handleBack() {
@@ -92,13 +103,10 @@ export function LearnDeck({ entries }: Props) {
     setShowUnlearnedOnly(false);
   }
 
-  const learnedCount = progress?.learnedWordIds.length ?? 0;
+  const learnedCount = learned.size;
 
   function masteredInGroup(difficulty: Difficulty): number {
-    if (!progress) return 0;
-    return progress.learnedWordIds.filter(
-      (id) => difficultyById.get(id) === difficulty,
-    ).length;
+    return entries.filter((entry) => entry.difficulty === difficulty && learned.has(entry.headword)).length;
   }
 
   if (!selectedGroup) {
@@ -201,13 +209,19 @@ export function LearnDeck({ entries }: Props) {
         </button>
       </div>
 
+      {saveError ? (
+        <p className="form-error" role="alert">
+          {saveError}
+        </p>
+      ) : null}
+
       <div className="word-grid">
         {filtered.map((entry) => (
           <WordCard
             entry={entry}
             forceOpen={bulkOpen}
             key={entry.id}
-            learned={learnedIds.has(entry.id)}
+            learned={learned.has(entry.headword)}
             onToggleLearned={toggleLearned}
           />
         ))}

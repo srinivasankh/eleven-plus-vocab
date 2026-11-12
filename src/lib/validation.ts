@@ -27,6 +27,17 @@ export const childNameSchema = z
 
 export const childIdSchema = z.string().uuid();
 
+export const quizLengthSchema = z.union([z.literal(5), z.literal(10), z.literal(20)]);
+
+export const setLearnedSchema = z.object({
+  wordId: z.number().int().positive(),
+  learned: z.boolean(),
+});
+
+export const quizResultSchema = z
+  .object({ score: z.number().int().min(0), total: quizLengthSchema })
+  .refine((value) => value.score <= value.total, { message: "Score can't be more than the total." });
+
 /**
  * Only allow redirects to a path on this site ("/quiz"), never to another origin
  * ("//evil.example", "https://…") — otherwise sign-in links could be used for phishing.

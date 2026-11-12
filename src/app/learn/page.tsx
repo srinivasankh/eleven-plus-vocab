@@ -1,4 +1,5 @@
 import { LearnDeck } from "@/components/LearnDeck";
+import { getProgressSnapshot } from "@/server/progress";
 import { requireChild } from "@/server/session";
 import { getAllWords } from "@/server/vocab";
 
@@ -6,7 +7,7 @@ import { getAllWords } from "@/server/vocab";
 export const dynamic = "force-dynamic";
 
 export default async function LearnPage() {
-  await requireChild("/learn");
-  const entries = await getAllWords();
-  return <LearnDeck entries={entries} />;
+  const { child } = await requireChild("/learn");
+  const [entries, snapshot] = await Promise.all([getAllWords(), getProgressSnapshot(child.id)]);
+  return <LearnDeck entries={entries} initialLearned={snapshot.learnedHeadwords} key={child.id} />;
 }

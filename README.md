@@ -7,7 +7,7 @@ Kid-friendly web app for UK 11+ exam vocabulary practice, built with Next.js + T
 - Learn mode with searchable vocabulary cards
 - Quiz mode (multiple-choice meanings -> words)
 - Family accounts: a parent signs in (email + password) and adds up to 6 child profiles
-- Progress saved in browser localStorage (moves to the server in the next stage)
+- Progress saved per child on the server (learned words, quiz results), so it follows the family across devices
 - Resume unfinished quiz
 - Vocabulary stored in Postgres, seeded from the markdown source (`npm run db:seed`)
 - Tolerant import: malformed blocks are skipped with warnings

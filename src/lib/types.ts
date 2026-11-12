@@ -45,23 +45,26 @@ export type QuizQuestion = {
 
 export type QuizLength = 5 | 10 | 20;
 
-export type ProgressState = {
-  lastUpdated: string;
-  learnedWordIds: number[];
-  quizHistory: Array<{ ts: string; score: number; total: number }>;
-  activeQuiz?: {
-    questionIndex: number;
-    answers: number[];
-    questionIds: string[];
-  };
-  preferences: {
-    questionsPerQuiz: QuizLength;
-  };
-};
-
 export type GeneratedVocabData = {
   entries: VocabEntry[];
   warnings: ParseWarning[];
   stats: ParseResult["stats"];
   generatedAt: string;
 };
+
+export type QuizResult = { ts: string; score: number; total: number };
+
+/** A child's progress as the pages need it (from the database). */
+export type ProgressSnapshot = {
+  /** Headwords the child has marked learned. */
+  learnedHeadwords: string[];
+  /** Distinct words in the word list (duplicates across sets count once). */
+  totalWords: number;
+  attempts: number;
+  /** Most recent first, at most 8. */
+  recentResults: QuizResult[];
+  /** Highest percentage so far (ties → most recent). */
+  best: QuizResult | null;
+  preferredQuizLength: QuizLength;
+};
+
