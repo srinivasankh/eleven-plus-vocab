@@ -1,6 +1,6 @@
 # Plan: Backend re-architecture (keep the current look and UX)
 
-Status: in progress (stages 0–1 done) · Branch: `claude/backend-exploration`
+Status: in progress (stages 0–2 done) · Branch: `claude/backend-exploration`
 
 ## Goal
 
@@ -94,7 +94,7 @@ in every server function (the real check).
    `db:generate` / `db:migrate` / `db:seed`, Zod. Upgrade `next` to the patched 15.x release.
 1. ✅ **Vocabulary in the database** — schema + seed from `Y5_set01_to_48.md` (difficulty from
    current lists). Learn page reads words server-side. UI unchanged.
-2. **Accounts & child profiles** — Better Auth, sign-in/up, `/profiles`, active-child cookie,
+2. ✅ **Accounts & child profiles** — Better Auth, sign-in/up, `/profiles`, active-child cookie,
    route protection.
 3. **Progress on the server** — learned words per child (by headword), Progress page from DB.
 4. **Quiz on the server** — attempts/questions tables, start/answer/finish/resume actions.

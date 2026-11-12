@@ -14,7 +14,7 @@ Guidance for working on **WordSpark** — a kid-friendly UK 11+ vocabulary pract
 
 ```bash
 npm ci                 # install
-cp .env.example .env   # first time only (DATABASE_URL, TEST_DATABASE_URL)
+cp .env.example .env   # first time only (DATABASE_URL, TEST_DATABASE_URL, BETTER_AUTH_*)
 docker compose up -d   # local Postgres (or use any Postgres; see below)
 npm run db:setup       # db:migrate + db:seed (load the 960 words)
 npm run dev            # regenerates vocab JSON (predev), then next dev
@@ -38,15 +38,33 @@ service postgresql start
 su postgres -c "psql -c \"create role wordspark login password 'wordspark'\" -c 'create database wordspark owner wordspark' -c 'create database wordspark_test owner wordspark'"
 cp .env.example .env && npm run db:setup
 ```
+(`.env.example`'s `BETTER_AUTH_SECRET` is a placeholder; replace it with `openssl rand -base64 32`.)
 The database is disposable (it disappears with the container); migrations + seed rebuild it.
 
 ## Architecture
 
 **Mid-migration to a full-stack app** — see `plans/backend-architecture.md` (stages 0–5).
-Done: Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side.
-Not yet: accounts (parent + child profiles), server-side progress and quiz. Until then:
+Done: Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side,
+parent accounts (Better Auth, email + password) with child profiles; every page except `/`,
+`/sign-in`, `/sign-up` requires sign-in **and** an active child.
+Not yet: server-side progress and quiz. Until then:
 - `/quiz` and `/progress` still read the bundled `src/data/vocab.generated.json`.
-- User progress still lives only in browser `localStorage` (`useProgressState`).
+- User progress still lives only in browser `localStorage` (`useProgressState`) — so it is
+  **per device, shared by all children on that device** until stage 3.
+
+### Accounts & access control
+- `user`/`session`/`account`/`verification` = Better Auth tables (a `user` is a **parent**);
+  `child` = profiles owned by a parent (display name only — no child PII), max 6 per family.
+- `src/server/auth.ts` → `getAuth()` (lazy). HTTP endpoints at `/api/auth/*`.
+- `src/server/session.ts`: `getParent()`, `getActiveChild()`, `requireParent(next)`,
+  `requireChild(next)`. The active child id lives in the httpOnly `ws_child` cookie and is
+  **re-checked against `child.parent_id` on every request** (`getChildForParent`). Any new
+  page/action that touches a child's data must call `requireChild()` (or `requireParent()` and
+  check ownership) — `src/middleware.ts` only checks that a session cookie exists.
+- Signing in clears `ws_child`, so a returning parent always picks a learner
+  (`/profiles?next=…`). Redirect targets go through `safeNextPath` / `learnerNextPath`
+  (`src/lib/validation.ts`) — never redirect to a raw query value.
+- Forms: server actions in `src/app/actions/` + `useActionState`, inputs validated with Zod.
 
 Database rules:
 - Schema lives in `src/server/db/schema.ts`. Change it → `npm run db:generate` → read the SQL in
@@ -84,14 +102,19 @@ Database rules:
 ### Layout
 
 ```
-src/app/            App Router pages (/learn is a server component; the others are still "use client")
+src/app/            App Router pages (server components that call requireChild(), rendering client components)
+  sign-in/, sign-up/, profiles/   account screens (built from existing CSS classes)
+  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child)
+  api/auth/[...all] Better Auth handler
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          home: stats + mission links
   learn/page.tsx    server: getAllWords() → <LearnDeck> (client: group picker, search, WordCards)
-  quiz/page.tsx     quiz setup (5/10/20), play, resume, results + review table
-  progress/page.tsx mastery dashboard, history, reset
-src/components/     LearnDeck, HeaderNav, WordCard, QuizCard, ThemeProvider, ThemeToggle, DataWarningFooter
-src/server/         server-only code: db/ (schema, client, seedVocab), vocab.ts (queries)
+  quiz/page.tsx     server: requireChild() → <QuizMission> (setup, play, resume, results)
+  progress/page.tsx server: requireChild() → <ProgressDashboard>
+src/components/     LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
+                    WordCard, QuizCard, ThemeProvider, ThemeToggle, DataWarningFooter
+src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, vocab.ts
+src/middleware.ts   redirects signed-out visitors away from /learn, /quiz, /progress, /profiles
 drizzle/            generated SQL migrations (committed)
 src/hooks/          useProgressState (load on mount, save on every change), useTheme
 src/lib/
@@ -100,6 +123,7 @@ src/lib/
   storage.ts        localStorage persistence + sanitizeProgressState
   difficulty.ts     hand-curated easy/hard ID sets (seed source for word.difficulty); else medium
   vocabSeed.ts      pure markdown→rows transform (headword, difficulty)
+  validation.ts     Zod schemas (sign-in/up, child name), safeNextPath / learnerNextPath
   theme.ts          light/dark resolution + persistence
   parseVocabMarkdown.ts  TS parser (tests only, see above)
 tests/              unit tests; tests/db/ = Postgres integration tests (npm run test:db)

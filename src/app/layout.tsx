@@ -5,6 +5,7 @@ import "./globals.css";
 import { HeaderNav } from "@/components/HeaderNav";
 import { DataWarningFooter } from "@/components/DataWarningFooter";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { getActiveChild, getParent } from "@/server/session";
 
 const baloo = Baloo_2({
   subsets: ["latin"],
@@ -23,7 +24,11 @@ export const metadata: Metadata = {
   description: "Kid-friendly 11+ vocabulary practice and quizzes.",
 };
 
-export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const parent = await getParent();
+  const activeChild = parent ? await getActiveChild() : null;
+  const account = parent ? { childName: activeChild?.displayName ?? null } : null;
+
   return (
     <html lang="en">
       <body className={`${baloo.variable} ${nunito.variable}`}>
@@ -44,7 +49,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <ThemeProvider>
           <div className="background-decor" aria-hidden="true" />
           <div className="app-shell">
-            <HeaderNav />
+            <HeaderNav account={account} />
             <main>{children}</main>
             <DataWarningFooter />
           </div>

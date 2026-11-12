@@ -6,7 +6,8 @@ Kid-friendly web app for UK 11+ exam vocabulary practice, built with Next.js + T
 
 - Learn mode with searchable vocabulary cards
 - Quiz mode (multiple-choice meanings -> words)
-- Progress saved in browser localStorage (as of now in this MVP)
+- Family accounts: a parent signs in (email + password) and adds up to 6 child profiles
+- Progress saved in browser localStorage (moves to the server in the next stage)
 - Resume unfinished quiz
 - Vocabulary stored in Postgres, seeded from the markdown source (`npm run db:seed`)
 - Tolerant import: malformed blocks are skipped with warnings
@@ -40,4 +41,5 @@ npm run dev
 
 Being migrated from a browser-only app to a full-stack app (Postgres + Drizzle, then accounts
 and server-side progress/quizzes) — see `plans/backend-architecture.md`. The vocabulary already
-lives in Postgres and the Learn page reads it on the server.
+lives in Postgres and the Learn page reads it on the server; parent accounts and child profiles
+are in place (Better Auth), and every page except the home page requires sign-in.

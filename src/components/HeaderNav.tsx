@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOutAction } from "@/app/actions/auth";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 const links = [
@@ -11,7 +12,11 @@ const links = [
   { href: "/progress", label: "Progress" },
 ];
 
-export function HeaderNav() {
+export type HeaderAccount = {
+  childName: string | null;
+} | null;
+
+export function HeaderNav({ account }: { account: HeaderAccount }) {
   const pathname = usePathname();
 
   return (
@@ -38,6 +43,24 @@ export function HeaderNav() {
           </ul>
         </nav>
         <ThemeToggle />
+        <div className="account-controls">
+          {account ? (
+            <>
+              <Link className="chip-btn" href="/profiles" title="Switch learner">
+                {account.childName ?? "Choose learner"}
+              </Link>
+              <form action={signOutAction}>
+                <button className="chip-btn" type="submit">
+                  Sign out
+                </button>
+              </form>
+            </>
+          ) : (
+            <Link className="chip-btn solid" href="/sign-in">
+              Sign in
+            </Link>
+          )}
+        </div>
       </div>
     </header>
   );

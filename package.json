@@ -20,6 +20,7 @@
     "db:studio": "drizzle-kit studio"
   },
   "dependencies": {
+    "better-auth": "1.7.22",
     "drizzle-orm": "0.45.4",
     "next": "15.5.29",
     "postgres": "4.1.1",

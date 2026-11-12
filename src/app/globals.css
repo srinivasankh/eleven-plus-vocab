@@ -1092,3 +1092,85 @@ input:focus-visible {
     min-width: 540px;
   }
 }
+
+/* Accounts & profiles (stage 2) — built from the existing tokens. */
+.profiles {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.auth-panel {
+  max-width: 460px;
+}
+
+.form-stack {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.form-inline {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+}
+
+.form-inline .cta {
+  margin-top: 1.55rem;
+}
+
+.form-error {
+  margin: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--danger);
+  background: color-mix(in srgb, var(--danger), transparent 90%);
+  color: var(--ink-strong);
+  padding: 0.6rem 0.8rem;
+  font-weight: 700;
+}
+
+.field-error {
+  color: var(--danger);
+  font-weight: 700;
+}
+
+.search-wrap input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.cta:disabled {
+  opacity: 0.65;
+  cursor: progress;
+}
+
+.auth-switch {
+  margin: var(--space-4) 0 0;
+}
+
+.profile-card {
+  width: 100%;
+  height: 100%;
+}
+
+.account-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.account-controls form {
+  display: contents;
+}
+
+a.chip-btn {
+  display: inline-flex;
+  align-items: center;
+}
+
+@media (max-width: 760px) {
+  .form-inline {
+    grid-template-columns: 1fr;
+  }
+
+  .form-inline .cta {
+    margin-top: 0;
+  }
+}
