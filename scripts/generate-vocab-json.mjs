@@ -51,7 +51,6 @@ function setForLine(line, lookup) {
 function parseMarkdown(markdown) {
   const warnings = [];
   const entries = [];
-  const lines = markdown.split("\n");
   const setLookup = buildSetLookup(markdown);
   const headingRegex = /^##\s+(\d+)\.\s+(.+)$/gm;
   const matches = [...markdown.matchAll(headingRegex)];
@@ -63,7 +62,7 @@ function parseMarkdown(markdown) {
     const blockStart = match.index ?? 0;
     const blockEnd = i + 1 < matches.length ? (matches[i + 1].index ?? markdown.length) : markdown.length;
     const block = markdown.slice(blockStart, blockEnd);
-    const headingLine = lines.slice(0, blockStart).length;
+    const headingLine = markdown.slice(0, blockStart).split("\n").length;
 
     const type = captureField(block, "Type") ?? "";
     const meaning = captureField(block, "Meaning") ?? "";

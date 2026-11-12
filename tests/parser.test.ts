@@ -44,4 +44,15 @@ describe("parseVocabMarkdown", () => {
     expect(result.entries).toHaveLength(0);
     expect(result.warnings.length).toBeGreaterThan(0);
   });
+
+  it("assigns each entry to the set heading above it, across many sets", () => {
+    const entry = (id: number, word: string) =>
+      `## ${id}. ${word}\n\n**Type:** Noun\n\n**Meaning:** a thing\n\n**Synonyms:** item\n\n**Antonyms:** (no direct antonyms)\n\n**Example Sentences:**\n1. A ${word}.\n\n`;
+    const markdown = [1, 2, 3]
+      .map((set) => `# Set ${set} Vocabulary List\n\n` + entry(set * 2 - 1, `Word${set}a`) + entry(set * 2, `Word${set}b`))
+      .join("");
+
+    const result = parseVocabMarkdown(markdown);
+    expect(result.entries.map((item) => item.setNumber)).toEqual([1, 1, 2, 2, 3, 3]);
+  });
 });
