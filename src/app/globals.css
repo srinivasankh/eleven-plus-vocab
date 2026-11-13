@@ -1098,6 +1098,84 @@ input:focus-visible {
   gap: var(--space-4);
 }
 
+.chip-btn.danger {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.manage-family summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--ink-strong);
+}
+
+.manage-family[open] summary {
+  margin-bottom: var(--space-4);
+}
+
+.manage-family h3 {
+  margin: 0 0 var(--space-2);
+  font-size: 1rem;
+}
+
+.manage-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.manage-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding: 0.55rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+
+.manage-name {
+  font-weight: 800;
+  overflow-wrap: anywhere;
+}
+
+.manage-confirm {
+  display: grid;
+  gap: var(--space-2);
+  flex-basis: 100%;
+}
+
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-3);
+  padding: var(--space-5) 0 var(--space-4);
+  color: var(--ink-muted);
+  font-size: 0.86rem;
+}
+
+.legal {
+  max-width: 760px;
+}
+
+.legal h2 {
+  margin-top: var(--space-5);
+  font-size: 1.25rem;
+}
+
+.legal p,
+.legal li {
+  line-height: 1.6;
+}
+
+.legal ul {
+  padding-left: 1.2rem;
+}
+
 .google-btn {
   gap: 0.6rem;
 }

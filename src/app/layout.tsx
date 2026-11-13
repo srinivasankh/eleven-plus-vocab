@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { unstable_rethrow } from "next/navigation";
+import Link from "next/link";
 import Script from "next/script";
 import "./globals.css";
 import { baloo, nunito } from "@/app/fonts";
@@ -54,6 +55,12 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <div className="app-shell">
             <HeaderNav account={account} />
             <main>{children}</main>
+            <footer className="site-footer">
+              <span>WordSpark 11+ vocabulary</span>
+              <Link className="link-inline" href="/privacy">
+                Privacy
+              </Link>
+            </footer>
           </div>
         </ThemeProvider>
       </body>

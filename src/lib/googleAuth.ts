@@ -46,3 +46,15 @@ export function googleErrorMessage(code: string | undefined | null): string | nu
       return "Google sign-in didn't work this time. Please try again.";
   }
 }
+
+/** Blank out OAuth tokens before an account row is written (password accounts have none anyway). */
+export function withoutProviderTokens<T extends Record<string, unknown>>(row: T): T {
+  return {
+    ...row,
+    accessToken: null,
+    refreshToken: null,
+    idToken: null,
+    accessTokenExpiresAt: null,
+    refreshTokenExpiresAt: null,
+  };
+}

@@ -130,6 +130,21 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
   email verification exists. Names from Google are tidied (`nameFromProvider`), never rejected; typed
   names still go through `parentNameSchema` (the hooks tell them apart by the `/callback/` path).
 
+- **Deletion (self-serve):** `/profiles` → "Manage family account" (`ManageFamily`): remove a learner
+  (`removeChildAction` → `deleteChild`, ownership-scoped) or delete the account (`deleteAccountAction`, confirm by
+  typing `DELETE` → `deleteParentAccount`; every table cascades from `user`; then cookies cleared →
+  `/sign-in?notice=account_deleted`). Immediate and permanent — the privacy page promises exactly this.
+- **Google tokens are not stored:** `databaseHooks.account.create.before` → `withoutProviderTokens` and
+  `updateAccountOnSignIn: false`. The app only uses Google to identify the parent.
+
+### Privacy notice
+- `/privacy` (`src/app/privacy/page.tsx`), linked from the footer, the sign-up form and Manage family. Owner facts
+  (operator "Srini K", `privacy@kanniwadi.uk`, `lastUpdated`) live only in `src/lib/legal.ts`.
+- **Every sentence must stay true of the code.** If you change what is stored, where it is hosted, cookies,
+  providers, retention (sessions 7 days; `rate_limit` rows pruned after a day on every limiter call) or deletion,
+  update the page and `legal.lastUpdated` in the same change. No cookie banner: only essential cookies/storage,
+  no analytics — adding analytics or third-party embeds would need consent first.
+
 Database rules:
 - Schema lives in `src/server/db/schema.ts`. Change it → `npm run db:generate` → read the SQL in
   `drizzle/` → `npm run db:migrate`. **Never `drizzle-kit push`**, never edit an applied migration.
@@ -171,6 +186,7 @@ src/app/            App Router pages (server components that call requireChild()
   api/auth/[...all] Better Auth handler
   api/health        health check (200 / 503)
   auth/continue     where Google sign-in lands: clears the learner cookie → learner picker
+  privacy/          privacy notice (facts from src/lib/legal.ts)
   error.tsx, global-error.tsx, not-found.tsx, fonts.ts
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
@@ -214,8 +230,9 @@ plans/              past implementation plans (historical; may reference old cou
 - Still true from review 2 (deliberately left): game-style labels with nothing behind them ("XP Mode",
   "Spark score booster", "daily missions", "speed"); page titles/description (Learn/Progress tab
   says "Quiz", one shared description, no favicon); no robots/noindex while not yet launched.
-- **Before a public launch:** email verification + password reset (need an email provider), and a
-  privacy notice (children's data; UK GDPR / Age Appropriate Design Code). Not built yet.
+- **Before a public launch:** email verification + password reset (need an email provider). Not built yet.
+  (Privacy notice + self-serve deletion: done.) No in-app data export or name editing — the privacy page
+  says those are by email request to privacy@kanniwadi.uk, which must actually forward to a read mailbox.
 - Fixed after review 2 (round 2): layout swallowed Next's dynamic-rendering signal (now
   `unstable_rethrow`); Home "Resume saved quiz mission" now opens the round (`/quiz?mode=resume`);
   signed-in parent with no learner sees "Pick a learner"; 6-learner cap held under concurrency

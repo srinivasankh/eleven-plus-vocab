@@ -57,10 +57,9 @@ export async function consumeRateLimit(
       retryAfterSeconds: sql<number>`greatest(0, ceil(extract(epoch from (${rateLimit.windowStart} + make_interval(secs => ${rule.windowSeconds}) - now()))))::int`,
     });
 
-  // Occasionally clear out long-expired rows so the table stays small.
-  if (Math.random() < 0.01) {
-    await getDb().delete(rateLimit).where(lt(rateLimit.windowStart, sql`now() - interval '1 day'`));
-  }
+  // Clear out rows whose window ended more than a day ago. Keys can contain an IP address, so
+  // they are not kept any longer than needed (the privacy page says so). The table is tiny.
+  await getDb().delete(rateLimit).where(lt(rateLimit.windowStart, sql`now() - interval '1 day'`));
 
   return { allowed: row.count <= rule.limit, retryAfterSeconds: row.retryAfterSeconds };
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { selectChildAction } from "@/app/actions/profiles";
 import { AddChildForm } from "@/components/AddChildForm";
+import { ManageFamily } from "@/components/ManageFamily";
 import { learnerNextPath, MAX_CHILDREN } from "@/lib/validation";
 import { listChildren } from "@/server/children";
 import { getActiveChild, requireParent } from "@/server/session";
@@ -53,6 +54,8 @@ export default async function ProfilesPage({ searchParams }: Props) {
       ) : null}
 
       {children.length < MAX_CHILDREN ? <AddChildForm first={children.length === 0} next={next} /> : null}
+
+      <ManageFamily learners={children} />
     </section>
   );
 }

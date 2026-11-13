@@ -50,3 +50,24 @@ export async function createChild(parentId: string, displayName: string): Promis
     return row;
   });
 }
+
+/**
+ * Removes one of this parent's learners and everything saved for them (learned words, quiz
+ * rounds and answers cascade). Returns false if the child doesn't exist or isn't theirs.
+ */
+export async function deleteChild(parentId: string, childId: string): Promise<boolean> {
+  const removed = await getDb()
+    .delete(child)
+    .where(and(eq(child.id, childId), eq(child.parentId, parentId)))
+    .returning({ id: child.id });
+  return removed.length > 0;
+}
+
+/**
+ * Deletes a parent's account and everything in it: sign-in sessions, password or Google link,
+ * learners and all their progress (every table cascades from `user`). Immediate and permanent.
+ */
+export async function deleteParentAccount(parentId: string): Promise<boolean> {
+  const removed = await getDb().delete(user).where(eq(user.id, parentId)).returning({ id: user.id });
+  return removed.length > 0;
+}

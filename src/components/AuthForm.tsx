@@ -127,6 +127,16 @@ export function AuthForm({ mode, next, googleEnabled = false, notice }: Props) {
         </button>
       </form>
 
+      {isSignUp ? (
+        <p className="section-meta">
+          We only ask for what the app needs, and you can delete your account at any time. Read our{" "}
+          <Link className="link-inline" href="/privacy">
+            privacy notice
+          </Link>
+          .
+        </p>
+      ) : null}
+
       <p className="auth-switch">
         {isSignUp ? "Already have an account? " : "New to WordSpark? "}
         <Link className="link-inline" href={otherHrefWithNext}>

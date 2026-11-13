@@ -10,6 +10,9 @@ export const signInSchema = z.object({
 });
 
 /** A parent's name. Also enforced inside Better Auth (src/server/auth.ts) for its raw endpoints. */
+/** What a parent types to confirm deleting their account. */
+export const DELETE_ACCOUNT_WORD = "DELETE";
+
 export const parentNameSchema = z.string().trim().min(1, "Please enter your name.").max(60, "That name is a bit long.");
 
 export const signUpSchema = z.object({

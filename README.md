@@ -9,6 +9,7 @@ Kid-friendly web app for UK 11+ exam vocabulary practice, built with Next.js, Ty
 - **Quiz:** multiple-choice "meaning → word" rounds of 5, 10 or 20 questions, built and scored on the server. An unfinished round can be resumed on any device, exactly as it was left.
 - **Progress:** learned words, quiz history and best score per child, saved to the family account so it follows them across devices.
 - **One-time import** of progress saved in a browser by the earlier, pre-accounts version of the app.
+- **Privacy:** a privacy notice at `/privacy`; parents can remove a learner or delete their whole account themselves.
 - Light and dark themes; works on phones.
 
 ## Data source
@@ -53,4 +54,3 @@ Pushing to `main` deploys; the build runs migrations and the word seed first (`n
 ## Before a public launch
 
 - Email verification and password reset (needs an email provider).
-- A privacy notice: the app stores children's learning data.

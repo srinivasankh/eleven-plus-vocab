@@ -7,7 +7,7 @@ import { getDb } from "@/server/db";
 import { account, session, user, verification } from "@/server/db/schema";
 import { authBaseUrl, previewOrigins } from "@/lib/deployOrigins";
 import { parentNameSchema } from "@/lib/validation";
-import { googleCredentials, isOAuthCallbackPath, nameFromProvider } from "@/lib/googleAuth";
+import { googleCredentials, isOAuthCallbackPath, nameFromProvider, withoutProviderTokens } from "@/lib/googleAuth";
 import { log, serializeError } from "@/server/log";
 
 /**
@@ -64,7 +64,15 @@ function createAuth() {
           },
         }
       : {},
+    // The app only uses Google to sign people in; it never calls Google on their behalf. So it
+    // keeps none of Google's access/refresh/ID tokens (less personal data to hold and protect).
+    account: { updateAccountOnSignIn: false },
     databaseHooks: {
+      account: {
+        create: {
+          before: async (newAccount) => ({ data: withoutProviderTokens(newAccount) }),
+        },
+      },
       user: {
         create: {
           before: async (newUser, context) => ({ data: { ...newUser, name: parentName(newUser.name, context) } }),

@@ -5,6 +5,7 @@ import {
   googleErrorMessage,
   isOAuthCallbackPath,
   nameFromProvider,
+  withoutProviderTokens,
 } from "@/lib/googleAuth";
 import { afterSignInPath } from "@/lib/validation";
 
@@ -65,5 +66,27 @@ describe("afterSignInPath", () => {
     expect(afterSignInPath("/sign-in")).toBe("/profiles");
     expect(afterSignInPath("https://evil.example/")).toBe("/profiles");
     expect(afterSignInPath("//evil.example")).toBe("/profiles");
+  });
+});
+
+describe("withoutProviderTokens", () => {
+  it("keeps the account link but drops every Google token", () => {
+    const row = withoutProviderTokens({
+      providerId: "google",
+      accountId: "123",
+      userId: "u1",
+      accessToken: "ya29.secret",
+      refreshToken: "1//refresh",
+      idToken: "eyJ...",
+      accessTokenExpiresAt: new Date(),
+      refreshTokenExpiresAt: new Date(),
+      password: null,
+    });
+    expect(row).toMatchObject({ providerId: "google", accountId: "123", userId: "u1" });
+    expect(row.accessToken).toBeNull();
+    expect(row.refreshToken).toBeNull();
+    expect(row.idToken).toBeNull();
+    expect(row.accessTokenExpiresAt).toBeNull();
+    expect(row.refreshTokenExpiresAt).toBeNull();
   });
 });
