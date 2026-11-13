@@ -1,3 +1,4 @@
+// The one parser for Y5_set01_to_48.md, used by `npm run db:seed` (scripts/seed.ts).
 import { ParseResult, ParseWarning, VocabEntry } from "@/lib/types";
 
 const headingRegex = /^##\s+(\d+)\.\s+(.+)$/gm;
@@ -87,7 +88,6 @@ export function parseVocabMarkdown(markdown: string): ParseResult {
   const warnings: ParseWarning[] = [];
   const entries: VocabEntry[] = [];
 
-  const lines = markdown.split("\n");
   const setLookup = buildSetLookup(markdown);
 
   const setMatches = [...markdown.matchAll(setRegex)];
@@ -108,7 +108,7 @@ export function parseVocabMarkdown(markdown: string): ParseResult {
         : markdown.length;
 
     const block = markdown.slice(blockStart, blockEnd);
-    const headingLine = lines.slice(0, blockStart).length;
+    const headingLine = markdown.slice(0, blockStart).split("\n").length;
 
     const type = captureField(block, "Type");
     const meaning = captureField(block, "Meaning");

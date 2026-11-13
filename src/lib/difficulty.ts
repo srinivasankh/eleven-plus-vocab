@@ -1,7 +1,9 @@
-import { VocabEntry } from "@/lib/types";
+import { Difficulty } from "@/lib/types";
 
-export type Difficulty = "easy" | "medium" | "hard";
+export type { Difficulty };
 
+// Source of truth for seeding `word.difficulty` (see src/lib/vocabSeed.ts); the app reads
+// difficulty from the database, not from here.
 // Words classified by real-world familiarity for 10–12 year olds.
 // Easy: everyday words kids this age already use or understand.
 // Hard: advanced vocabulary that stretches their knowledge.
@@ -60,21 +62,4 @@ export function getDifficulty(id: number): Difficulty {
   if (easyIds.has(id)) return "easy";
   if (hardIds.has(id)) return "hard";
   return "medium";
-}
-
-export function filterByDifficulty(
-  entries: VocabEntry[],
-  difficulty: Difficulty,
-): VocabEntry[] {
-  return entries.filter((entry) => getDifficulty(entry.id) === difficulty);
-}
-
-export function countByDifficulty(
-  entries: VocabEntry[],
-): Record<Difficulty, number> {
-  const counts: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
-  for (const entry of entries) {
-    counts[getDifficulty(entry.id)] += 1;
-  }
-  return counts;
 }
