@@ -1,3 +1,4 @@
+// The one parser for Y5_set01_to_48.md, used by `npm run db:seed` (scripts/seed.ts).
 import { ParseResult, ParseWarning, VocabEntry } from "@/lib/types";
 
 const headingRegex = /^##\s+(\d+)\.\s+(.+)$/gm;

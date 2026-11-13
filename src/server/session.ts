@@ -5,6 +5,7 @@ import { cache } from "react";
 import { childIdSchema } from "@/lib/validation";
 import { getAuth } from "@/server/auth";
 import { ChildProfile, getChildForParent } from "@/server/children";
+import { log } from "@/server/log";
 
 export const ACTIVE_CHILD_COOKIE = "ws_child";
 
@@ -21,9 +22,13 @@ export const getParent = cache(async (): Promise<Parent | null> => {
 export const getActiveChild = cache(async (): Promise<ChildProfile | null> => {
   const parent = await getParent();
   if (!parent) return null;
-  const parsed = childIdSchema.safeParse((await cookies()).get(ACTIVE_CHILD_COOKIE)?.value);
-  if (!parsed.success) return null;
-  return getChildForParent(parent.id, parsed.data);
+  const raw = (await cookies()).get(ACTIVE_CHILD_COOKIE)?.value;
+  if (!raw) return null;
+  const parsed = childIdSchema.safeParse(raw);
+  const owned = parsed.success ? await getChildForParent(parent.id, parsed.data) : null;
+  // A cookie naming someone else's (or a deleted) child: possible tampering, worth seeing in logs.
+  if (!owned) log.warn("session.child_not_owned", { parentId: parent.id });
+  return owned;
 });
 
 export async function requireParent(nextPath?: string): Promise<Parent> {

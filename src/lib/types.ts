@@ -44,13 +44,6 @@ export type QuizQuestion = {
 
 export type QuizLength = 5 | 10 | 20;
 
-export type GeneratedVocabData = {
-  entries: VocabEntry[];
-  warnings: ParseWarning[];
-  stats: ParseResult["stats"];
-  generatedAt: string;
-};
-
 export type QuizResult = { ts: string; score: number; total: number };
 
 /** A child's progress as the pages need it (from the database). */

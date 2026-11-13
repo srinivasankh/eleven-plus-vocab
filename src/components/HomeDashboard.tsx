@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { LegacyImportBanner } from "@/components/LegacyImportBanner";
 import { QuizResult } from "@/lib/types";
 
 type Props = {
@@ -58,6 +59,8 @@ export function HomeDashboard({ learner }: Props) {
           </article>
         </div>
       </section>
+
+      {learner ? <LegacyImportBanner childName={learner.name} /> : null}
 
       <section className="mission-grid" aria-label="Main actions">
         <article className="panel mission-card">

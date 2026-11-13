@@ -1026,16 +1026,6 @@ a {
   padding: 0.55rem 0;
 }
 
-.data-warning {
-  margin-top: var(--space-4);
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--warning-line);
-  background: var(--warning-bg);
-  color: var(--warning-ink);
-  padding: 0.62rem 0.8rem;
-  font-size: 0.88rem;
-  font-weight: 700;
-}
 
 button:focus-visible,
 a:focus-visible,
@@ -1173,4 +1163,37 @@ a.chip-btn {
   .form-inline .cta {
     margin-top: 0;
   }
+}
+
+/* Error and not-found pages (stage 5). */
+.error-panel {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.error-code {
+  margin: 0;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+}
+
+/* One-time import of pre-accounts progress (stage 5). */
+.legacy-import {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.legacy-import h2,
+.legacy-import p {
+  margin: 0;
+}
+
+.form-success {
+  margin: 0;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--brand);
+  background: var(--brand-soft);
+  color: var(--ink-strong);
+  padding: 0.6rem 0.8rem;
+  font-weight: 700;
 }

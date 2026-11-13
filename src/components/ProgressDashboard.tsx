@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { resetProgressAction } from "@/app/actions/progress";
+import { LegacyImportBanner } from "@/components/LegacyImportBanner";
 import { useMounted } from "@/hooks/useMounted";
 import { ProgressSnapshot } from "@/lib/types";
 
@@ -41,6 +42,8 @@ export function ProgressDashboard({ childName, snapshot }: Props) {
         <h1>Mastery Dashboard</h1>
         <p>{childName}&apos;s progress is saved to your family account, on every device.</p>
       </header>
+
+      <LegacyImportBanner childName={childName} />
 
       <div className="progress-grid">
         <article className="panel dashboard-card">

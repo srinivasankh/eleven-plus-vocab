@@ -7,6 +7,7 @@ import {
   setWordLearned,
   UnknownWordError,
 } from "@/server/progress";
+import { log } from "@/server/log";
 import { requireChild } from "@/server/session";
 
 export type ActionResult<T = undefined> = { ok: true; data: T } | { ok: false; error: string };
@@ -23,7 +24,8 @@ export async function setLearnedAction(input: { wordId: number; learned: boolean
     revalidatePath("/progress");
     return { ok: true, data: headword };
   } catch (error) {
-    if (!(error instanceof UnknownWordError)) console.error("[progress] setLearned failed", error);
+    if (error instanceof UnknownWordError) log.warn("progress.set_learned.unknown_word", { childId: child.id });
+    else log.error("progress.set_learned.failed", error, { childId: child.id });
     return { ok: false, error: TRY_AGAIN };
   }
 }
@@ -32,12 +34,13 @@ export async function resetProgressAction(): Promise<ActionResult> {
   const { child } = await requireChild();
   try {
     await resetProgress(child.id);
+    log.info("progress.reset", { childId: child.id });
     revalidatePath("/progress");
     revalidatePath("/learn");
     revalidatePath("/");
     return { ok: true, data: undefined };
   } catch (error) {
-    console.error("[progress] reset failed", error);
+    log.error("progress.reset.failed", error, { childId: child.id });
     return { ok: false, error: TRY_AGAIN };
   }
 }

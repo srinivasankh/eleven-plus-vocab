@@ -1,6 +1,6 @@
 # Plan: Backend re-architecture (keep the current look and UX)
 
-Status: in progress (stages 0–4 done) · Branch: `claude/backend-exploration`
+Status: complete (stages 0–5 done) · Branch: `claude/backend-exploration`
 
 ## Goal
 
@@ -98,7 +98,7 @@ in every server function (the real check).
    route protection.
 3. ✅ **Progress on the server** — learned words per child (by headword), Progress page from DB.
 4. ✅ **Quiz on the server** — attempts/questions tables, start/answer/finish/resume actions.
-5. **Hardening** — error pages, logging, health check, optional one-time import of a browser's
+5. ✅ **Hardening** — error pages, logging, health check, optional one-time import of a browser's
    old localStorage progress into a child profile, tests for ownership checks, update
    `README.md` and `CLAUDE.md`. Remove now-unused client-only code (`storage.ts`, generated JSON
    pipeline) once nothing reads it.

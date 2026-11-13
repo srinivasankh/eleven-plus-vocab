@@ -67,3 +67,21 @@ export function fieldErrors(error: z.ZodError): Record<string, string> {
   }
   return result;
 }
+
+/** Server-side check of an import request (the browser already filtered it; never trust that). */
+export const legacyProgressSchema = z.object({
+  learnedWordIds: z.array(z.number().int().positive()).max(2000),
+  quizHistory: z
+    .array(
+      z
+        .object({
+          ts: z.string().datetime(),
+          score: z.number().int().min(0),
+          total: quizLengthSchema,
+        })
+        .refine((item) => item.score <= item.total)
+        .refine((item) => Date.parse(item.ts) <= Date.now() + 24 * 60 * 60 * 1000),
+    )
+    .max(500),
+});
+

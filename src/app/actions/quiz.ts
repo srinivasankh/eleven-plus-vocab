@@ -12,19 +12,21 @@ import {
   QuizNotFoundError,
   startQuiz,
 } from "@/server/quiz";
+import { log } from "@/server/log";
 import { requireChild } from "@/server/session";
 import type { ActionResult } from "@/app/actions/progress";
 
 const TRY_AGAIN = "Something went wrong. Please try again.";
 
-function failure(error: unknown, context: string): { ok: false; error: string } {
+function failure(error: unknown, context: string, childId: string): { ok: false; error: string } {
   if (error instanceof QuizNotFoundError) {
+    log.warn(`quiz.${context}.not_found`, { childId });
     return { ok: false, error: "This quiz has ended. Start a new mission to keep practising." };
   }
   if (error instanceof QuizIncompleteError || error instanceof InvalidAnswerError) {
     return { ok: false, error: error.message };
   }
-  console.error(`[quiz] ${context} failed`, error);
+  log.error(`quiz.${context}.failed`, error, { childId });
   return { ok: false, error: TRY_AGAIN };
 }
 
@@ -38,7 +40,7 @@ export async function startQuizAction(length: QuizLength): Promise<ActionResult<
     revalidatePath("/");
     return { ok: true, data: quiz };
   } catch (error) {
-    return failure(error, "start");
+    return failure(error, "start", child.id);
   }
 }
 
@@ -55,7 +57,7 @@ export async function answerQuestionAction(input: {
     const { attemptId, position, chosenIndex } = parsed.data;
     return { ok: true, data: await answerQuestion(child.id, attemptId, position, chosenIndex) };
   } catch (error) {
-    return failure(error, "answer");
+    return failure(error, "answer", child.id);
   }
 }
 
@@ -66,10 +68,11 @@ export async function finishQuizAction(attemptId: string): Promise<ActionResult<
 
   try {
     const quiz = await finishQuiz(child.id, parsed.data);
+    log.info("quiz.finished", { childId: child.id, attemptId: quiz.attemptId, score: quiz.score, total: quiz.total });
     revalidatePath("/progress");
     revalidatePath("/");
     return { ok: true, data: quiz };
   } catch (error) {
-    return failure(error, "finish");
+    return failure(error, "finish", child.id);
   }
 }

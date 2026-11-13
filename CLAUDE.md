@@ -17,8 +17,8 @@ npm ci                 # install
 cp .env.example .env   # first time only (DATABASE_URL, TEST_DATABASE_URL, BETTER_AUTH_*)
 docker compose up -d   # local Postgres (or use any Postgres; see below)
 npm run db:setup       # db:migrate + db:seed (load the 960 words)
-npm run dev            # regenerates vocab JSON (predev), then next dev
-npm run build          # regenerates vocab JSON (prebuild), then next build
+npm run dev            # next dev (needs Postgres + seeded words)
+npm run build          # next build (no database needed at build time)
 npm run test           # unit tests (no database needed)
 npm run test:db        # integration tests against TEST_DATABASE_URL (wipes that DB)
 npm run typecheck      # tsc --noEmit
@@ -43,15 +43,30 @@ The database is disposable (it disappears with the container); migrations + seed
 
 ## Architecture
 
-**Mid-migration to a full-stack app** — see `plans/backend-architecture.md` (stages 0–5).
-Done: Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side,
+**Full-stack app** — the migration in `plans/backend-architecture.md` (stages 0–5) is complete.
+Postgres + Drizzle, vocabulary in the database, `/learn` reads words server-side,
 parent accounts (Better Auth, email + password) with child profiles; every page except `/`,
 `/sign-in`, `/sign-up` requires sign-in **and** an active child; **progress per child in
 Postgres** (learned words by headword, quiz results, preferred quiz length); **the quiz runs on
 the server** (questions built, stored, revealed and scored server-side; resume from the database).
 Nothing about progress or quizzes is kept in the browser any more (only the theme preference).
-Not yet (stage 5): error pages/logging/health check, optional import of pre-accounts
-`localStorage` progress (`eleven_plus_quiz_progress_v1`), removing the legacy JSON pipeline.
+
+### Operations
+- **Logging:** `src/server/log.ts` → `log.info/warn/error(event, fields)` writes one JSON line per
+  event (`{time, level, event, ...}`); keys that look sensitive (password, email, token, cookie…)
+  are redacted. Log **ids, never personal data**. Event names are dotted, e.g. `quiz.finished`,
+  `auth.sign_in.rejected`, `session.child_not_owned` (possible cookie tampering).
+- **Health check:** `GET /api/health` → 200 `{status:"ok",database:"ok"}` or 503 when the database
+  is unreachable; `no-store`, reveals nothing else. Not behind sign-in.
+- **Errors:** `src/app/error.tsx` (inside the layout, kid-friendly, shows `digest` as an error code),
+  `global-error.tsx` (last resort; own `<html>`, shared fonts from `src/app/fonts.ts`),
+  `not-found.tsx`. The root layout catches account-lookup failures so outages still render the
+  normal shell.
+- **Pre-accounts progress import:** browsers that used the old app have `eleven_plus_quiz_progress_v1`
+  in localStorage. `LegacyImportBanner` (Home + Progress) offers a one-time import into the active
+  learner: `parseLegacyProgress` (tolerant, `src/lib/legacyProgress.ts`) → `importLegacyProgressAction`
+  (Zod `legacyProgressSchema`) → `importLegacyProgress` (`src/server/legacyImport.ts`; idempotent).
+  Afterwards the key is renamed to `…_imported`; "No thanks" sets `eleven_plus_legacy_import_dismissed_v1`.
 
 ### Quiz
 - Tables: `quiz_attempt` (status `in_progress` | `finished`; **at most one in progress per child**
@@ -119,27 +134,27 @@ Database rules:
    (`src/lib/vocabSeed.ts`: adds `headword` + `difficulty`) → `seedVocab` (`src/server/db/seedVocab.ts`:
    upsert in one transaction, deletes words no longer in the source). Tables: `vocab_set`, `word`.
    Read via `getAllWords()` in `src/server/vocab.ts`.
-3. **Legacy JSON (until stage 5):** `scripts/generate-vocab-json.mjs` parses the markdown → `src/data/vocab.generated.json` (`{ entries, warnings, stats, generatedAt }`). Entries missing word/type/meaning/synonyms/examples are skipped with a warning; gaps in the ID sequence are warned.
-   The JSON is committed. After editing the markdown, re-seed **and** regenerate/commit the JSON.
-   Access: `src/lib/vocabData.ts` (`getVocabEntries`, `getDataWarningsCount`, `getDataStats`). In non-production, `DataWarningFooter` shows a warning count.
-
-⚠️ Parsing logic is **duplicated**: `scripts/generate-vocab-json.mjs` (legacy JSON) and `src/lib/parseVocabMarkdown.ts` (seed + tests). Keep them in sync until the JSON pipeline is removed.
+   Malformed entries are skipped and printed as warnings by the seed script. After editing the
+   markdown, run `npm run db:seed` (there is no generated file to commit any more).
 
 ### Layout
 
 ```
 src/app/            App Router pages (server components that call requireChild(), rendering client components)
   sign-in/, sign-up/, profiles/   account screens (built from existing CSS classes)
-  actions/          server actions: auth.ts (sign up/in/out), profiles.ts (add/select child), progress.ts, quiz.ts
+  actions/          server actions: auth.ts, profiles.ts, progress.ts, quiz.ts, legacyImport.ts
   api/auth/[...all] Better Auth handler
+  api/health        health check (200 / 503)
+  error.tsx, global-error.tsx, not-found.tsx, fonts.ts
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
   learn/page.tsx    server: words + snapshot → <LearnDeck> (client: group picker, search, WordCards)
   quiz/page.tsx     server: active round + preferred length → <QuizMission activeQuiz initialQuizLength>
   progress/page.tsx server: snapshot → <ProgressDashboard>
 src/components/     HomeDashboard, LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
-                    WordCard, QuizCard, ThemeProvider, ThemeToggle, DataWarningFooter
-src/server/         server-only code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, quiz.ts, vocab.ts
+                    LegacyImportBanner, WordCard, QuizCard, ThemeProvider, ThemeToggle
+src/server/         server code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, quiz.ts,
+                    vocab.ts, legacyImport.ts, log.ts
 src/middleware.ts   redirects signed-out visitors away from /learn, /quiz, /progress, /profiles
 drizzle/            generated SQL migrations (committed)
 src/hooks/          useMounted, useTheme
@@ -148,9 +163,10 @@ src/lib/
   quiz.ts           pure quiz builder: buildQuiz, buildQuestion, scoreAnswers, shuffle (injectable RNG)
   difficulty.ts     hand-curated easy/hard ID sets (seed source for word.difficulty); else medium
   vocabSeed.ts      pure markdown→rows transform (headword, difficulty)
-  validation.ts     Zod schemas (sign-in/up, child name), safeNextPath / learnerNextPath
+  validation.ts     Zod schemas (auth, child name, quiz, legacy import), safeNextPath / learnerNextPath
+  legacyProgress.ts tolerant reader for the pre-accounts localStorage blob
   theme.ts          light/dark resolution + persistence
-  parseVocabMarkdown.ts  TS parser (tests only, see above)
+  parseVocabMarkdown.ts  the markdown parser (used by db:seed)
 tests/              unit tests; tests/db/ = Postgres integration tests (npm run test:db)
 plans/              past implementation plans (historical; may reference old counts)
 ```
@@ -165,9 +181,12 @@ plans/              past implementation plans (historical; may reference old cou
 
 ## Known issues / tech debt
 
-- Duplicated parser (script vs `src/lib`), duplicated theme-init logic (layout vs `theme.ts`).
+- Duplicated theme-init logic (inline script in `layout.tsx` vs `theme.ts`).
 - `plans/steady-dreaming-hedgehog.md` references 560 words; the dataset is now 960.
-- Legacy JSON (`src/data/vocab.generated.json`, `vocabData.ts`) is now only used by `DataWarningFooter`; remove in stage 5.
+- **Before a public launch:** email verification + password reset (need an email provider), and a
+  privacy notice (children's data; UK GDPR / Age Appropriate Design Code). Not built yet.
+- Fixed in stage 5: no error pages (blank Next.js error screen); no way to see failures (no logs);
+  duplicated markdown parser and the bundled JSON copy of the word list.
 - Fixed in stage 4: resuming a quiz could change saved answers; "Serene" offered twice; scores computed (and fakeable) in the browser; "Resume" button shown with nothing to resume.
 - Fixed in stage 3: blocked browser storage crashed every page; "best score" compared raw counts across quiz lengths; mastery counted duplicate words twice.
 - Fixed: the parsers used to assign 929 of 960 words to set 48 (line number computed from a character offset). Regression-tested in `tests/parser.test.ts`.

@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { fieldErrors, learnerNextPath, signInSchema, signUpSchema } from "@/lib/validation";
 import { getAuth } from "@/server/auth";
+import { log } from "@/server/log";
 import { clearActiveChildCookie } from "@/server/session";
 
 export type AuthFormState = {
@@ -21,15 +22,19 @@ const friendlyAuthErrors: Record<string, string> = {
   INVALID_EMAIL: "Please enter a valid email address.",
 };
 
-function authErrorMessage(error: unknown): string {
+function authErrorMessage(error: unknown, action: "sign_in" | "sign_up"): string {
   if (isAPIError(error)) {
     const code = (error.body as { code?: string } | undefined)?.code;
-    if (code && friendlyAuthErrors[code]) return friendlyAuthErrors[code];
     if (error.status === 429 || error.statusCode === 429) {
+      log.warn(`auth.${action}.rate_limited`);
       return "Too many attempts. Please wait a minute and try again.";
     }
+    if (code && friendlyAuthErrors[code]) {
+      log.warn(`auth.${action}.rejected`, { code });
+      return friendlyAuthErrors[code];
+    }
   }
-  console.error("[auth] unexpected error", error);
+  log.error(`auth.${action}.failed`, error);
   return "Something went wrong. Please try again.";
 }
 
@@ -44,9 +49,10 @@ export async function signUpAction(_prev: AuthFormState, formData: FormData): Pr
   if (!parsed.success) return { errors: fieldErrors(parsed.error), values };
 
   try {
-    await getAuth().api.signUpEmail({ body: parsed.data, headers: await headers() });
+    const created = await getAuth().api.signUpEmail({ body: parsed.data, headers: await headers() });
+    log.info("auth.sign_up", { parentId: created.user.id });
   } catch (error) {
-    return { errors: { form: authErrorMessage(error) }, values };
+    return { errors: { form: authErrorMessage(error, "sign_up") }, values };
   }
 
   await clearActiveChildCookie();
@@ -65,7 +71,7 @@ export async function signInAction(_prev: AuthFormState, formData: FormData): Pr
   try {
     await getAuth().api.signInEmail({ body: parsed.data, headers: await headers() });
   } catch (error) {
-    return { errors: { form: authErrorMessage(error) }, values };
+    return { errors: { form: authErrorMessage(error, "sign_in") }, values };
   }
 
   // A different parent may have used this browser before: never inherit their child.
