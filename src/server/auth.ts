@@ -5,6 +5,7 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { getDb } from "@/server/db";
 import { account, session, user, verification } from "@/server/db/schema";
+import { authBaseUrl, previewOrigins } from "@/lib/deployOrigins";
 import { parentNameSchema } from "@/lib/validation";
 import { log, serializeError } from "@/server/log";
 
@@ -27,7 +28,10 @@ export const PASSWORD_MAX = 128;
 function createAuth() {
   return betterAuth({
     appName: "WordSpark",
-    // BETTER_AUTH_SECRET and BETTER_AUTH_URL are read from the environment.
+    // BETTER_AUTH_SECRET is read from the environment. The base URL is BETTER_AUTH_URL in
+    // production, or this preview deployment's own address on Vercel previews.
+    baseURL: authBaseUrl(process.env),
+    trustedOrigins: previewOrigins(process.env),
     database: drizzleAdapter(getDb(), {
       provider: "pg",
       schema: { user, session, account, verification },

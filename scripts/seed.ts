@@ -7,13 +7,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { drizzle } from "drizzle-orm/postgres-js";
 import postgres from "postgres";
+import { directDatabaseUrl } from "@/lib/deployOrigins";
 import { parseVocabMarkdown } from "@/lib/parseVocabMarkdown";
 import { buildSeedRows } from "@/lib/vocabSeed";
 import * as schema from "@/server/db/schema";
 import { seedVocab } from "@/server/db/seedVocab";
 
 async function main() {
-  const url = process.env.DATABASE_URL;
+  const url = directDatabaseUrl(process.env);
   if (!url) throw new Error("DATABASE_URL is not set. Copy .env.example to .env first.");
 
   const sourcePath = path.join(process.cwd(), "Y5_set01_to_48.md");
