@@ -45,6 +45,11 @@ npm run dev
 
 See `CLAUDE.md` for details and `plans/backend-architecture.md` for how the app moved from browser-only to full-stack.
 
+## Deployment
+
+Hosted on Vercel at https://vocab.kanniwadi.uk with Neon Postgres (separate production and preview databases).
+Pushing to `main` deploys; the build runs migrations and the word seed first (`npm run vercel-build`). See `CLAUDE.md`.
+
 ## Before a public launch
 
 - Email verification and password reset (needs an email provider).

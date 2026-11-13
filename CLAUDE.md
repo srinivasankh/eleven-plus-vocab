@@ -229,6 +229,21 @@ plans/              past implementation plans (historical; may reference old cou
 - Validate server action inputs with Zod.
 - Add/extend Vitest tests in `tests/` for logic changes in `src/lib`, and `tests/db/` for database code.
 
+## Deployment (Vercel)
+
+- Live at **https://vocab.kanniwadi.uk** (Vercel project `eleven-plus-vocab`, functions in London `lhr1`).
+  **Every push to `main` deploys to production**; pushes to other branches make protected preview deployments.
+- `vercel.json` sets the build to `npm run vercel-build` = `drizzle-kit migrate && tsx scripts/seed.ts && next build`,
+  so migrations + seed run against that environment's database on every build. A failing migration fails the
+  build and the previous deployment stays live. Never remove the migrate step to make a build pass.
+- Databases: two Neon Postgres databases (Vercel Marketplace, Free, London): `wordspark-prod` → Production env only,
+  `wordspark-preview` → Preview env only. Env vars `DATABASE_URL` (pooled, app) and `DATABASE_URL_UNPOOLED` (direct,
+  migrations/seed). Never point Preview at the prod database.
+- Other env: `BETTER_AUTH_SECRET` (different per environment), `BETTER_AUTH_URL=https://vocab.kanniwadi.uk` (Production only).
+  Previews trust their exact `VERCEL_BRANCH_URL` / `VERCEL_URL` origins (`src/lib/deployOrigins.ts`).
+- Roll back: Vercel dashboard → Deployments → previous production deployment → "Promote". Migrations are not
+  rolled back, so keep schema changes backward-compatible with the previous deployment.
+
 ## Git
 
 - Active development branch: `claude/backend-exploration` (push work here; `main` is the default branch).
