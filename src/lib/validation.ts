@@ -9,8 +9,11 @@ export const signInSchema = z.object({
   password: z.string().min(1, "Please enter your password.").max(128),
 });
 
+/** A parent's name. Also enforced inside Better Auth (src/server/auth.ts) for its raw endpoints. */
+export const parentNameSchema = z.string().trim().min(1, "Please enter your name.").max(60, "That name is a bit long.");
+
 export const signUpSchema = z.object({
-  name: z.string().trim().min(1, "Please enter your name.").max(60, "That name is a bit long."),
+  name: parentNameSchema,
   email,
   password: z
     .string()

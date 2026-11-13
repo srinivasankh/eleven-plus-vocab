@@ -49,4 +49,22 @@ describe("parent accounts (Better Auth)", () => {
 
     expect(await ctx.db.select().from(user)).toHaveLength(1);
   });
+
+  it("applies the app's name rules even through Better Auth's own endpoints", async () => {
+    // Found in review: /api/auth/sign-up/email accepted a blank and a 5,000-character name.
+    const { getAuth } = await import("@/server/auth");
+    const api = getAuth().api;
+
+    for (const name of ["   ", "x".repeat(5000)]) {
+      await expect(
+        api.signUpEmail({ body: { name, email: `bad-${name.length}@example.test`, password: "correct-horse-battery" } }),
+      ).rejects.toMatchObject({ status: "BAD_REQUEST" });
+    }
+
+    const created = await api.signUpEmail({
+      body: { name: "  Sam  ", email: "sam@example.test", password: "correct-horse-battery" },
+    });
+    expect(created.user.name).toBe("Sam"); // trimmed, like the form
+    expect(await ctx.db.select().from(user)).toHaveLength(2);
+  });
 });
