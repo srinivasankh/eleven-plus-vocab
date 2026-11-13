@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { unstable_rethrow } from "next/navigation";
 import Script from "next/script";
 import "./globals.css";
 import { baloo, nunito } from "@/app/fonts";
@@ -21,6 +22,9 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     const activeChild = parent ? await getActiveChild() : null;
     account = parent ? { childName: activeChild?.displayName ?? null } : null;
   } catch (error) {
+    // Let Next's own control-flow signals through (e.g. the "this page is dynamic" signal used
+    // at build time); only real failures fall back to a signed-out header.
+    unstable_rethrow(error);
     log.error("layout.account_lookup_failed", error);
   }
 
