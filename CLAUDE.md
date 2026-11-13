@@ -120,6 +120,30 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
   (`/profiles?next=…`). Redirect targets go through `safeNextPath` / `learnerNextPath`
   (`src/lib/validation.ts`) — never redirect to a raw query value.
 - Forms: server actions in `src/app/actions/` + `useActionState`, inputs validated with Zod.
+- **Google sign-in** (optional; on only when `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` are set — `googleCredentials()`
+  in `src/lib/googleAuth.ts`, which also hides the button). `googleSignInAction` (rate-limited per IP) calls
+  `signInSocial` with `disableRedirect` → Google (`prompt=select_account`) → `/api/auth/callback/google` →
+  `/auth/continue` (route handler: clears `ws_child`, redirects via `afterSignInPath` to the learner picker,
+  like the password form). Failures land on `/sign-in?error=<code>` → `googleErrorMessage`.
+  Account linking keeps Better Auth's default `requireLocalEmailVerified`: Google is **not** attached to an
+  existing password account (emails aren't verified yet) → `account_not_linked`. Don't relax that until
+  email verification exists. Names from Google are tidied (`nameFromProvider`), never rejected; typed
+  names still go through `parentNameSchema` (the hooks tell them apart by the `/callback/` path).
+
+- **Deletion (self-serve):** `/profiles` → "Manage family account" (`ManageFamily`): remove a learner
+  (`removeChildAction` → `deleteChild`, ownership-scoped) or delete the account (`deleteAccountAction`, confirm by
+  typing `DELETE` → `deleteParentAccount`; every table cascades from `user`; then cookies cleared →
+  `/sign-in?notice=account_deleted`). Immediate and permanent — the privacy page promises exactly this.
+- **Google tokens are not stored:** `databaseHooks.account.create.before` → `withoutProviderTokens` and
+  `updateAccountOnSignIn: false`. The app only uses Google to identify the parent.
+
+### Privacy notice
+- `/privacy` (`src/app/privacy/page.tsx`), linked from the footer, the sign-up form and Manage family. Owner facts
+  (operator "Srini K", `privacy@kanniwadi.uk`, `lastUpdated`) live only in `src/lib/legal.ts`.
+- **Every sentence must stay true of the code.** If you change what is stored, where it is hosted, cookies,
+  providers, retention (sessions 7 days; `rate_limit` rows pruned after a day on every limiter call) or deletion,
+  update the page and `legal.lastUpdated` in the same change. No cookie banner: only essential cookies/storage,
+  no analytics — adding analytics or third-party embeds would need consent first.
 
 Database rules:
 - Schema lives in `src/server/db/schema.ts`. Change it → `npm run db:generate` → read the SQL in
@@ -161,6 +185,8 @@ src/app/            App Router pages (server components that call requireChild()
   actions/          server actions: auth.ts, profiles.ts, progress.ts, quiz.ts, legacyImport.ts
   api/auth/[...all] Better Auth handler
   api/health        health check (200 / 503)
+  auth/continue     where Google sign-in lands: clears the learner cookie → learner picker
+  privacy/          privacy notice (facts from src/lib/legal.ts)
   error.tsx, global-error.tsx, not-found.tsx, fonts.ts
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
@@ -204,8 +230,9 @@ plans/              past implementation plans (historical; may reference old cou
 - Still true from review 2 (deliberately left): game-style labels with nothing behind them ("XP Mode",
   "Spark score booster", "daily missions", "speed"); page titles/description (Learn/Progress tab
   says "Quiz", one shared description, no favicon); no robots/noindex while not yet launched.
-- **Before a public launch:** email verification + password reset (need an email provider), and a
-  privacy notice (children's data; UK GDPR / Age Appropriate Design Code). Not built yet.
+- **Before a public launch:** email verification + password reset (need an email provider). Not built yet.
+  (Privacy notice + self-serve deletion: done.) No in-app data export or name editing — the privacy page
+  says those are by email request to privacy@kanniwadi.uk, which must actually forward to a read mailbox.
 - Fixed after review 2 (round 2): layout swallowed Next's dynamic-rendering signal (now
   `unstable_rethrow`); Home "Resume saved quiz mission" now opens the round (`/quiz?mode=resume`);
   signed-in parent with no learner sees "Pick a learner"; 6-learner cap held under concurrency
@@ -228,6 +255,25 @@ plans/              past implementation plans (historical; may reference old cou
 - Client components guard `window`/`document`/`localStorage` access for SSR (`typeof window === "undefined"`).
 - Validate server action inputs with Zod.
 - Add/extend Vitest tests in `tests/` for logic changes in `src/lib`, and `tests/db/` for database code.
+
+## Deployment (Vercel)
+
+- Live at **https://vocab.kanniwadi.uk** (Vercel project `eleven-plus-vocab`, functions in London `lhr1`).
+  **Every push to `main` deploys to production**; pushes to other branches make protected preview deployments.
+- `vercel.json` sets the build to `npm run vercel-build` = `drizzle-kit migrate && tsx scripts/seed.ts && next build`,
+  so migrations + seed run against that environment's database on every build. A failing migration fails the
+  build and the previous deployment stays live. Never remove the migrate step to make a build pass.
+- Databases: two Neon Postgres databases (Vercel Marketplace, Free, London): `wordspark-prod` → Production env only,
+  `wordspark-preview` → Preview env only. Env vars `DATABASE_URL` (pooled, app) and `DATABASE_URL_UNPOOLED` (direct,
+  migrations/seed). Never point Preview at the prod database.
+- Other env: `BETTER_AUTH_SECRET` (different per environment), `BETTER_AUTH_URL=https://vocab.kanniwadi.uk` (Production only),
+  `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (Production + Preview, one Google OAuth client). Its authorised redirect URIs:
+  `https://vocab.kanniwadi.uk/api/auth/callback/google`, the preview branch URL's `/api/auth/callback/google`, and
+  `http://localhost:3000/api/auth/callback/google`. Previews use the **branch** URL as their auth base, so Google
+  sign-in works on `claude/backend-exploration` previews only (other branches would need their URL added).
+  Previews trust their exact `VERCEL_BRANCH_URL` / `VERCEL_URL` origins (`src/lib/deployOrigins.ts`).
+- Roll back: Vercel dashboard → Deployments → previous production deployment → "Promote". Migrations are not
+  rolled back, so keep schema changes backward-compatible with the previous deployment.
 
 ## Git
 

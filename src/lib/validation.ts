@@ -10,6 +10,9 @@ export const signInSchema = z.object({
 });
 
 /** A parent's name. Also enforced inside Better Auth (src/server/auth.ts) for its raw endpoints. */
+/** What a parent types to confirm deleting their account. */
+export const DELETE_ACCOUNT_WORD = "DELETE";
+
 export const parentNameSchema = z.string().trim().min(1, "Please enter your name.").max(60, "That name is a bit long.");
 
 export const signUpSchema = z.object({
@@ -70,7 +73,13 @@ export function safeNextPath(value: unknown, fallback = "/profiles"): string {
  */
 export function learnerNextPath(value: unknown): string {
   const path = safeNextPath(value, "/learn");
-  return /^\/(profiles|sign-in|sign-up|api)(\/|\?|$)/.test(path) ? "/learn" : path;
+  return /^\/(profiles|sign-in|sign-up|api|auth)(\/|\?|$)/.test(path) ? "/learn" : path;
+}
+
+/** Where a parent goes right after signing in: always pick a learner first, then carry on. */
+export function afterSignInPath(value: unknown): string {
+  const next = learnerNextPath(value);
+  return next === "/learn" ? "/profiles" : `/profiles?next=${encodeURIComponent(next)}`;
 }
 
 /** First error message per field, for showing next to form inputs. */
