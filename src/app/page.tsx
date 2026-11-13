@@ -1,13 +1,14 @@
 import { HomeDashboard } from "@/components/HomeDashboard";
 import { getProgressSnapshot } from "@/server/progress";
-import { getActiveChild } from "@/server/session";
+import { getActiveChild, getParent } from "@/server/session";
 
 export default async function HomePage() {
-  const child = await getActiveChild();
+  const [parent, child] = await Promise.all([getParent(), getActiveChild()]);
   const snapshot = child ? await getProgressSnapshot(child.id) : null;
 
   return (
     <HomeDashboard
+      signedIn={parent !== null}
       learner={
         child && snapshot
           ? {

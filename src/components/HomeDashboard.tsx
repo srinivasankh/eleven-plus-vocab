@@ -5,6 +5,8 @@ import { LegacyImportBanner } from "@/components/LegacyImportBanner";
 import { QuizResult } from "@/lib/types";
 
 type Props = {
+  /** Signed in as a parent (with or without a learner picked). */
+  signedIn: boolean;
   /** The active learner, or null when signed out / no learner picked. */
   learner: {
     id: string;
@@ -16,7 +18,7 @@ type Props = {
   } | null;
 };
 
-export function HomeDashboard({ learner }: Props) {
+export function HomeDashboard({ signedIn, learner }: Props) {
   const hasActiveQuiz = learner?.hasActiveQuiz ?? false;
   const learnedCount = learner?.learnedCount ?? 0;
   const attempts = learner?.attempts ?? 0;
@@ -43,7 +45,9 @@ export function HomeDashboard({ learner }: Props) {
           <article className="hero-stat">
             <p className="label">Words learned</p>
             <p className="value">{learnedCount}</p>
-            <p className="hint">{learner ? `Saved for ${learner.name}` : "Sign in to track progress"}</p>
+            <p className="hint">
+              {learner ? `Saved for ${learner.name}` : signedIn ? "Pick a learner to track progress" : "Sign in to track progress"}
+            </p>
           </article>
 
           <article className="hero-stat">

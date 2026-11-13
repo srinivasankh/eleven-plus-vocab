@@ -26,16 +26,19 @@ type Props = {
   initialQuizLength: QuizLength;
   /** The child's unfinished round from the server, if any. */
   activeQuiz: QuizView | null;
+  /** Open the saved round straight away (Home's "Resume saved quiz mission" link). */
+  resumeOnOpen?: boolean;
 };
 
 /**
  * The quiz runs on the server: it builds the questions, keeps each answer hidden until the
  * child has answered, and scores the round. This component only shows what the server says.
  */
-export function QuizMission({ initialQuizLength, activeQuiz }: Props) {
-  const [quiz, setQuiz] = useState<QuizView | null>(null);
+export function QuizMission({ initialQuizLength, activeQuiz, resumeOnOpen = false }: Props) {
+  const openSaved = resumeOnOpen && activeQuiz !== null;
+  const [quiz, setQuiz] = useState<QuizView | null>(openSaved ? activeQuiz : null);
   const [savedQuiz, setSavedQuiz] = useState<QuizView | null>(activeQuiz);
-  const [index, setIndex] = useState(0);
+  const [index, setIndex] = useState(openSaved && activeQuiz ? resumeIndex(activeQuiz) : 0);
   const [pendingChoice, setPendingChoice] = useState<number | null>(null);
   const [selectedLength, setSelectedLength] = useState<QuizLength>(initialQuizLength);
   const [error, setError] = useState<string | null>(null);
