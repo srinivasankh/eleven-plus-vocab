@@ -69,10 +69,11 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
 - **Errors:** `src/app/error.tsx` (inside the layout, kid-friendly, shows `digest` as an error code),
   `global-error.tsx` (last resort; own `<html>`, shared fonts from `src/app/fonts.ts`),
   `not-found.tsx`. The root layout catches account-lookup failures so outages still render the
-  normal shell.
+  normal shell — it calls `unstable_rethrow(error)` first so Next's own control-flow signals pass.
+  Any new try/catch around `headers()`/`cookies()`/`redirect()` must do the same.
 - **Pre-accounts progress import:** browsers that used the old app have `eleven_plus_quiz_progress_v1`
   in localStorage. `LegacyImportBanner` (Home + Progress) offers a one-time import into the active
-  learner: `parseLegacyProgress` (tolerant, `src/lib/legacyProgress.ts`) → `importLegacyProgressAction`
+  learner — **once per child, enforced on the server** (`child.legacy_imported_at`, claimed atomically): `parseLegacyProgress` (tolerant, `src/lib/legacyProgress.ts`) → `importLegacyProgressAction`
   (Zod `legacyProgressSchema`) → `importLegacyProgress` (`src/server/legacyImport.ts`; idempotent).
   Afterwards the key is renamed to `…_imported`; "No thanks" sets `eleven_plus_legacy_import_dismissed_v1`.
 
@@ -103,7 +104,10 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
 
 ### Accounts & access control
 - `user`/`session`/`account`/`verification` = Better Auth tables (a `user` is a **parent**);
-  `child` = profiles owned by a parent (display name only — no child PII), max 6 per family.
+  `child` = profiles owned by a parent (display name only — no child PII), max 6 per family
+  (`createChild` locks the parent's `user` row so concurrent adds can't exceed it). Parent names
+  are validated by `parentNameSchema` in the forms **and** in Better Auth `databaseHooks`
+  (covers its raw `/api/auth/*` endpoints).
 - `src/server/auth.ts` → `getAuth()` (lazy). HTTP endpoints at `/api/auth/*`.
 - `src/server/session.ts`: `getParent()`, `getActiveChild()`, `requireParent(next)`,
   `requireChild(next)`. The active child id lives in the httpOnly `ws_child` cookie and is
@@ -193,15 +197,16 @@ plans/              past implementation plans (historical; may reference old cou
 
 - Duplicated theme-init logic (inline script in `layout.tsx` vs `theme.ts`).
 - `plans/steady-dreaming-hedgehog.md` references 560 words; the dataset is now 960.
-- Open from review 2 (worth knowing): the 6-learner cap can be exceeded by simultaneous requests
-  (count-then-insert, no lock); the legacy import action can be called repeatedly to add fake
-  finished rounds (one-time only in the browser); the root layout's try/catch swallows Next's
-  dynamic-rendering signal (7 false `layout.account_lookup_failed` logs per build — use
-  `unstable_rethrow`); Home's "Resume saved quiz mission" lands on setup; "Sign in to track
-  progress" shows to a signed-in parent with no learner; raw `/api/auth/sign-up/email` accepts
-  blank/very long names; plan doc overstates (parent overview, rename, sign-up CTAs).
+- Still true from review 2 (deliberately left): game-style labels with nothing behind them ("XP Mode",
+  "Spark score booster", "daily missions", "speed"); page titles/description (Learn/Progress tab
+  says "Quiz", one shared description, no favicon); no robots/noindex while not yet launched.
 - **Before a public launch:** email verification + password reset (need an email provider), and a
   privacy notice (children's data; UK GDPR / Age Appropriate Design Code). Not built yet.
+- Fixed after review 2 (round 2): layout swallowed Next's dynamic-rendering signal (now
+  `unstable_rethrow`); Home "Resume saved quiz mission" now opens the round (`/quiz?mode=resume`);
+  signed-in parent with no learner sees "Pick a learner"; 6-learner cap held under concurrency
+  (parent row locked); legacy import once per child server-side (`child.legacy_imported_at`);
+  Better Auth `databaseHooks` apply the name rule to its raw endpoints; plan doc corrected.
 - Fixed after review 2: sign-in form had no rate limit; `next` redirect check let tab/newline/backslash
   through; Learn group counts double-counted repeated words; emails could reach logs via DB errors.
 - Fixed in stage 5: no error pages (blank Next.js error screen); no way to see failures (no logs);

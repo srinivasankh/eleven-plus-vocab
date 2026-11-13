@@ -15,7 +15,7 @@ and every page layout are kept; only where pages get their data from changes. Ne
 
 | Topic | Decision |
 |---|---|
-| Accounts | **Parent account + child profiles.** A parent signs up with email + password and adds one or more children. Each child's progress is separate; the parent can see all of them. Children don't have emails or passwords. |
+| Accounts | **Parent account + child profiles.** A parent signs up with email + password and adds one or more children. Each child's progress is separate; the parent sees each child's progress by switching learner (there is no combined parent overview yet). Children don't have emails or passwords. |
 | Database | **Postgres from the start.** Local dev via `docker-compose.yml` (or a locally installed Postgres); hosted Postgres in production. |
 | Guest mode | **None — sign-in required.** Only the home page (and sign-in / sign-up) is public. |
 
@@ -42,10 +42,12 @@ word           id (= markdown id 1..960), set_id → vocab_set, word, headword (
 learned_word   child_id → child, headword, learned_at        PK (child_id, headword)
                -- tracked per *headword*, so the 78 words that appear twice count once
 
-quiz_attempt   id, child_id → child, length (5|10|20), status (in_progress|finished),
+quiz_attempt   id, child_id → child, total (5|10|20), status (in_progress|finished),
                started_at, finished_at, score
-quiz_question  attempt_id → quiz_attempt, position, word_id → word,
+quiz_question  attempt_id → quiz_attempt, position, word_id → word, prompt,
                options text[], correct_index, chosen_index (null until answered), answered_at
+
+(As built, also: child.preferred_quiz_length, child.legacy_imported_at, rate_limit.)
 ```
 
 Difficulty moves from the hard-coded ID lists in `src/lib/difficulty.ts` into the `word.difficulty`
@@ -54,10 +56,10 @@ column (seeded from those same lists, so the 244/381/335 split is preserved).
 ## Server layer (`src/server/`)
 
 - `db/` — Drizzle client, schema, migrations.
-- `auth.ts` — Better Auth config; `requireParent()` helper.
-- `children.ts` — create/list/rename profiles; **active child** stored in an httpOnly cookie and
-  re-checked against `parent_id` on every request (`requireChild()`), so one family can never
-  read or write another's data.
+- `auth.ts` — Better Auth config. `session.ts` — `requireParent()` / `requireChild()` helpers.
+- `children.ts` — create/list profiles (renaming is not built); **active child** stored in an
+  httpOnly cookie and re-checked against `parent_id` on every request (`requireChild()`), so one
+  family can never read or write another's data.
 - `vocab.ts` — queries for words by difficulty / search.
 - `progress.ts` — mark/unmark learned, mastery counts, quiz history.
 - `quiz.ts` — start, answer, finish, resume. **The server stores each question's option order
@@ -71,12 +73,12 @@ column (seeded from those same lists, so the 244/381/335 split is preserved).
 
 | Route | Access | Change |
 |---|---|---|
-| `/` | public | same hero; CTAs point to sign-up / sign-in when signed out |
+| `/` | public | same hero and links; signed-out visitors following them are sent to sign-in (no separate sign-up CTA) |
 | `/sign-in`, `/sign-up` | public | new, built from existing classes |
 | `/profiles` | parent | new — pick / add a child ("Who's learning today?") |
 | `/learn` | child | same UI; data from server, learned toggled via server action |
 | `/quiz` | child | same UI; questions/answers/scoring via server actions; resume = load in-progress attempt |
-| `/progress` | child (+ parent sees all children) | same UI; data from server; "best score" by percentage |
+| `/progress` | child | same UI; data from server; "best score" by percentage (one child at a time) |
 
 Route protection in `middleware.ts` (cookie presence) **plus** `requireParent()` / `requireChild()`
 in every server function (the real check).
@@ -107,6 +109,7 @@ in every server function (the real check).
 
 - Email verification and password reset (need an email provider — add before public launch).
 - Child PINs / child self sign-in, teacher/classroom accounts, Google sign-in.
+- A parent overview of all children's progress on one page, and renaming learner profiles.
 - Spaced repetition, streaks, XP (the UI labels that imply these stay as-is for now; flagged in review).
 - Deployment (handled later with `deploy-an-app`).
 
