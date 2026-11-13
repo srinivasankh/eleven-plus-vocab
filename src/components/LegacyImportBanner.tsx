@@ -60,6 +60,10 @@ export function LegacyImportBanner({ childName }: { childName: string }) {
         // Ignore: importing again is harmless (duplicates are skipped on the server).
       }
       setFound(null);
+      if (result.data.alreadyImported) {
+        setMessage({ kind: "done", text: `Progress from this device was already added to ${childName}'s account.` });
+        return;
+      }
       setMessage({
         kind: "done",
         text: `Added ${plural(result.data.wordsAdded, "word", "words")} and ${plural(

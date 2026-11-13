@@ -8,7 +8,7 @@ import { requireChild } from "@/server/session";
 import type { ActionResult } from "@/app/actions/progress";
 
 export async function importLegacyProgressAction(input: unknown): Promise<
-  ActionResult<{ wordsAdded: number; resultsAdded: number }>
+  ActionResult<{ wordsAdded: number; resultsAdded: number; alreadyImported: boolean }>
 > {
   const { child } = await requireChild();
   const parsed = legacyProgressSchema.safeParse(input);

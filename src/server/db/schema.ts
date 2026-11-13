@@ -129,6 +129,8 @@ export const child = pgTable(
     displayName: text("display_name").notNull(),
     /** Last quiz length the child picked (5, 10 or 20). */
     preferredQuizLength: integer("preferred_quiz_length").notNull().default(10),
+    /** When pre-accounts browser progress was imported; the import is allowed once per child. */
+    legacyImportedAt: timestamp("legacy_imported_at", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(),
   },
   (table) => [

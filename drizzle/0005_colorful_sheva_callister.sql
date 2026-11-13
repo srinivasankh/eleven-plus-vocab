@@ -1,0 +1,1 @@
+ALTER TABLE "child" ADD COLUMN "legacy_imported_at" timestamp with time zone;

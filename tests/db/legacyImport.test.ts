@@ -40,7 +40,7 @@ const legacy = {
 
 describe("importing pre-accounts progress", () => {
   it("adds learned words by headword and quiz results with their original dates", async () => {
-    expect(await importLegacyProgress(asha, legacy)).toEqual({ wordsAdded: 2, resultsAdded: 2 });
+    expect(await importLegacyProgress(asha, legacy)).toEqual({ wordsAdded: 2, resultsAdded: 2, alreadyImported: false });
 
     const snapshot = await getProgressSnapshot(asha);
     expect(snapshot.learnedHeadwords.sort()).toEqual(["ajar", "serene"]);
@@ -50,13 +50,30 @@ describe("importing pre-accounts progress", () => {
     expect(snapshot.hasActiveQuiz).toBe(false);
   });
 
-  it("is safe to run twice", async () => {
-    expect(await importLegacyProgress(asha, legacy)).toEqual({ wordsAdded: 0, resultsAdded: 0 });
-    expect((await getProgressSnapshot(asha)).attempts).toBe(2);
+  it("is allowed only once per child, even with different data", async () => {
+    // Found in review: repeated calls could add any number of made-up "finished" rounds.
+    const fake = {
+      learnedWordIds: [3],
+      quizHistory: [{ ts: "2026-03-05T09:00:00.000Z", score: 20, total: 20 as const }],
+    };
+    expect(await importLegacyProgress(asha, fake)).toEqual({ wordsAdded: 0, resultsAdded: 0, alreadyImported: true });
+    expect(await importLegacyProgress(asha, legacy)).toEqual({ wordsAdded: 0, resultsAdded: 0, alreadyImported: true });
+
+    const snapshot = await getProgressSnapshot(asha);
+    expect(snapshot.attempts).toBe(2);
+    expect(snapshot.best).toMatchObject({ score: 18, total: 20 });
+  });
+
+  it("can't be claimed twice by simultaneous calls", async () => {
+    const results = await Promise.all(Array.from({ length: 5 }, () => importLegacyProgress(ben, legacy)));
+    expect(results.filter((r) => !r.alreadyImported)).toHaveLength(1);
+    expect((await getProgressSnapshot(ben)).attempts).toBe(2);
+    // (Ben is used here, so "only touches the chosen child" below now uses a third learner.)
   });
 
   it("only touches the chosen child", async () => {
-    const snapshot = await getProgressSnapshot(ben);
+    const cleo = (await createChild("parent-1", "Cleo")).id;
+    const snapshot = await getProgressSnapshot(cleo);
     expect(snapshot.learnedHeadwords).toEqual([]);
     expect(snapshot.attempts).toBe(0);
   });
