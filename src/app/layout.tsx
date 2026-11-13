@@ -8,6 +8,10 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { log } from "@/server/log";
 import { getActiveChild, getParent } from "@/server/session";
 
+// Every page depends on who is signed in, so nothing is pre-built at build time. This is also
+// what lets `next build` run without a database (e.g. on Vercel before DATABASE_URL is set).
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "WordSpark 11+ Quiz",
   description: "Kid-friendly 11+ vocabulary practice and quizzes.",

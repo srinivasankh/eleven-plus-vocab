@@ -19,6 +19,7 @@ docker compose up -d   # local Postgres (or use any Postgres; see below)
 npm run db:setup       # db:migrate + db:seed (load the 960 words)
 npm run dev            # next dev (needs Postgres + seeded words)
 npm run build          # next build (no database needed at build time)
+npm run build:no-db    # next build with DATABASE_URL/BETTER_AUTH_SECRET emptied — proves the above
 npm run test           # unit tests (no database needed)
 npm run test:db        # integration tests against TEST_DATABASE_URL (wipes that DB)
 npm run typecheck      # tsc --noEmit
@@ -29,7 +30,8 @@ npm run db:seed        # (re)load words from Y5_set01_to_48.md — idempotent
 npm run db:studio      # browse the database
 ```
 
-Before committing: `npm run test`, `npm run test:db` and `npm run typecheck` should pass.
+Before committing: `npm run test`, `npm run test:db` and `npm run typecheck` should pass, and
+`npm run build:no-db` after any change to pages, the layout or `src/server/session.ts`.
 
 **Cloud sessions (no Docker):** Postgres 16 is installed in the container but stopped. Start it and
 create the role/databases once per session:
@@ -125,8 +127,10 @@ Database rules:
 - Server code gets the client via `getDb()` from `src/server/db/index.ts` (lazy; `server-only`).
   Scripts/tests must not import that module — they build their own client (see `scripts/seed.ts`,
   `tests/db/helpers.ts`).
-- Pages that query the DB must render on demand (`export const dynamic = "force-dynamic"`), so
-  `next build` never needs a database.
+- Every page renders on demand: the root layout sets `export const dynamic = "force-dynamic"`, so
+  `next build` never needs a database (it previously failed on Vercel when a DB setup error
+  fired before any `headers()` call). Request-reading helpers (`getParent`) read `headers()`
+  *before* touching auth/DB for the same reason.
 
 ### Data pipeline
 

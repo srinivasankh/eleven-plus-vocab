@@ -13,7 +13,11 @@ export type Parent = { id: string; name: string; email: string };
 
 /** The signed-in parent, or null. Cached per request. */
 export const getParent = cache(async (): Promise<Parent | null> => {
-  const result = await getAuth().api.getSession({ headers: await headers() });
+  // Read the request first: this is what tells Next the page is per-visitor. If the auth/database
+  // setup ran first and threw (e.g. no DATABASE_URL at build time), Next would try to pre-build
+  // the page and the build would fail.
+  const requestHeaders = await headers();
+  const result = await getAuth().api.getSession({ headers: requestHeaders });
   if (!result) return null;
   return { id: result.user.id, name: result.user.name, email: result.user.email };
 });
