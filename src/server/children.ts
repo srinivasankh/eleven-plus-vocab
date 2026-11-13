@@ -2,7 +2,7 @@ import "server-only";
 import { and, asc, count, eq } from "drizzle-orm";
 import { MAX_CHILDREN } from "@/lib/validation";
 import { getDb } from "@/server/db";
-import { child, ChildRow } from "@/server/db/schema";
+import { child, ChildRow, user } from "@/server/db/schema";
 
 export type ChildProfile = Pick<ChildRow, "id" | "displayName">;
 
@@ -33,6 +33,10 @@ export class TooManyChildrenError extends Error {
 /** `displayName` must already be validated with `childNameSchema`. */
 export async function createChild(parentId: string, displayName: string): Promise<ChildProfile> {
   return getDb().transaction(async (tx) => {
+    // Lock this parent's row so simultaneous "add learner" requests take turns; otherwise each
+    // could count 5, pass the check, and insert (found in review: up to 13 profiles).
+    await tx.select({ id: user.id }).from(user).where(eq(user.id, parentId)).for("update");
+
     const [{ value: existing }] = await tx
       .select({ value: count() })
       .from(child)

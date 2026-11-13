@@ -47,6 +47,17 @@ describe("child profiles", () => {
     expect(await listChildren(c)).toHaveLength(MAX_CHILDREN);
   });
 
+  it("keeps the cap even when several learners are added at the same moment", async () => {
+    // A timing race, so try it several times; before the fix this ended with up to 13 profiles.
+    for (let round = 0; round < 10; round += 1) {
+      const parent = await makeParent(`parent-rush-${round}`);
+      for (let i = 0; i < MAX_CHILDREN - 1; i += 1) await createChild(parent, `Kid ${i}`);
+      const results = await Promise.allSettled(Array.from({ length: 8 }, (_, i) => createChild(parent, `Rush ${i}`)));
+      expect(results.filter((r) => r.status === "fulfilled")).toHaveLength(1);
+      expect(await listChildren(parent)).toHaveLength(MAX_CHILDREN);
+    }
+  });
+
   it("removes a family's children when the parent account is deleted", async () => {
     const { eq } = await import("drizzle-orm");
     await ctx.db.delete(user).where(eq(user.id, "parent-c"));
