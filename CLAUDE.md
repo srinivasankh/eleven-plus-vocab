@@ -54,8 +54,16 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
 ### Operations
 - **Logging:** `src/server/log.ts` → `log.info/warn/error(event, fields)` writes one JSON line per
   event (`{time, level, event, ...}`); keys that look sensitive (password, email, token, cookie…)
-  are redacted. Log **ids, never personal data**. Event names are dotted, e.g. `quiz.finished`,
+  are redacted, anything shaped like an email is masked, and Drizzle "Failed query" errors are
+  reduced to "Database query failed" + driver code (their message contains the SQL parameters).
+  Better Auth's own logger is routed through it (`src/server/auth.ts`). Log **ids, never personal data**. Event names are dotted, e.g. `quiz.finished`,
   `auth.sign_in.rejected`, `session.child_not_owned` (possible cookie tampering).
+- **Rate limiting:** server actions call Better Auth directly, which **bypasses Better Auth's HTTP
+  rate limiter**, so `src/app/actions/auth.ts` limits the form path itself via
+  `src/server/rateLimit.ts` (Postgres `rate_limit` table, atomic upsert, shared by all instances):
+  sign-in 10 / 15 min per account (email stored only as a SHA-256 hash) and 30 / 15 min per IP;
+  sign-up 10 / hour per IP. A correct password resets the account counter. Fails closed. IP comes
+  from `x-forwarded-for` — assumes a proxy in front; the per-account limit can't be forged.
 - **Health check:** `GET /api/health` → 200 `{status:"ok",database:"ok"}` or 503 when the database
   is unreachable; `no-store`, reveals nothing else. Not behind sign-in.
 - **Errors:** `src/app/error.tsx` (inside the layout, kid-friendly, shows `digest` as an error code),
@@ -154,7 +162,7 @@ src/app/            App Router pages (server components that call requireChild()
 src/components/     HomeDashboard, LearnDeck, QuizMission, ProgressDashboard, AuthForm, AddChildForm, HeaderNav (+ account chips),
                     LegacyImportBanner, WordCard, QuizCard, ThemeProvider, ThemeToggle
 src/server/         server code: db/ (schema, client, seedVocab), auth.ts, session.ts, children.ts, progress.ts, quiz.ts,
-                    vocab.ts, legacyImport.ts, log.ts
+                    vocab.ts, legacyImport.ts, log.ts, rateLimit.ts
 src/middleware.ts   redirects signed-out visitors away from /learn, /quiz, /progress, /profiles
 drizzle/            generated SQL migrations (committed)
 src/hooks/          useMounted, useTheme
@@ -164,6 +172,8 @@ src/lib/
   difficulty.ts     hand-curated easy/hard ID sets (seed source for word.difficulty); else medium
   vocabSeed.ts      pure markdown→rows transform (headword, difficulty)
   validation.ts     Zod schemas (auth, child name, quiz, legacy import), safeNextPath / learnerNextPath
+                    (reject control chars + backslashes, then require same origin via URL parsing)
+  wordCounts.ts     count distinct words (headwords) — used for every count on the Learn page
   legacyProgress.ts tolerant reader for the pre-accounts localStorage blob
   theme.ts          light/dark resolution + persistence
   parseVocabMarkdown.ts  the markdown parser (used by db:seed)
@@ -183,8 +193,17 @@ plans/              past implementation plans (historical; may reference old cou
 
 - Duplicated theme-init logic (inline script in `layout.tsx` vs `theme.ts`).
 - `plans/steady-dreaming-hedgehog.md` references 560 words; the dataset is now 960.
+- Open from review 2 (worth knowing): the 6-learner cap can be exceeded by simultaneous requests
+  (count-then-insert, no lock); the legacy import action can be called repeatedly to add fake
+  finished rounds (one-time only in the browser); the root layout's try/catch swallows Next's
+  dynamic-rendering signal (7 false `layout.account_lookup_failed` logs per build — use
+  `unstable_rethrow`); Home's "Resume saved quiz mission" lands on setup; "Sign in to track
+  progress" shows to a signed-in parent with no learner; raw `/api/auth/sign-up/email` accepts
+  blank/very long names; plan doc overstates (parent overview, rename, sign-up CTAs).
 - **Before a public launch:** email verification + password reset (need an email provider), and a
   privacy notice (children's data; UK GDPR / Age Appropriate Design Code). Not built yet.
+- Fixed after review 2: sign-in form had no rate limit; `next` redirect check let tab/newline/backslash
+  through; Learn group counts double-counted repeated words; emails could reach logs via DB errors.
 - Fixed in stage 5: no error pages (blank Next.js error screen); no way to see failures (no logs);
   duplicated markdown parser and the bundled JSON copy of the word list.
 - Fixed in stage 4: resuming a quiz could change saved answers; "Serene" offered twice; scores computed (and fakeable) in the browser; "Resume" button shown with nothing to resume.

@@ -6,6 +6,15 @@ import { redirect } from "next/navigation";
 import { fieldErrors, learnerNextPath, signInSchema, signUpSchema } from "@/lib/validation";
 import { getAuth } from "@/server/auth";
 import { log } from "@/server/log";
+import {
+  clientIp,
+  consumeRateLimit,
+  emailKey,
+  ipKey,
+  RateLimitRule,
+  resetRateLimit,
+  RULES,
+} from "@/server/rateLimit";
 import { clearActiveChildCookie } from "@/server/session";
 
 export type AuthFormState = {
@@ -38,6 +47,33 @@ function authErrorMessage(error: unknown, action: "sign_in" | "sign_up"): string
   return "Something went wrong. Please try again.";
 }
 
+function tooManyAttempts(retryAfterSeconds: number): string {
+  const minutes = Math.max(1, Math.ceil(retryAfterSeconds / 60));
+  return `Too many attempts. Please wait ${minutes} minute${minutes === 1 ? "" : "s"} and try again.`;
+}
+
+/**
+ * Counts this attempt against every key; returns an error message if any limit is exceeded.
+ * Fails closed: if the limiter can't run, the attempt is refused rather than let through.
+ */
+async function rateLimited(action: "sign_in" | "sign_up", checks: [string, RateLimitRule][]): Promise<string | null> {
+  try {
+    let wait = 0;
+    for (const [key, rule] of checks) {
+      const result = await consumeRateLimit(key, rule);
+      if (!result.allowed) wait = Math.max(wait, result.retryAfterSeconds);
+    }
+    if (wait > 0) {
+      log.warn(`auth.${action}.rate_limited`);
+      return tooManyAttempts(wait);
+    }
+    return null;
+  } catch (error) {
+    log.error(`auth.${action}.rate_limit_unavailable`, error);
+    return "Something went wrong. Please try again.";
+  }
+}
+
 export async function signUpAction(_prev: AuthFormState, formData: FormData): Promise<AuthFormState> {
   const raw = {
     name: String(formData.get("name") ?? ""),
@@ -48,8 +84,12 @@ export async function signUpAction(_prev: AuthFormState, formData: FormData): Pr
   const parsed = signUpSchema.safeParse(raw);
   if (!parsed.success) return { errors: fieldErrors(parsed.error), values };
 
+  const requestHeaders = await headers();
+  const limited = await rateLimited("sign_up", [[ipKey("sign_up", clientIp(requestHeaders)), RULES.signUpPerIp]]);
+  if (limited) return { errors: { form: limited }, values };
+
   try {
-    const created = await getAuth().api.signUpEmail({ body: parsed.data, headers: await headers() });
+    const created = await getAuth().api.signUpEmail({ body: parsed.data, headers: requestHeaders });
     log.info("auth.sign_up", { parentId: created.user.id });
   } catch (error) {
     return { errors: { form: authErrorMessage(error, "sign_up") }, values };
@@ -68,11 +108,24 @@ export async function signInAction(_prev: AuthFormState, formData: FormData): Pr
   const parsed = signInSchema.safeParse(raw);
   if (!parsed.success) return { errors: fieldErrors(parsed.error), values };
 
+  // Server actions call Better Auth directly, which bypasses its HTTP rate limiter, so the
+  // form path is limited here: per account (can't be forged) and per network address.
+  const requestHeaders = await headers();
+  const accountKey = emailKey("sign_in", parsed.data.email);
+  const limited = await rateLimited("sign_in", [
+    [accountKey, RULES.signInPerEmail],
+    [ipKey("sign_in", clientIp(requestHeaders)), RULES.signInPerIp],
+  ]);
+  if (limited) return { errors: { form: limited }, values };
+
   try {
-    await getAuth().api.signInEmail({ body: parsed.data, headers: await headers() });
+    await getAuth().api.signInEmail({ body: parsed.data, headers: requestHeaders });
   } catch (error) {
     return { errors: { form: authErrorMessage(error, "sign_in") }, values };
   }
+
+  // The right password clears this account's failed-attempt count.
+  await resetRateLimit(accountKey).catch((error) => log.error("auth.sign_in.rate_limit_reset_failed", error));
 
   // A different parent may have used this browser before: never inherit their child.
   // So always pick a learner first, then continue to where they were heading.

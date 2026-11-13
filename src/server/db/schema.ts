@@ -223,3 +223,15 @@ export const quizQuestion = pgTable(
 export type ChildRow = typeof child.$inferSelect;
 export type WordRow = typeof words.$inferSelect;
 export type NewWordRow = typeof words.$inferInsert;
+
+// ---------------------------------------------------------------------------
+// Rate limiting (sign-in / sign-up), shared by every server instance.
+// `key` never contains an email: emails are stored as a SHA-256 hash.
+// ---------------------------------------------------------------------------
+
+export const rateLimit = pgTable("rate_limit", {
+  key: text("key").primaryKey(),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull().defaultNow(),
+  count: integer("count").notNull().default(0),
+});
+
