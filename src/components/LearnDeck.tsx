@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { setLearnedAction } from "@/app/actions/progress";
 import { WordCard } from "@/components/WordCard";
 import { Difficulty, WordEntry } from "@/lib/types";
+import { countLearnedWords, countWords, countWordsByDifficulty } from "@/lib/wordCounts";
 
 const groupMeta: Record<
   Difficulty,
@@ -42,11 +43,7 @@ export function LearnDeck({ entries, initialLearned }: Props) {
   const [bulkOpen, setBulkOpen] = useState<{ value: boolean; version: number } | null>(null);
   const [showUnlearnedOnly, setShowUnlearnedOnly] = useState(false);
 
-  const difficultyCounts = useMemo(() => {
-    const counts: Record<Difficulty, number> = { easy: 0, medium: 0, hard: 0 };
-    for (const entry of entries) counts[entry.difficulty] += 1;
-    return counts;
-  }, [entries]);
+  const difficultyCounts = useMemo(() => countWordsByDifficulty(entries), [entries]);
 
   const groupEntries = useMemo(() => {
     if (!selectedGroup) return [];
@@ -106,7 +103,10 @@ export function LearnDeck({ entries, initialLearned }: Props) {
   const learnedCount = learned.size;
 
   function masteredInGroup(difficulty: Difficulty): number {
-    return entries.filter((entry) => entry.difficulty === difficulty && learned.has(entry.headword)).length;
+    return countLearnedWords(
+      entries.filter((entry) => entry.difficulty === difficulty),
+      learned,
+    );
   }
 
   if (!selectedGroup) {
@@ -179,8 +179,8 @@ export function LearnDeck({ entries, initialLearned }: Props) {
         </label>
 
         <div className="meta-row" aria-label="Search summary">
-          <span className="meta-pill">Showing {filtered.length} words</span>
-          <span className="meta-pill">Total in group {groupEntries.length}</span>
+          <span className="meta-pill">Showing {countWords(filtered)} words</span>
+          <span className="meta-pill">Total in group {countWords(groupEntries)}</span>
           <span className="meta-pill">Mastered {masteredInGroup(selectedGroup)}</span>
         </div>
       </section>
