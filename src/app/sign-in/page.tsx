@@ -1,15 +1,17 @@
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { AuthForm } from "@/components/AuthForm";
+import { googleCredentials, googleErrorMessage } from "@/lib/googleAuth";
 import { safeNextPath } from "@/lib/validation";
 import { getParent } from "@/server/session";
 
 export const metadata: Metadata = { title: "Sign in · WordSpark 11+" };
 
-type Props = { searchParams: Promise<{ next?: string }> };
+type Props = { searchParams: Promise<{ next?: string; error?: string }> };
 
 export default async function SignInPage({ searchParams }: Props) {
-  const next = safeNextPath((await searchParams).next);
+  const params = await searchParams;
+  const next = safeNextPath(params.next);
   if (await getParent()) redirect(next);
 
   return (
@@ -18,7 +20,12 @@ export default async function SignInPage({ searchParams }: Props) {
         <h1>Welcome back</h1>
         <p>Sign in to pick up your word missions where you left off.</p>
       </header>
-      <AuthForm mode="sign-in" next={next} />
+      <AuthForm
+        googleEnabled={googleCredentials(process.env) !== null}
+        mode="sign-in"
+        next={next}
+        notice={googleErrorMessage(params.error)}
+      />
     </section>
   );
 }

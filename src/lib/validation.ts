@@ -70,7 +70,13 @@ export function safeNextPath(value: unknown, fallback = "/profiles"): string {
  */
 export function learnerNextPath(value: unknown): string {
   const path = safeNextPath(value, "/learn");
-  return /^\/(profiles|sign-in|sign-up|api)(\/|\?|$)/.test(path) ? "/learn" : path;
+  return /^\/(profiles|sign-in|sign-up|api|auth)(\/|\?|$)/.test(path) ? "/learn" : path;
+}
+
+/** Where a parent goes right after signing in: always pick a learner first, then carry on. */
+export function afterSignInPath(value: unknown): string {
+  const next = learnerNextPath(value);
+  return next === "/learn" ? "/profiles" : `/profiles?next=${encodeURIComponent(next)}`;
 }
 
 /** First error message per field, for showing next to form inputs. */

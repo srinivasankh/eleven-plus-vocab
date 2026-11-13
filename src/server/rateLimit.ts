@@ -11,6 +11,7 @@ export const RULES = {
   signInPerEmail: { limit: 10, windowSeconds: 15 * 60 },
   signInPerIp: { limit: 30, windowSeconds: 15 * 60 },
   signUpPerIp: { limit: 10, windowSeconds: 60 * 60 },
+  googleStartPerIp: { limit: 30, windowSeconds: 15 * 60 },
 } satisfies Record<string, RateLimitRule>;
 
 /** Rate-limit keys never contain an email: it is hashed (lower-cased first). */

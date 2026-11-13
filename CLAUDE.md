@@ -120,6 +120,15 @@ Nothing about progress or quizzes is kept in the browser any more (only the them
   (`/profiles?next=…`). Redirect targets go through `safeNextPath` / `learnerNextPath`
   (`src/lib/validation.ts`) — never redirect to a raw query value.
 - Forms: server actions in `src/app/actions/` + `useActionState`, inputs validated with Zod.
+- **Google sign-in** (optional; on only when `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` are set — `googleCredentials()`
+  in `src/lib/googleAuth.ts`, which also hides the button). `googleSignInAction` (rate-limited per IP) calls
+  `signInSocial` with `disableRedirect` → Google (`prompt=select_account`) → `/api/auth/callback/google` →
+  `/auth/continue` (route handler: clears `ws_child`, redirects via `afterSignInPath` to the learner picker,
+  like the password form). Failures land on `/sign-in?error=<code>` → `googleErrorMessage`.
+  Account linking keeps Better Auth's default `requireLocalEmailVerified`: Google is **not** attached to an
+  existing password account (emails aren't verified yet) → `account_not_linked`. Don't relax that until
+  email verification exists. Names from Google are tidied (`nameFromProvider`), never rejected; typed
+  names still go through `parentNameSchema` (the hooks tell them apart by the `/callback/` path).
 
 Database rules:
 - Schema lives in `src/server/db/schema.ts`. Change it → `npm run db:generate` → read the SQL in
@@ -161,6 +170,7 @@ src/app/            App Router pages (server components that call requireChild()
   actions/          server actions: auth.ts, profiles.ts, progress.ts, quiz.ts, legacyImport.ts
   api/auth/[...all] Better Auth handler
   api/health        health check (200 / 503)
+  auth/continue     where Google sign-in lands: clears the learner cookie → learner picker
   error.tsx, global-error.tsx, not-found.tsx, fonts.ts
   layout.tsx        fonts (Baloo 2 / Nunito), inline theme-init script, ThemeProvider, header/footer
   page.tsx          server: active child's snapshot → <HomeDashboard> (stats + mission links)
@@ -239,7 +249,11 @@ plans/              past implementation plans (historical; may reference old cou
 - Databases: two Neon Postgres databases (Vercel Marketplace, Free, London): `wordspark-prod` → Production env only,
   `wordspark-preview` → Preview env only. Env vars `DATABASE_URL` (pooled, app) and `DATABASE_URL_UNPOOLED` (direct,
   migrations/seed). Never point Preview at the prod database.
-- Other env: `BETTER_AUTH_SECRET` (different per environment), `BETTER_AUTH_URL=https://vocab.kanniwadi.uk` (Production only).
+- Other env: `BETTER_AUTH_SECRET` (different per environment), `BETTER_AUTH_URL=https://vocab.kanniwadi.uk` (Production only),
+  `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` (Production + Preview, one Google OAuth client). Its authorised redirect URIs:
+  `https://vocab.kanniwadi.uk/api/auth/callback/google`, the preview branch URL's `/api/auth/callback/google`, and
+  `http://localhost:3000/api/auth/callback/google`. Previews use the **branch** URL as their auth base, so Google
+  sign-in works on `claude/backend-exploration` previews only (other branches would need their URL added).
   Previews trust their exact `VERCEL_BRANCH_URL` / `VERCEL_URL` origins (`src/lib/deployOrigins.ts`).
 - Roll back: Vercel dashboard → Deployments → previous production deployment → "Promote". Migrations are not
   rolled back, so keep schema changes backward-compatible with the previous deployment.

@@ -3,7 +3,7 @@
 import { isAPIError } from "better-auth/api";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { fieldErrors, learnerNextPath, signInSchema, signUpSchema } from "@/lib/validation";
+import { afterSignInPath, fieldErrors, learnerNextPath, signInSchema, signUpSchema } from "@/lib/validation";
 import { getAuth } from "@/server/auth";
 import { log } from "@/server/log";
 import {
@@ -56,7 +56,7 @@ function tooManyAttempts(retryAfterSeconds: number): string {
  * Counts this attempt against every key; returns an error message if any limit is exceeded.
  * Fails closed: if the limiter can't run, the attempt is refused rather than let through.
  */
-async function rateLimited(action: "sign_in" | "sign_up", checks: [string, RateLimitRule][]): Promise<string | null> {
+async function rateLimited(action: "sign_in" | "sign_up" | "google", checks: [string, RateLimitRule][]): Promise<string | null> {
   try {
     let wait = 0;
     for (const [key, rule] of checks) {
@@ -130,8 +130,45 @@ export async function signInAction(_prev: AuthFormState, formData: FormData): Pr
   // A different parent may have used this browser before: never inherit their child.
   // So always pick a learner first, then continue to where they were heading.
   await clearActiveChildCookie();
+  redirect(afterSignInPath(formData.get("next")));
+}
+
+export type GoogleFormState = { error?: string };
+
+/**
+ * Starts "Continue with Google". Google sends the parent back to Better Auth's callback, which
+ * signs them in (creating the account on first use) and then redirects to /auth/continue, which
+ * clears any previous learner and opens the learner picker — the same as the password form.
+ * On failure Better Auth redirects to /sign-in?error=<code> (see googleErrorMessage).
+ */
+export async function googleSignInAction(_prev: GoogleFormState, formData: FormData): Promise<GoogleFormState> {
   const next = learnerNextPath(formData.get("next"));
-  redirect(next === "/learn" ? "/profiles" : `/profiles?next=${encodeURIComponent(next)}`);
+  const nextQuery = next === "/learn" ? "" : `?next=${encodeURIComponent(next)}`;
+
+  const requestHeaders = await headers();
+  // Each start writes a short-lived row (the OAuth state), so starts are limited per address.
+  const limited = await rateLimited("google", [[ipKey("google_start", clientIp(requestHeaders)), RULES.googleStartPerIp]]);
+  if (limited) return { error: limited };
+
+  let url: string | undefined;
+  try {
+    const result = await getAuth().api.signInSocial({
+      body: {
+        provider: "google",
+        callbackURL: `/auth/continue${nextQuery}`,
+        newUserCallbackURL: "/auth/continue",
+        errorCallbackURL: `/sign-in${nextQuery}`,
+        disableRedirect: true,
+      },
+      headers: requestHeaders,
+    });
+    url = result.url;
+  } catch (error) {
+    log.error("auth.google.start_failed", error);
+  }
+  if (!url) return { error: "Google sign-in isn't available right now. Please use your email and password." };
+  log.info("auth.google.started");
+  redirect(url);
 }
 
 export async function signOutAction() {
