@@ -44,9 +44,21 @@ export const answerSchema = z.object({
  * ("//evil.example", "https://…") — otherwise sign-in links could be used for phishing.
  */
 export function safeNextPath(value: unknown, fallback = "/profiles"): string {
-  if (typeof value !== "string") return fallback;
-  if (!value.startsWith("/") || value.startsWith("//") || value.startsWith("/\\")) return fallback;
-  return value;
+  if (typeof value !== "string" || value.length > 512) return fallback;
+  // Browsers silently strip tabs/newlines and treat "\\" like "/", so "/\t/evil.example" or
+  // "/\\evil.example" would become "//evil.example". Reject them outright.
+  if (/[\u0000-\u001F\u007F\\]/.test(value)) return fallback;
+  if (!value.startsWith("/") || value.startsWith("//")) return fallback;
+
+  // Belt and braces: resolve it the way a browser would and require the same origin.
+  const base = "http://same-site.invalid";
+  try {
+    const url = new URL(value, base);
+    if (url.origin !== base) return fallback;
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    return fallback;
+  }
 }
 
 /**

@@ -12,6 +12,28 @@ describe("safeNextPath", () => {
       expect(safeNextPath(value)).toBe("/profiles");
     }
   });
+
+  it("rejects control characters and backslashes that browsers would strip or rewrite", () => {
+    // Found in review: "/\t/evil.example" passed the old check and browsers read it as "//evil.example".
+    for (const value of [
+      "/\t/evil.example",
+      "/\n/evil.example",
+      "/\r/evil.example",
+      "/\t\t/evil.example",
+      "/\\/evil.example",
+      "/quiz\\..\\..\\evil",
+      "/\u0000/evil.example",
+      "/" + "a".repeat(600),
+    ]) {
+      expect(safeNextPath(value)).toBe("/profiles");
+    }
+    // Every accepted value must resolve to this site, whatever a browser does with it.
+    for (const value of ["/quiz", "/progress?x=1#top", "/%09/evil.example", "/%2F%2Fevil.example"]) {
+      const kept = safeNextPath(value);
+      expect(kept.startsWith("/") && !kept.startsWith("//")).toBe(true);
+      expect(new URL(kept, "https://wordspark.test").host).toBe("wordspark.test");
+    }
+  });
 });
 
 describe("learnerNextPath", () => {
